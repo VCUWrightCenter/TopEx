@@ -1,3 +1,5 @@
+![CI](https://github.com/etfrenchvcu/medtop/workflows/CI/badge.svg)
+
 # MedTop
 > Extracting topics from reflective medical writings
 

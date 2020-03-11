@@ -1,4 +1,17 @@
-# nbdev template
+# MedTop
+> Extracting topics from reflective medical writings
 
-Use this template to more easily create your nbdev project.
 
+This file will become your README and also the index of your documentation.
+
+## Install
+
+`pip install medtop`
+
+## How to use
+
+Fill me in please! Don't forget code examples:
+
+```python
+1+1
+```

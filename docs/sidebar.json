@@ -1,6 +1,7 @@
 {
   "medtop": {
     "Overview": "/",
-    "module name here": "/core"
+    "Helpers": "/helpers",
+    "Preprocessing": "/preprocessing"
   }
 }

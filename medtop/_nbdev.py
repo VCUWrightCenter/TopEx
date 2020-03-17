@@ -2,9 +2,26 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"import_docs": "Core.ipynb",
+         "sentences_to_disk": "Core.ipynb",
+         "get_term_averages": "nlp_helpers.ipynb",
+         "get_term_max": "nlp_helpers.ipynb",
+         "get_top_phrases": "nlp_helpers.ipynb",
+         "get_vec": "nlp_helpers.ipynb",
+         "get_phrase_vec_tfidf": "nlp_helpers.ipynb",
+         "get_phrase_vec_w2v": "nlp_helpers.ipynb",
+         "average_sent_size": "nlp_helpers.ipynb",
+         "w2v_from_corpus": "nlp_helpers.ipynb",
+         "w2v_pretrained": "nlp_helpers.ipynb",
+         "merge_doc_lists": "nlp_helpers.ipynb",
+         "create_tfidf": "nlp_helpers.ipynb",
+         "decontracted": "preprocessing.ipynb",
+         "tokenize_and_stem2": "preprocessing.ipynb",
+         "tokenize_and_stem": "preprocessing.ipynb"}
 
-modules = []
+modules = ["core.py",
+           "nlp_helpers.py",
+           "preprocessing.py"]
 
 doc_url = "https://etfrenchvcu.github.io/medtop/"
 

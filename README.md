@@ -1,5 +1,3 @@
-![CI](https://github.com/etfrenchvcu/medtop/workflows/CI/badge.svg)
-
 # MedTop
 > Extracting topics from reflective medical writings
 
@@ -17,3 +15,10 @@ Fill me in please! Don't forget code examples:
 ```python
 1+1
 ```
+
+
+
+
+    2
+
+

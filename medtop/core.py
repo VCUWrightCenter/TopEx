@@ -9,8 +9,10 @@ import matplotlib.pyplot as plt
 from .nlp_helpers import *
 from .preprocessing import *
 import numpy
+from scipy.cluster.hierarchy import ward, cut_tree
 from sklearn.cluster import KMeans, AgglomerativeClustering
 from sklearn.metrics import silhouette_score, pairwise_distances
+from sklearn.metrics.pairwise import cosine_similarity
 import os
 from sklearn.decomposition import TruncatedSVD
 import umap.umap_ as umap

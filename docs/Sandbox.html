@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "summary"
+description: "summary"
 ---
 <!--
 
@@ -28,7 +29,10 @@ summary: "summary"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">medtop.core</span> <span class="k">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">medtop.core</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">medtop.nlp_helpers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">medtop.preprocessing</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span>
 </pre></div>
 
     </div>
@@ -42,22 +46,8 @@ summary: "summary"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">path_to_file_list</span> <span class="o">=</span> <span class="s1">&#39;data/2019.03.11_DevCorpus/file_list.txt&#39;</span>
-<span class="n">my_docs</span><span class="p">,</span> <span class="n">my_docs_pos</span><span class="p">,</span> <span class="n">my_docs_loc</span><span class="p">,</span> <span class="n">raw_sentences</span> <span class="o">=</span> <span class="n">import_docs</span><span class="p">(</span><span class="n">path_to_file_list</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">doc_ix</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw_sentences</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">sent_ix</span><span class="p">,</span> <span class="n">sent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;doc.</span><span class="si">{doc_ix}</span><span class="s2">.sent.</span><span class="si">{sent_ix}</span><span class="se">\t</span><span class="si">{sent}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">path_to_seed_topics_file_list</span> <span class="o">=</span> <span class="s1">&#39;data/2019.03.12_SEED_TOPICS/FILELIST.txt&#39;</span>
+<span class="n">tfidf_dense</span><span class="p">,</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">create_tfidf</span><span class="p">(</span><span class="n">path_to_seed_topics_file_list</span><span class="p">,</span> <span class="n">path_to_corpus_file_list</span> <span class="o">=</span> <span class="n">path_to_file_list</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -70,10 +60,7 @@ summary: "summary"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>doc.0.sent.0	I am currently on my first AI in the Emergency Department.
-
-doc.1.sent.0	I am currently working in the cardiac surgery ICU and for me the greatest challenge has been doing my critical care AI right after my ward AI.
-
+<pre>Size of TF-IDF: 6 Docs, 529 Tokens
 </pre>
 </div>
 </div>
@@ -87,9 +74,21 @@ doc.1.sent.0	I am currently working in the cardiac surgery ICU and for me the gr
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">raw_sentences</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">raw_sentences</span><span class="p">[</span><span class="n">doc</span><span class="p">])):</span>
-        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;doc.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.sent.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">raw_sentences</span><span class="p">[</span><span class="n">doc</span><span class="p">][</span><span class="n">sent</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">path_to_file_list</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;The file </span><span class="si">{path}</span><span class="s1"> does not exist&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ERROR in get_doc_word_vectors: Invalid vector_type parameter value (</span><span class="si">{path}</span><span class="s1">)&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -104,11 +103,11 @@ doc.1.sent.0	I am currently working in the cardiac surgery ICU and for me the gr
 <div class="output_subarea output_text output_error">
 <pre>
 <span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-4-8db247900e30&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>public<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-16-a12ca150912f&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">raise</span> ValueError<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">f&#39;ERROR in get_doc_word_vectors: Invalid vector_type parameter value ({path})&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
 
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;public&#39; is not defined</pre>
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>: ERROR in get_doc_word_vectors: Invalid vector_type parameter value (data/2019.03.11_DevCorpus/file_list.txt)</pre>
 </div>
 </div>
 

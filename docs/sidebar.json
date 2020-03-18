@@ -1,7 +1,10 @@
 {
   "medtop": {
     "Overview": "/",
+    "Core": "/Core",
     "Helpers": "/helpers",
-    "Preprocessing": "/preprocessing"
+    "NLP Helpers": "/nlp_helpers",
+    "Preprocessing": "/preprocessing",
+    "Title": "/Sandbox"
   }
 }

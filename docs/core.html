@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "Methods for calling "
+description: "Methods for calling "
 ---
 <!--
 
@@ -38,7 +39,7 @@ summary: "Methods for calling "
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="import_docs" class="doc_header"><code>import_docs</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L10" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_docs</code>(<strong><code>path_to_file_list</code></strong>, <strong><code>verbose</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="import_docs" class="doc_header"><code>import_docs</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_docs</code>(<strong><code>path_to_file_list</code></strong>, <strong><code>verbose</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Imports and processes the list of documents contained in the given file</p>
 
@@ -62,9 +63,211 @@ summary: "Methods for calling "
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="sentences_to_disk" class="doc_header"><code>sentences_to_disk</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sentences_to_disk</code>(<strong><code>raw_sentences</code></strong>, <strong><code>outfile_name</code></strong>)</p>
+<h4 id="sentences_to_disk" class="doc_header"><code>sentences_to_disk</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sentences_to_disk</code>(<strong><code>raw_sentences</code></strong>, <strong><code>outfile_name</code></strong>)</p>
 </blockquote>
 <p>Writes the raw sentences to a file organized by document and sentence number</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_doc_top_phrases" class="doc_header"><code>get_doc_top_phrases</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_top_phrases</code>(<strong><code>raw_docs</code></strong>, <strong><code>feature_names</code></strong>, <strong><code>tdm</code></strong>, <strong><code>window_size</code></strong>=<em><code>6</code></em>, <strong><code>include_input_in_tfidf</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_doc_word_vectors_tfidf" class="doc_header"><code>get_doc_word_vectors_tfidf</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_word_vectors_tfidf</code>(<strong><code>doc_top_phrases</code></strong>, <strong><code>dictionary</code></strong>, <strong><code>tfidf_dense</code></strong>)</p>
+</blockquote>
+<p>Uses the TF-IDF matrix to create a list of lists corresponding to a word vectors for the top phrases of each sentence in each document</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_doc_word_vectors_svd" class="doc_header"><code>get_doc_word_vectors_svd</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L82" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_word_vectors_svd</code>(<strong><code>doc_top_phrases</code></strong>, <strong><code>dictionary</code></strong>, <strong><code>tfidf_dense</code></strong>, <strong><code>dimensions</code></strong>=<em><code>2</code></em>)</p>
+</blockquote>
+<p>Decomposes the TF-IDF matrix via SVD and uses the result to create a list of lists corresponding to a word vectors for the top phrases of each sentence in each document</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_doc_word_vectors_umap" class="doc_header"><code>get_doc_word_vectors_umap</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L88" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_word_vectors_umap</code>(<strong><code>doc_top_phrases</code></strong>, <strong><code>dictionary</code></strong>, <strong><code>tfidf_dense</code></strong>, <strong><code>umap_neighbors</code></strong>=<em><code>15</code></em>, <strong><code>dimensions</code></strong>=<em><code>2</code></em>)</p>
+</blockquote>
+<p>Transforms the TF-IDF matrix via UMAP and uses the result to create a list of lists corresponding to a word vectors for the top phrases of each sentence in each document</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_doc_word_vectors_pretrained" class="doc_header"><code>get_doc_word_vectors_pretrained</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L94" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_word_vectors_pretrained</code>(<strong><code>doc_top_phrases</code></strong>, <strong><code>path_to_w2v_bin_file</code></strong>)</p>
+</blockquote>
+<p>Uses pretrained Word2Vec embeddings to create a list of lists corresponding to a word vectors for the top phrases of each sentence in each document</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_doc_word_vectors_local" class="doc_header"><code>get_doc_word_vectors_local</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L100" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_word_vectors_local</code>(<strong><code>doc_top_phrases</code></strong>, <strong><code>raw_docs</code></strong>, <strong><code>my_docs</code></strong>)</p>
+</blockquote>
+<p>Creates Word2Vec embeddings from the input corpus and uses them to create a list of lists corresponding to a word vectors for the top phrases of each sentence in each document</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="filter_sentences" class="doc_header"><code>filter_sentences</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L106" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>filter_sentences</code>(<strong><code>doc_phrase_vecs</code></strong>, <strong><code>doc_top_phrases</code></strong>)</p>
+</blockquote>
+<p>Filter the sentences, removing any that contain zero 'top phrases'</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_optimal_k" class="doc_header"><code>get_optimal_k</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L128" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_optimal_k</code>(<strong><code>just_phrase_vecs</code></strong>, <strong><code>k_range</code></strong>=<em><code>range(2, 100)</code></em>, <strong><code>save_chart</code></strong>=<em><code>True</code></em>, <strong><code>chart_title</code></strong>=<em><code>'KmeansSilhouette.png'</code></em>)</p>
+</blockquote>
+<p>Clusters the top phrase vectors for a range of k values and plots the silhoute coefficients
+(this is a function of mean intra-cluster distance and mean nearest-cluster distance).
+Returns the optimal k-value (highest silhoute coefficient)</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_cluster_assignments_kmeans" class="doc_header"><code>get_cluster_assignments_kmeans</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L141" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_assignments_kmeans</code>(<strong><code>k</code></strong>, <strong><code>just_phrase_vecs</code></strong>)</p>
+</blockquote>
+<p>Use K-means algorithm to cluster phr</p>
 
 </div>
 

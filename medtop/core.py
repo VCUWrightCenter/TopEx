@@ -2,7 +2,8 @@
 
 __all__ = ['import_docs', 'sentences_to_disk', 'get_doc_top_phrases', 'get_doc_word_vectors_tfidf',
            'get_doc_word_vectors_svd', 'get_doc_word_vectors_umap', 'get_doc_word_vectors_pretrained',
-           'get_doc_word_vectors_local', 'filter_sentences', 'get_optimal_k', 'get_cluster_assignments_kmeans']
+           'get_doc_word_vectors_local', 'filter_sentences', 'get_optimal_k', 'get_cluster_assignments_kmeans',
+           'get_linkage_matrix', 'get_optimal_height', 'get_cluster_assignments_hac']
 
 # Cell
 import matplotlib.pyplot as plt
@@ -125,23 +126,63 @@ def filter_sentences(doc_phrase_vecs, doc_top_phrases):
     return just_phrase_vecs, just_phrase_ids, just_phrase_text
 
 # Cell
-def get_optimal_k(just_phrase_vecs, k_range = range(2, 100), save_chart = True, chart_title = "KmeansSilhouette.png"):
+def get_optimal_k(just_phrase_vecs, save_chart = True, chart_title = "KmeansSilhouette.png"):
     """
     Clusters the top phrase vectors for a range of k values and plots the silhoute coefficients
     (this is a function of mean intra-cluster distance and mean nearest-cluster distance).
     Returns the optimal k-value (highest silhoute coefficient)
     """
+    max_k = min(len(just_phrase_vecs), 100)
+    k_range = range(2, max_k)
     score = [(silhouette_score(just_phrase_vecs, KMeans(i).fit(just_phrase_vecs).predict(just_phrase_vecs))) for i in k_range]
     fig = plt.plot(k_range, score)
     if save_chart:
         plt.savefig(chart_title, dpi=300)
-    optimal_k = k_range[score.index(max(score))]
+    optimal_k = k_range[numpy.argmax(score)]
     return optimal_k
 
 def get_cluster_assignments_kmeans(k, just_phrase_vecs):
-    "Use K-means algorithm to cluster phr"
+    "Use K-means algorithm to cluster phrase vectors"
     kmeans = KMeans(n_clusters=k, random_state=42).fit(just_phrase_vecs)
     cluster_assignments = kmeans.predict(just_phrase_vecs)
     #TODO: this is never used before being overwritten later. Remove?
     dist = pairwise_distances(just_phrase_vecs, metric='euclidean')
     return cluster_assignments, dist
+
+# Cell
+from sklearn.metrics import silhouette_score, pairwise_distances
+from sklearn.metrics.pairwise import cosine_similarity
+from scipy.cluster.hierarchy import ward, cut_tree
+import matplotlib.pyplot as plt
+import numpy
+
+#export
+def get_linkage_matrix(just_phrase_vecs, dist_metric):
+    "Creates a linkage matrix by calculating distance between phrase vectors"
+    if dist_metric == "cosine":
+        dist = 1 - cosine_similarity(just_phrase_vecs)
+    else:
+        dist = pairwise_distances(just_phrase_vecs, metric=dist_metric)
+    return ward(dist)
+
+def get_optimal_height(just_phrase_vecs, linkage_matrix, save_chart = True, chart_title = "HACSilhouette.png"):
+    """
+    Clusters the top phrase vectors and plots the silhoute coefficients for a range of dendrograph heights.
+    Returns the optimal height value (highest silhoute coefficient)
+    """
+    max_h = min(len(just_phrase_vecs), 100)
+    # QUESTION: What is the limiting factor for the min/max in this range?
+#     h_range = range(30, max_h)
+    h_range = range(1,10)
+    h_score = [(silhouette_score(just_phrase_vecs, [x[0] for x in cut_tree(linkage_matrix, height=i)] )) for i in h_range]
+
+    fig = plt.plot(h_range, h_score)
+
+    if save_chart:
+        plt.savefig(chart_title, dpi=300)
+    optimal_h = h_range[numpy.argmax(h_score)]
+    return optimal_h
+
+def get_cluster_assignments_hac(linkage_matrix, height):
+    "Use Hierarchical Agglomerative Clustering to cluster phrase vectors"
+    return [x[0] for x in cut_tree(linkage_matrix, height=height)]

@@ -16,6 +16,10 @@ index = {"import_docs": "Core.ipynb",
          "get_linkage_matrix": "Core.ipynb",
          "get_optimal_height": "Core.ipynb",
          "get_cluster_assignments_hac": "Core.ipynb",
+         "visualize_umap": "Core.ipynb",
+         "visualize_mds": "Core.ipynb",
+         "visualize_svd": "Core.ipynb",
+         "get_cluster_topics": "Core.ipynb",
          "get_term_averages": "nlp_helpers.ipynb",
          "get_term_max": "nlp_helpers.ipynb",
          "get_top_phrases": "nlp_helpers.ipynb",
@@ -31,6 +35,7 @@ index = {"import_docs": "Core.ipynb",
          "tokenize_and_stem": "preprocessing.ipynb"}
 
 modules = ["core.py",
+           "None.py",
            "nlp_helpers.py",
            "preprocessing.py"]
 

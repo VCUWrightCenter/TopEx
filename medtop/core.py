@@ -3,15 +3,20 @@
 __all__ = ['import_docs', 'sentences_to_disk', 'get_doc_top_phrases', 'get_doc_word_vectors_tfidf',
            'get_doc_word_vectors_svd', 'get_doc_word_vectors_umap', 'get_doc_word_vectors_pretrained',
            'get_doc_word_vectors_local', 'filter_sentences', 'get_optimal_k', 'get_cluster_assignments_kmeans',
-           'get_linkage_matrix', 'get_optimal_height', 'get_cluster_assignments_hac']
+           'get_linkage_matrix', 'get_optimal_height', 'get_cluster_assignments_hac', 'visualize_umap', 'visualize_mds',
+           'visualize_svd', 'get_cluster_topics']
 
 # Cell
 import matplotlib.pyplot as plt
 from .nlp_helpers import *
 from .preprocessing import *
 import numpy
+import pandas as pd
+import plotly
+import plotly.express as px
 from scipy.cluster.hierarchy import ward, cut_tree
 from sklearn.cluster import KMeans, AgglomerativeClustering
+from sklearn.manifold import MDS
 from sklearn.metrics import silhouette_score, pairwise_distances
 from sklearn.metrics.pairwise import cosine_similarity
 import os
@@ -63,10 +68,6 @@ def sentences_to_disk(raw_sentences, outfile_name):
 
 # Cell
 def get_doc_top_phrases(raw_docs, feature_names, tdm, window_size = 6, include_input_in_tfidf = False):
-#     """
-#     feature_names = dictionary.token2id
-#     tdm = tfidf_dense
-#     """
     #TODO: Do this without reparsing each sentence in get_top_phrases
     doc_top_phrases = []
     for doc_id, text in enumerate(raw_docs):
@@ -126,7 +127,7 @@ def filter_sentences(doc_phrase_vecs, doc_top_phrases):
     return just_phrase_vecs, just_phrase_ids, just_phrase_text
 
 # Cell
-def get_optimal_k(just_phrase_vecs, save_chart = True, chart_title = "KmeansSilhouette.png"):
+def get_optimal_k(just_phrase_vecs, save_chart = False, chart_file = "KmeansSilhouette.png"):
     """
     Clusters the top phrase vectors for a range of k values and plots the silhoute coefficients
     (this is a function of mean intra-cluster distance and mean nearest-cluster distance).
@@ -137,7 +138,7 @@ def get_optimal_k(just_phrase_vecs, save_chart = True, chart_title = "KmeansSilh
     score = [(silhouette_score(just_phrase_vecs, KMeans(i).fit(just_phrase_vecs).predict(just_phrase_vecs))) for i in k_range]
     fig = plt.plot(k_range, score)
     if save_chart:
-        plt.savefig(chart_title, dpi=300)
+        plt.savefig(chart_file, dpi=300)
     optimal_k = k_range[numpy.argmax(score)]
     return optimal_k
 
@@ -150,13 +151,6 @@ def get_cluster_assignments_kmeans(k, just_phrase_vecs):
     return cluster_assignments, dist
 
 # Cell
-from sklearn.metrics import silhouette_score, pairwise_distances
-from sklearn.metrics.pairwise import cosine_similarity
-from scipy.cluster.hierarchy import ward, cut_tree
-import matplotlib.pyplot as plt
-import numpy
-
-#export
 def get_linkage_matrix(just_phrase_vecs, dist_metric):
     "Creates a linkage matrix by calculating distance between phrase vectors"
     if dist_metric == "cosine":
@@ -165,7 +159,7 @@ def get_linkage_matrix(just_phrase_vecs, dist_metric):
         dist = pairwise_distances(just_phrase_vecs, metric=dist_metric)
     return ward(dist)
 
-def get_optimal_height(just_phrase_vecs, linkage_matrix, save_chart = True, chart_title = "HACSilhouette.png"):
+def get_optimal_height(just_phrase_vecs, linkage_matrix, save_chart = False, chart_file = "HACSilhouette.png"):
     """
     Clusters the top phrase vectors and plots the silhoute coefficients for a range of dendrograph heights.
     Returns the optimal height value (highest silhoute coefficient)
@@ -179,10 +173,64 @@ def get_optimal_height(just_phrase_vecs, linkage_matrix, save_chart = True, char
     fig = plt.plot(h_range, h_score)
 
     if save_chart:
-        plt.savefig(chart_title, dpi=300)
+        plt.savefig(chart_file, dpi=300)
     optimal_h = h_range[numpy.argmax(h_score)]
     return optimal_h
 
 def get_cluster_assignments_hac(linkage_matrix, height):
     "Use Hierarchical Agglomerative Clustering to cluster phrase vectors"
     return [x[0] for x in cut_tree(linkage_matrix, height=height)]
+
+# Cell
+def visualize_umap(just_phrase_ids, cluster_assignments, just_phrase_text, dist, umap_neighbors = 15, save_chart = False, chart_file = "UMAP.html"):
+    "Visualize the clusters using UMAP"
+    reducer = umap.UMAP(n_neighbors=umap_neighbors, min_dist=.1, metric='cosine', random_state=42)
+    embedding = reducer.fit_transform(dist)
+    df = pd.DataFrame(dict(label=just_phrase_ids, UMAP_cluster=cluster_assignments, phrase=just_phrase_text, x=embedding[:, 0], y=embedding[:, 1]))
+    fig = px.scatter(df, x="x", y="y", hover_name="label", color="UMAP_cluster", hover_data=["phrase", "label","UMAP_cluster"], color_continuous_scale='rainbow')
+    fig.show()
+    if save_chart:
+        plotly.offline.plot(fig, filename=chart_file)
+
+def visualize_mds(just_phrase_ids, cluster_assignments, just_phrase_text, dist, save_chart = False, chart_file = "MDS.html"):
+    "Visualize the clusters using Multi-Dimensional Scaling (MDS)"
+    mds = MDS(n_components=2, dissimilarity="precomputed", random_state=42)
+    pos = mds.fit_transform(dist)
+    xs, ys = pos[:, 0], pos[:, 1]
+    df = pd.DataFrame(dict(x=xs, y=ys, MDS_cluster=cluster_assignments, label=just_phrase_ids, phrase=just_phrase_text))
+    fig = px.scatter(df, x="x", y="y", hover_name="label", color="MDS_cluster", hover_data=["phrase", "label","MDS_cluster"], color_continuous_scale='rainbow')
+    fig.show()
+    if save_chart:
+        plotly.offline.plot(fig, filename=chart_file)
+
+def visualize_svd(just_phrase_ids, cluster_assignments, just_phrase_text, dist, save_chart = False, chart_file = "SVD.html"):
+    "Visualize the clusters using Singular Value Decomposition (SVD)"
+    svd2d =  TruncatedSVD(n_components = 2, random_state = 42).fit_transform(dist)
+    df = pd.DataFrame(dict(label=just_phrase_ids, SVD_cluster=cluster_assignments, phrase=just_phrase_text, x=svd2d[:, 0], y=svd2d[:, 1]))
+    fig = px.scatter(df, x="x", y="y", hover_name="label", color="SVD_cluster", hover_data=["phrase", "label","SVD_cluster"], color_continuous_scale='rainbow')
+    fig.show()
+    if save_chart:
+        plotly.offline.plot(fig, filename=chart_file)
+
+# Cell
+def get_cluster_topics(cluster_assignments, just_phrase_ids, my_docs):
+    "Get list of phrases by document/sentence"
+    cluster_topics = []
+    for c in set(cluster_assignments):
+        #QUESTION: I removed the condition len(x.split(".")) > 1 is there a case when that wouldn't be True?
+        # Parse (doc_id, sent_id) "coordinate" pairs from dataframe label column
+        cluster_mask = numpy.asarray(cluster_assignments) == c
+        # TODO: Consolidate the next two lines if Amy's okay with storing just_phrase_ids as a list of tuples
+        topic_labels = numpy.asarray(just_phrase_ids)[cluster_mask]
+        sent_coords = [[int(x.split(".")[1]), int(x.split(".")[3])] for x in topic_labels]
+
+        ## sent_coords has each element formatted as [doc number, sentence number]
+        cluster_terms = []
+        for doc_id, sent_id in sent_coords:
+            sent = my_docs[doc_id][sent_id]
+            # This isn't used. Can we remove?
+#             pos = my_docs_pos[doc_id][sent_id]
+            cluster_terms.append(sent)
+
+        cluster_topics.append(cluster_terms)
+    return cluster_topics

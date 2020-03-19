@@ -4,13 +4,15 @@ __all__ = ['import_docs', 'sentences_to_disk', 'get_doc_top_phrases', 'get_doc_w
            'get_doc_word_vectors_svd', 'get_doc_word_vectors_umap', 'get_doc_word_vectors_pretrained',
            'get_doc_word_vectors_local', 'filter_sentences', 'get_optimal_k', 'get_cluster_assignments_kmeans',
            'get_linkage_matrix', 'get_optimal_height', 'get_cluster_assignments_hac', 'visualize_umap', 'visualize_mds',
-           'visualize_svd', 'get_cluster_topics']
+           'visualize_svd', 'get_cluster_topics', 'write_output_to_disk', 'evaluate']
 
 # Cell
+from gensim import corpora, models
 import matplotlib.pyplot as plt
+from .helpers import *
 from .nlp_helpers import *
 from .preprocessing import *
-import numpy
+import numpy as np
 import pandas as pd
 import plotly
 import plotly.express as px
@@ -54,7 +56,7 @@ def import_docs(path_to_file_list, verbose = False):
 
     if verbose == True: print("Number of Documents Loaded: " + str(len(my_docs)))
 
-    return my_docs, my_docs_pos, my_docs_loc, raw_sentences, raw_docs
+    return my_docs, my_docs_pos, my_docs_loc, raw_sentences, raw_docs, file_list
 
 # Cell
 def sentences_to_disk(raw_sentences, outfile_name):
@@ -120,7 +122,7 @@ def filter_sentences(doc_phrase_vecs, doc_top_phrases):
             this_text = doc_top_phrases[doc_ix][phrase_ix]
 
             # Check phrase_vec is not zero or an array of zeros, these would imply the sentence has no "top phrases"
-            if isinstance(phrase_vec, numpy.ndarray) and any(numpy.zeros(len(phrase_vec)) != phrase_vec):
+            if isinstance(phrase_vec, np.ndarray) and any(np.zeros(len(phrase_vec)) != phrase_vec):
                 just_phrase_vecs.append(list(phrase_vec))
                 just_phrase_ids.append(phrase_id)
                 just_phrase_text.append(this_text[1])
@@ -139,7 +141,7 @@ def get_optimal_k(just_phrase_vecs, save_chart = False, chart_file = "KmeansSilh
     fig = plt.plot(k_range, score)
     if save_chart:
         plt.savefig(chart_file, dpi=300)
-    optimal_k = k_range[numpy.argmax(score)]
+    optimal_k = k_range[np.argmax(score)]
     return optimal_k
 
 def get_cluster_assignments_kmeans(k, just_phrase_vecs):
@@ -174,7 +176,7 @@ def get_optimal_height(just_phrase_vecs, linkage_matrix, save_chart = False, cha
 
     if save_chart:
         plt.savefig(chart_file, dpi=300)
-    optimal_h = h_range[numpy.argmax(h_score)]
+    optimal_h = h_range[np.argmax(h_score)]
     return optimal_h
 
 def get_cluster_assignments_hac(linkage_matrix, height):
@@ -214,15 +216,10 @@ def visualize_svd(just_phrase_ids, cluster_assignments, just_phrase_text, dist, 
 
 # Cell
 def get_cluster_topics(cluster_assignments, just_phrase_ids, my_docs):
-    "Get list of phrases by document/sentence"
+    "Gets a list of the main topics for each cluster"
     cluster_topics = []
     for c in set(cluster_assignments):
-        #QUESTION: I removed the condition len(x.split(".")) > 1 is there a case when that wouldn't be True?
-        # Parse (doc_id, sent_id) "coordinate" pairs from dataframe label column
-        cluster_mask = numpy.asarray(cluster_assignments) == c
-        # TODO: Consolidate the next two lines if Amy's okay with storing just_phrase_ids as a list of tuples
-        topic_labels = numpy.asarray(just_phrase_ids)[cluster_mask]
-        sent_coords = [[int(x.split(".")[1]), int(x.split(".")[3])] for x in topic_labels]
+        sent_coords = get_cluster_sent_coords(c, just_phrase_ids, cluster_assignments)
 
         ## sent_coords has each element formatted as [doc number, sentence number]
         cluster_terms = []
@@ -233,4 +230,85 @@ def get_cluster_topics(cluster_assignments, just_phrase_ids, my_docs):
             cluster_terms.append(sent)
 
         cluster_topics.append(cluster_terms)
-    return cluster_topics
+
+    main_cluster_topics = []
+    for doc_topics in cluster_topics:
+        #Latent Dirichlet Allocation implementation with Gensim
+        dictionary = corpora.Dictionary(doc_topics)
+        corpus = [dictionary.doc2bow(text) for text in doc_topics]
+        lda = models.LdaModel(corpus, num_topics=1, id2word=dictionary)
+        topics_matrix = lda.show_topics(formatted=False, num_words=10)
+
+        topics_ary = list(np.array(topics_matrix[0][1])[:,0])
+        main_cluster_topics.append(topics_ary)
+    return main_cluster_topics
+
+# Cell
+def write_output_to_disk(main_cluster_topics, just_phrase_ids, cluster_assignments, raw_sentences,
+                         doc_top_phrases, file_list, file_name = "TopicClusterResults.txt"):
+    "Creates a CSV file listing cluster_id/doc_id/doc_name/sentence_id/sentence_text/sentences_phrases"
+    with open(file_name, "w") as outfile:
+        for c, topics in enumerate(main_cluster_topics):
+            outfile.write("Cluster\tDocument.Num\tDocument.Name\tSentence.Num\tSentence.Text\nPhrase.Text")
+            sent_coords = get_cluster_sent_coords(c, just_phrase_ids, cluster_assignments)
+            outfile.write(f"Cluster {c} Keywords: {', '.join(topics)}\n")
+
+            ## sent_coords has each element formatted as [doc number, sentence number]
+            for doc_id, sent_id in sent_coords:
+                if doc_id >= 0 and sent_id >= 0:
+                    outfile.write(f"{c}\t{doc_id}\t{file_list[doc_id]}\t{sent_id}\t{raw_sentences[doc_id][sent_id]}\t{doc_top_phrases[doc_id][sent_id]}\n")
+                else:
+                    #QUESTION: What are we trying to do here? When would this be hit?
+                    outfile.write(f"{c}\t{doc_id, sent_id}\t{doc_id, sent_id}\t{doc_id, sent_id}\t{doc_id, sent_id}\t{doc_id, sent_id}\n")
+
+# Cell
+def evaluate(just_phrase_ids, cluster_assignments, just_phrase_text,
+             gold_file = "data/GOLD_Expert_2019.03.12_TestCorpus_AMY.txt", output_file = "output/EvaluationResults.txt"):
+    "Evaluate precision, recall, and F1 against a gold standard dataset. Write results to a file"
+
+    df = pd.DataFrame(dict(label=just_phrase_ids, cluster=cluster_assignments, phrase=just_phrase_text))
+
+    # Process the gold standard file into a list of IDs and classification groups
+    with open(gold_file) as file:
+        gold_list = file.read().strip().split('\n')
+    gold_array = np.array([x.split('\t') for x in gold_list])
+    ids, group = gold_array.T
+    baseline = list(np.unique(group)) # This is the list of classes ['Confidence', 'Overwhelmed', 'Supportive Environment', 'System Issues']
+
+    # Dictionary of IDs corresponding to each class
+    gold_clusters = {}
+    for clazz in baseline:
+        # List of IDs (doc.#.sent.#) corresponding to a given class
+        gold_clusters[clazz] = gold_array[gold_array[:,1] == clazz][:,0]
+
+    #TODO: This can be combined with the for loop above
+    closest_to_gold = {}
+    for b in baseline:
+        max_overlap = 0
+        max_overlap_cluster = -1
+        cluster_ids = list(set(cluster_assignments))
+        just_phrase_ids
+
+        for c in cluster_ids:
+            overlap = len(set(gold_clusters[b]).intersection(set(df.label[df.cluster==c])))
+            if overlap > max_overlap:
+                max_overlap = overlap
+                max_overlap_cluster = c
+        closest_to_gold[b] = max_overlap_cluster
+
+    #TODO: I think this could also be combined with the above FOR loop
+    # Write results to a file
+    with open(output_file, "w") as eout:
+        eout.write("Gold Concept\tGold Concept Members\tClosest Cluster Num\tClosest Cluster Members\tTP\tFP\tFN\tP\tR\tF1\n")
+        for g in gold_clusters.keys():
+            ## We only want to do these calculations on sentences that are in the gold file.
+            ## Get closest cluster list of sentences that are ONLY in gold
+            closest = set(df.label[df.cluster==closest_to_gold[g]]).intersection(set(ids))
+            gold = set(gold_clusters[g])
+            TP = len(gold.intersection(closest))
+            FP = len(closest - gold)
+            FN = len(gold - closest)
+            P = round(TP/(TP+FP), 3) if (TP+FP) > 0 else float("Nan")
+            R = round(TP/(TP+FN), 3) if (TP+FN) > 0 else float("Nan")
+            F1 = round(2*((P*R)/(P+R)), 3) if (P+R) > 0 else float("Nan")
+            eout.write(f"{g}\t{gold}\t{closest_to_gold[g]}\t{closest}\t{TP}\t{FP}\t{FN}\t{P}\t{R}\t{F1}\n")

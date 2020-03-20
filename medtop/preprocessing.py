@@ -64,6 +64,9 @@ def tokenize_and_stem(text):
 
     #For each sentence in document get back the list of tokenized words with contractions normalized and punctuation removed
     for s in sent:
+        # Condense whitespace
+        s = re.sub("\s+", " " ,s).strip()
+
         raw_sent.append(s)
         tokenized = WhitespaceTokenizer().tokenize(decontracted(s).translate(table))
 

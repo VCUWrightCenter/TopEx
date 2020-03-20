@@ -7,6 +7,7 @@ __all__ = ['import_docs', 'sentences_to_disk', 'get_doc_top_phrases', 'get_doc_w
            'visualize_svd', 'get_cluster_topics', 'write_output_to_disk', 'evaluate']
 
 # Cell
+import csv
 from gensim import corpora, models
 import matplotlib.pyplot as plt
 from .helpers import *
@@ -33,12 +34,12 @@ def import_docs(path_to_file_list):
     with open(path_to_file_list) as file:
         file_list = file.read().strip().split('\n')
 
-    # Create a dataframe containing the ID (generated), file name, and raw text of each document
+    # Create a dataframe containing the doc_id, file name, and raw text of each document
     doc_cols = ["doc_id", "file", "text"]
     doc_df = pd.DataFrame(columns=doc_cols)
 
-    # Create a dataframe containing the doc_id, sent_id (generated), raw text, and list of words for each sentence
-    sent_cols = ["doc_id", "sent_id", "text", "tokens"]
+    # Create a dataframe containing the doc_sent_id, doc_id, sent_id, raw text, and list of words for each sentence
+    sent_cols = ["doc_sent_id", "doc_id", "sent_id", "text", "tokens"]
     data = pd.DataFrame(columns=sent_cols)
 
     for doc_id, file in enumerate(file_list):
@@ -51,22 +52,18 @@ def import_docs(path_to_file_list):
         split_sent, raw_sent = tokenize_and_stem(text)
         for sent_id, _ in enumerate(split_sent):
             # Populate a row in data for each sentence in the document
+            doc_sent_id = f"doc.{doc_id}.sent.{sent_id}"
             text = raw_sent[sent_id]
             tokens = split_sent[sent_id]
-            sent_row = pd.Series([doc_id, sent_id, text, tokens], index=sent_cols)
+            sent_row = pd.Series([doc_sent_id, doc_id, sent_id, text, tokens], index=sent_cols)
             data = data.append(sent_row, ignore_index=True)
 
     return data, doc_df
 
 # Cell
-def sentences_to_disk(raw_sentences, outfile_name):
+def sentences_to_disk(data, file_name = 'output/DocumentSentenceList.txt'):
     "Writes the raw sentences to a file organized by document and sentence number"
-#     outfile_name = args.o + "/" + args.p + "_DocumentSentenceList.txt"
-    with open(outfile_name, "w") as outfile:
-        outfile.write("Sentence ID\tSentence Text\n")
-        for doc_ix, doc in enumerate(raw_sentences):
-            for sent_ix, sent in enumerate(doc):
-                outfile.write(f"doc.{doc_ix}.sent.{sent_ix}\t{sent}\n")
+    data.to_csv(file_name, columns=["doc_sent_id", "text"], sep='\t', encoding='utf-8', index=False)#, quoting=csv.QUOTE_NONE, quotechar="",  escapechar="\\"
 
 # Cell
 def get_doc_top_phrases(raw_docs, feature_names, tdm, window_size = 6, include_input_in_tfidf = False):

@@ -34,8 +34,9 @@ index = {"import_docs": "Core.ipynb",
          "w2v_pretrained": "nlp_helpers.ipynb",
          "create_tfidf": "nlp_helpers.ipynb",
          "decontracted": "preprocessing.ipynb",
-         "tokenize_and_stem2": "preprocessing.ipynb",
-         "tokenize_and_stem": "preprocessing.ipynb"}
+         "token_filter": "preprocessing.ipynb",
+         "tokenize_and_stem": "preprocessing.ipynb",
+         "tokenize_and_stem_original": "preprocessing.ipynb"}
 
 modules = ["core.py",
            "helpers.py",

@@ -26,37 +26,37 @@ from sklearn.decomposition import TruncatedSVD
 import umap.umap_ as umap
 
 # Cell
-def import_docs(path_to_file_list, verbose = False):
+def import_docs(path_to_file_list):
     "Imports and processes the list of documents contained in the given file"
 
     # Extract list of files from text document
     with open(path_to_file_list) as file:
         file_list = file.read().strip().split('\n')
 
-    # Append the raw contents of each document to an array
-    file_content = []
-    for file_path in file_list:
-        with open(file_path, "r") as file:
-            text = file.read()
-            file_content.append(text)
+    # Create a dataframe containing the ID (generated), file name, and raw text of each document
+    doc_cols = ["doc_id", "file", "text"]
+    doc_df = pd.DataFrame(columns=doc_cols)
 
-    my_docs = []
-    my_docs_pos = []
-    my_docs_loc = []
-    raw_docs = []
-    raw_sentences = []
+    # Create a dataframe containing the doc_id, sent_id (generated), raw text, and list of words for each sentence
+    sent_cols = ["doc_id", "sent_id", "text", "tokens"]
+    data = pd.DataFrame(columns=sent_cols)
 
-    for doc in file_content:
-        split_sent, split_sent_pos, split_sent_loc, tokens, pos, loc, full_sent, full_pos, full_loc, raw_sent = tokenize_and_stem(doc)
-        my_docs.append(split_sent)
-        my_docs_pos.append(split_sent_pos)
-        my_docs_loc.append(split_sent_loc)
-        raw_docs.append(doc)
-        raw_sentences.append(raw_sent)
+    for doc_id, file in enumerate(file_list):
+        with open(file, "r") as file_content:
+            # Populate a row in doc_df for each file loaded
+            text = file_content.read()
+            doc_row = pd.Series([doc_id, file, text], index=doc_cols)
+            doc_df = doc_df.append(doc_row, ignore_index=True)
 
-    if verbose == True: print("Number of Documents Loaded: " + str(len(my_docs)))
+        split_sent, raw_sent = tokenize_and_stem(text)
+        for sent_id, _ in enumerate(split_sent):
+            # Populate a row in data for each sentence in the document
+            text = raw_sent[sent_id]
+            tokens = split_sent[sent_id]
+            sent_row = pd.Series([doc_id, sent_id, text, tokens], index=sent_cols)
+            data = data.append(sent_row, ignore_index=True)
 
-    return my_docs, my_docs_pos, my_docs_loc, raw_sentences, raw_docs, file_list
+    return data, doc_df
 
 # Cell
 def sentences_to_disk(raw_sentences, outfile_name):

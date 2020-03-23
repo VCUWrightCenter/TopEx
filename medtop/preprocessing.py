@@ -86,7 +86,6 @@ def tokenize_and_stem(text):
         filtered_pos = list(np.array(pos_tags)[filter_mask])
         sent_tokens.append(filtered_tokens)
         sent_pos.append(filtered_pos)
-        break
 
     return sent_tokens, sent_pos, sent_raw
 

@@ -5,8 +5,8 @@ title: MedTop
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Extracting topics from reflective medical writings.  "
-description: "Extracting topics from reflective medical writings.  "
+summary: "Extracting topics from reflective medical writings."
+description: "Extracting topics from reflective medical writings."
 ---
 <!--
 
@@ -103,6 +103,20 @@ description: "Extracting topics from reflective medical writings.  "
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Removed 41 sentences without phrases.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -127,7 +141,7 @@ description: "Extracting topics from reflective medical writings.  "
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">assign_clusters</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;hac&quot;</span><span class="p">)</span>
 <span class="n">cluster_df</span> <span class="o">=</span> <span class="n">get_cluster_topics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">visualize_clustering</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;umap&quot;</span><span class="p">,</span> <span class="n">display_inline</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">visualize_clustering</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;umap&quot;</span><span class="p">,</span> <span class="n">show_chart</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>

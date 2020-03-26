@@ -1,6 +1,8 @@
-![CI](https://github.com/cctrbic/medtop/workflows/CI/badge.svg)
+![CI](https://github.com/cctrbic/medtop/workflows/CI/badge.svg) 
+Documentation is available at https://cctrbic.github.io/medtop/.
+
 # MedTop
-> Extracting topics from reflective medical writings.  
+> Extracting topics from reflective medical writings.
 
 
 ```python
@@ -27,28 +29,6 @@ path_to_file_list = 'data/corpus_file_list.txt'
 data, doc_df = import_docs(path_to_file_list, save_results = False)
 ```
 
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-3-94cd8af6b3a0> in <module>
-    ----> 1 from medtop.core import *
-          2 path_to_file_list = 'data/corpus_file_list.txt'
-          3 data, doc_df = import_docs(path_to_file_list, save_results = False)
-    
-
-    ~\code\medtop\medtop\core.py in <module>
-        136 def get_vectors(method:str, data:DataFrame, dictionary:gensim.corpora.dictionary.Dictionary = None,
-        137                 tfidf:np.ndarray = None, dimensions:int = 2, umap_neighbors:int = 15,
-    --> 138                 path_to_w2v_bin_file:str = None, doc_df:DataFrame = None):
-        139     """
-        140     Creates a word vector for each phrase in the dataframe.
-    
-
-    NameError: name 'gensim' is not defined
-
-
 ### Transform data
 Create word vectors from the most expressive phrase in each sentence of the imported documents.
 
@@ -58,6 +38,9 @@ tfidf, dictionary = create_tfidf(path_to_seed_topics_file_list, doc_df)
 data = get_phrases(data, dictionary.token2id, tfidf, include_input_in_tfidf = False)
 data = get_vectors("tfidf", data, dictionary = dictionary, tfidf = tfidf)
 ```
+
+    Removed 41 sentences without phrases.
+    
 
 **Questions about unrepresentative names:**   
   1) Need a better understanding of `include_input_in_tfidf`  
@@ -69,7 +52,7 @@ Cluster the sentences into groups expressing similar ideas or topics.
 ```python
 data = assign_clusters(data, method = "hac")
 cluster_df = get_cluster_topics(data, doc_df, save_results = False)
-visualize_clustering(data, method = "umap", display_inline = False)
+visualize_clustering(data, method = "umap", show_chart = False)
 ```
 
 ### Evaluate results

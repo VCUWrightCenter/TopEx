@@ -11,19 +11,13 @@ entries:
       url: /
     - output: web,pdf
       title: Core
-      url: /Core
+      url: /core
     - output: web,pdf
-      title: Helpers
-      url: /helpers
-    - output: web,pdf
-      title: NLP Helpers
-      url: /nlp_helpers
+      title: Internal
+      url: /internal
     - output: web,pdf
       title: Preprocessing
       url: /preprocessing
-    - output: web,pdf
-      title: Title
-      url: /Sandbox
     output: web
     title: medtop
   output: web

@@ -39,10 +39,9 @@ description: "Methods for preprocessing raw text data"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="decontracted" class="doc_header"><code>decontracted</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>decontracted</code>(<strong><code>phrase</code></strong>)</p>
+<h4 id="decontracted" class="doc_header"><code>decontracted</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>decontracted</code>(<strong><code>text</code></strong>)</p>
 </blockquote>
-<p>Removes contractions from <code>phrase</code></p>
-<p>Obtainined from <a href="https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python">https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python</a></p>
+<p>Removes contractions from input <code>text</code>. Credit: <a href="https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python">https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python</a></p>
 
 </div>
 
@@ -64,8 +63,9 @@ description: "Methods for preprocessing raw text data"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="tokenize_and_stem2" class="doc_header"><code>tokenize_and_stem2</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tokenize_and_stem2</code>(<strong><code>text</code></strong>)</p>
+<h4 id="token_filter" class="doc_header"><code>token_filter</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>token_filter</code>(<strong><code>token</code></strong>, <strong><code>stop_words</code></strong>)</p>
 </blockquote>
+<p>Returns False for stop words and tokens with no alpha characters, otherwise, True</p>
 
 </div>
 
@@ -74,17 +74,6 @@ description: "Methods for preprocessing raw text data"
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://stackoverflow.com/questions/31387905/converting-plural-to-singular-in-a-text-file-with-python">https://stackoverflow.com/questions/31387905/converting-plural-to-singular-in-a-text-file-with-python</a><br>
-<a href="https://stackoverflow.com/questions/31387905/converting-plural-to-singular-in-a-text-file-with-python">https://stackoverflow.com/questions/31387905/converting-plural-to-singular-in-a-text-file-with-python</a></p>
-<p>Need to pass one document text at a time.<br>
-Returns the list of all tokens<br>
-Returns the list of tokenizes sentences</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -98,7 +87,7 @@ Returns the list of tokenizes sentences</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="tokenize_and_stem" class="doc_header"><code>tokenize_and_stem</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L62" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tokenize_and_stem</code>(<strong><code>text</code></strong>)</p>
+<h4 id="tokenize_and_stem" class="doc_header"><code>tokenize_and_stem</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L53" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tokenize_and_stem</code>(<strong><code>text</code></strong>)</p>
 </blockquote>
 <p>Parse out sentences, remove contractions, tokenize by white space, and remove all punctuation, and lemmatize tokens</p>
 

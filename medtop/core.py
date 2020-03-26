@@ -25,7 +25,7 @@ def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str 
     Document pre-processing is handled in [`tokenize_and_stem`](/medtop/preprocessing#tokenize_and_stem).
     `path_to_file_list` is a path to a text file containing a list of files to be processed separated by line breaks.
 
-    Returns (`DataFrame`, `DataFrame`)
+    Returns (DataFrame, DataFrame)
     """
 
     # Extract list of files from text document
@@ -73,7 +73,16 @@ def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str 
 
 # Cell
 def create_tfidf(path_to_seed_topics_file_list, input_doc_df = None):
-    "Create a TF-IDF matrix from the tokens in the seed topics documents and optionally, the input corpus"
+    """
+    Creates a dense TF-IDF matrix from the tokens in the seed topics documents and optionally, the input corpus.
+    """
+    """
+    Imports and pre-processes the list of documents contained in the input file.
+    Document pre-processing is handled in [`tokenize_and_stem`](/medtop/preprocessing#tokenize_and_stem).
+    `path_to_file_list` is a path to a text file containing a list of files to be processed separated by line breaks.
+
+    Returns (`DataFrame`, `DataFrame`)
+    """
 
     # Import seed topics documents
     _, seed_doc_df = import_docs(path_to_seed_topics_file_list)

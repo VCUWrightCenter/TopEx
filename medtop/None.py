@@ -565,3 +565,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import os
 from sklearn.decomposition import TruncatedSVD
 import umap.umap_ as umap
+
+# Cell
+import pandas as pd
+from .preprocessing import *

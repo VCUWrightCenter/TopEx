@@ -39,9 +39,12 @@ description: "MedTop core API"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="import_docs" class="doc_header"><code>import_docs</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_docs</code>(<strong><code>path_to_file_list</code></strong>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/DocumentSentenceList.txt'</code></em>)</p>
+<h4 id="import_docs" class="doc_header"><code>import_docs</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_docs</code>(<strong><code>path_to_file_list</code></strong>:<code>str</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/DocumentSentenceList.txt'</code></em>)</p>
 </blockquote>
-<p>Imports and preprocesses the list of documents contained in the input file.</p>
+<p>Imports and pre-processes the list of documents contained in the input file.
+Document pre-processing is handled in <a href="/medtop/preprocessing#tokenize_and_stem"><code>tokenize_and_stem</code></a>.
+<code>path_to_file_list</code> is a path to a text file containing a list of files to be processed separated by line breaks.</p>
+<p>Returns (<code>DataFrame</code>, <code>DataFrame</code>)</p>
 
 </div>
 
@@ -63,7 +66,7 @@ description: "MedTop core API"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_tfidf" class="doc_header"><code>create_tfidf</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L69" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_tfidf</code>(<strong><code>path_to_seed_topics_file_list</code></strong>, <strong><code>input_doc_df</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="create_tfidf" class="doc_header"><code>create_tfidf</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_tfidf</code>(<strong><code>path_to_seed_topics_file_list</code></strong>, <strong><code>input_doc_df</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Create a TF-IDF matrix from the tokens in the seed topics documents and optionally, the input corpus</p>
 
@@ -87,7 +90,7 @@ description: "MedTop core API"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_phrases" class="doc_header"><code>get_phrases</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L92" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_phrases</code>(<strong><code>data</code></strong>, <strong><code>feature_names</code></strong>, <strong><code>tdm</code></strong>, <strong><code>window_size</code></strong>=<em><code>6</code></em>, <strong><code>include_input_in_tfidf</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="get_phrases" class="doc_header"><code>get_phrases</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L98" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_phrases</code>(<strong><code>data</code></strong>, <strong><code>feature_names</code></strong>, <strong><code>tdm</code></strong>, <strong><code>window_size</code></strong>=<em><code>6</code></em>, <strong><code>include_input_in_tfidf</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Extracts the most expressive phrase of length <code>window_size</code> from each sentence and appends them to the input dataframe in a new 'phrase' column.
 Sentences without phrases of sufficient length are removed.</p>
@@ -112,7 +115,7 @@ Sentences without phrases of sufficient length are removed.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_vectors" class="doc_header"><code>get_vectors</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L114" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_vectors</code>(<strong><code>method</code></strong>, <strong><code>data</code></strong>, <strong><code>dictionary</code></strong>=<em><code>None</code></em>, <strong><code>tfidf</code></strong>=<em><code>None</code></em>, <strong><code>dimensions</code></strong>=<em><code>2</code></em>, <strong><code>umap_neighbors</code></strong>=<em><code>15</code></em>, <strong><code>path_to_w2v_bin_file</code></strong>=<em><code>None</code></em>, <strong><code>doc_df</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="get_vectors" class="doc_header"><code>get_vectors</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L120" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_vectors</code>(<strong><code>method</code></strong>, <strong><code>data</code></strong>, <strong><code>dictionary</code></strong>=<em><code>None</code></em>, <strong><code>tfidf</code></strong>=<em><code>None</code></em>, <strong><code>dimensions</code></strong>=<em><code>2</code></em>, <strong><code>umap_neighbors</code></strong>=<em><code>15</code></em>, <strong><code>path_to_w2v_bin_file</code></strong>=<em><code>None</code></em>, <strong><code>doc_df</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Creates a word vector for each phrase in the dataframe.</p>
 
@@ -136,7 +139,7 @@ Sentences without phrases of sufficient length are removed.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="assign_clusters" class="doc_header"><code>assign_clusters</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L165" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>assign_clusters</code>(<strong><code>data</code></strong>, <strong><code>method</code></strong>=<em><code>'kmeans'</code></em>, <strong><code>dist_metric</code></strong>=<em><code>'euclidean'</code></em>, <strong><code>k</code></strong>=<em><code>None</code></em>, <strong><code>height</code></strong>=<em><code>None</code></em>, <strong><code>show_chart</code></strong>=<em><code>False</code></em>, <strong><code>show_dendrogram</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="assign_clusters" class="doc_header"><code>assign_clusters</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L171" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>assign_clusters</code>(<strong><code>data</code></strong>, <strong><code>method</code></strong>=<em><code>'kmeans'</code></em>, <strong><code>dist_metric</code></strong>=<em><code>'euclidean'</code></em>, <strong><code>k</code></strong>=<em><code>None</code></em>, <strong><code>height</code></strong>=<em><code>None</code></em>, <strong><code>show_chart</code></strong>=<em><code>False</code></em>, <strong><code>show_dendrogram</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Clusters the sentences using phrase vectors.</p>
 
@@ -160,7 +163,7 @@ Sentences without phrases of sufficient length are removed.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="visualize_clustering" class="doc_header"><code>visualize_clustering</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L184" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>visualize_clustering</code>(<strong><code>data</code></strong>, <strong><code>method</code></strong>=<em><code>'umap'</code></em>, <strong><code>dist_metric</code></strong>=<em><code>'cosine'</code></em>, <strong><code>umap_neighbors</code></strong>=<em><code>15</code></em>, <strong><code>display_inline</code></strong>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>=<em><code>'cluster_visualization.html'</code></em>)</p>
+<h4 id="visualize_clustering" class="doc_header"><code>visualize_clustering</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L190" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>visualize_clustering</code>(<strong><code>data</code></strong>, <strong><code>method</code></strong>=<em><code>'umap'</code></em>, <strong><code>dist_metric</code></strong>=<em><code>'cosine'</code></em>, <strong><code>umap_neighbors</code></strong>=<em><code>15</code></em>, <strong><code>display_inline</code></strong>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>=<em><code>'cluster_visualization.html'</code></em>)</p>
 </blockquote>
 <p>Visualize clustering in two dimensions.</p>
 
@@ -184,7 +187,7 @@ Sentences without phrases of sufficient length are removed.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_cluster_topics" class="doc_header"><code>get_cluster_topics</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_topics</code>(<strong><code>data</code></strong>, <strong><code>doc_df</code></strong>=<em><code>None</code></em>, <strong><code>topics_per_cluster</code></strong>=<em><code>10</code></em>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/TopicClusterResults.txt'</code></em>)</p>
+<h4 id="get_cluster_topics" class="doc_header"><code>get_cluster_topics</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L228" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_topics</code>(<strong><code>data</code></strong>, <strong><code>doc_df</code></strong>=<em><code>None</code></em>, <strong><code>topics_per_cluster</code></strong>=<em><code>10</code></em>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/TopicClusterResults.txt'</code></em>)</p>
 </blockquote>
 <p>Returns a dataframe containing a list of the main topics for each cluster.</p>
 
@@ -208,7 +211,7 @@ Sentences without phrases of sufficient length are removed.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="evaluate" class="doc_header"><code>evaluate</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L248" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate</code>(<strong><code>data</code></strong>, <strong><code>gold_file</code></strong>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/EvaluationResults.txt'</code></em>)</p>
+<h4 id="evaluate" class="doc_header"><code>evaluate</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L254" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate</code>(<strong><code>data</code></strong>, <strong><code>gold_file</code></strong>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/EvaluationResults.txt'</code></em>)</p>
 </blockquote>
 <p>Evaluate precision, recall, and F1 against a gold standard dataset.</p>
 

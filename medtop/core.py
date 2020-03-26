@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import medtop.internal as internal
 import medtop.preprocessing as preprocessing
 import numpy as np
-import pandas as pd
+from pandas import DataFrame, Series, read_csv, merge
 import plotly
 import plotly.express as px
 from sklearn.manifold import MDS
@@ -19,8 +19,14 @@ from sklearn.decomposition import TruncatedSVD
 import umap.umap_ as umap
 
 # Cell
-def import_docs(path_to_file_list, save_results = False, file_name = 'output/DocumentSentenceList.txt'):
-    "Imports and preprocesses the list of documents contained in the input file."
+def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt'):
+    """
+    Imports and pre-processes the list of documents contained in the input file.
+    Document pre-processing is handled in [`tokenize_and_stem`](/medtop/preprocessing#tokenize_and_stem).
+    `path_to_file_list` is a path to a text file containing a list of files to be processed separated by line breaks.
+
+    Returns (`DataFrame`, `DataFrame`)
+    """
 
     # Extract list of files from text document
     with open(path_to_file_list, encoding="utf-8") as file:
@@ -48,16 +54,16 @@ def import_docs(path_to_file_list, save_results = False, file_name = 'output/Doc
             sent_text = raw_sent[sent_id]
             tokens = sent_tokens[sent_id]
             pos_tags = sent_pos[sent_id]
-            data_rows.append(pd.Series([row_id, doc_id, sent_id, sent_text, tokens, pos_tags], index=data_cols))
+            data_rows.append(Series([row_id, doc_id, sent_id, sent_text, tokens, pos_tags], index=data_cols))
 
         # Populate a row in doc_df for each file loaded
         doc_tokens = [token for sent in sent_tokens for token in sent]
-        doc_row = pd.Series([doc_id, file, doc_text, doc_tokens], index=doc_cols)
+        doc_row = Series([doc_id, file, doc_text, doc_tokens], index=doc_cols)
         doc_rows.append(doc_row)
 
     # Create dataframes from lists of Series
-    data = pd.DataFrame(data_rows)
-    doc_df = pd.DataFrame(doc_rows)
+    data = DataFrame(data_rows)
+    doc_df = DataFrame(doc_rows)
 
     # Optionally save the results to disk
     if save_results:
@@ -210,7 +216,7 @@ def visualize_clustering(data, method = "umap", dist_metric = "cosine", umap_nei
 
     # Print visualization to screen by default
     if display_inline:
-        visualization_df = pd.DataFrame(dict(id=list(data.id), cluster=list(data.cluster), phrase=list(data.phrase), x=x, y=y))
+        visualization_df = DataFrame(dict(id=list(data.id), cluster=list(data.cluster), phrase=list(data.phrase), x=x, y=y))
         fig = px.scatter(visualization_df, x="x", y="y", hover_name="id", color="cluster", hover_data=["phrase","cluster"], color_continuous_scale='rainbow')
         fig.show()
 
@@ -233,9 +239,9 @@ def get_cluster_topics(data, doc_df = None, topics_per_cluster = 10, save_result
         lda = models.LdaModel(corpus, num_topics=1, id2word=dictionary)
         topics_matrix = lda.show_topics(formatted=False, num_words=topics_per_cluster)
         topics = list(np.array(topics_matrix[0][1])[:,0])
-        rows.append(pd.Series([c, topics, len(cluster_tokens)], index=["cluster", "topics", "sent_count"]))
+        rows.append(Series([c, topics, len(cluster_tokens)], index=["cluster", "topics", "sent_count"]))
 
-    cluster_df = pd.DataFrame(rows)
+    cluster_df = DataFrame(rows)
 
     # Optionally save clusters to disk
     if save_results:
@@ -249,10 +255,10 @@ def evaluate(data, gold_file, save_results = False, file_name = "output/Evaluati
     "Evaluate precision, recall, and F1 against a gold standard dataset."
 
     # Import gold standard list of IDs (doc.#.sent.#) and labels
-    gold_df = pd.read_csv(gold_file, names=["id", "label"], sep="\t", encoding="utf-8")
+    gold_df = read_csv(gold_file, names=["id", "label"], sep="\t", encoding="utf-8")
 
     # Inner join the actual labels with the assigned clusters for each document.
-    eval_df = pd.merge(gold_df, data[["id", "cluster"]], on="id")
+    eval_df = merge(gold_df, data[["id", "cluster"]], on="id")
 
     # Iterate labels in the gold standard dataset
     rows = []
@@ -276,11 +282,11 @@ def evaluate(data, gold_file, save_results = False, file_name = "output/Evaluati
         recall = round(tp/(tp+fn), 3) if (tp+fn) > 0 else float("Nan")
         f1 = round(2*((precision*recall)/(precision+recall)), 3) if (precision+recall) > 0 else float("Nan")
 
-        rows.append(pd.Series([label, gold_examples, closest_cluster, closest_cluster_members, tp, fp, fn, precision, recall, f1],
+        rows.append(Series([label, gold_examples, closest_cluster, closest_cluster_members, tp, fp, fn, precision, recall, f1],
                               index=["label", "gold_examples", "closest_cluster", "closest_cluster_members", "tp", "fp", "fn", "precision", "recall", "f1"]))
 
     # Create results dataframe with a row for each label
-    results_df = pd.DataFrame(rows).sort_values(by=["label"])
+    results_df = DataFrame(rows).sort_values(by=["label"])
 
     # Optionally save the results to disk
     if save_results:

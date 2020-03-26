@@ -4,12 +4,14 @@ __all__ = ['import_docs', 'create_tfidf', 'get_phrases', 'get_vectors', 'assign_
            'get_cluster_topics', 'evaluate']
 
 # Cell
+import gensim
 from gensim import corpora, models, matutils
 import matplotlib.pyplot as plt
 import medtop.internal as internal
 import medtop.preprocessing as preprocessing
 import numpy as np
-from pandas import DataFrame, Series, read_csv, merge
+import pandas as pd
+from pandas import DataFrame, Series
 import plotly
 import plotly.express as px
 from sklearn.manifold import MDS
@@ -22,6 +24,7 @@ import umap.umap_ as umap
 def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt'):
     """
     Imports and pre-processes the list of documents contained in the input file.
+
     Document pre-processing is handled in [`tokenize_and_stem`](/medtop/preprocessing#tokenize_and_stem).
     `path_to_file_list` is a path to a text file containing a list of files to be processed separated by line breaks.
 
@@ -72,16 +75,15 @@ def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str 
     return data, doc_df
 
 # Cell
-def create_tfidf(path_to_seed_topics_file_list, input_doc_df = None):
+def create_tfidf(path_to_seed_topics_file_list:str, doc_df:DataFrame = None):
     """
     Creates a dense TF-IDF matrix from the tokens in the seed topics documents and optionally, the input corpus.
-    """
-    """
-    Imports and pre-processes the list of documents contained in the input file.
-    Document pre-processing is handled in [`tokenize_and_stem`](/medtop/preprocessing#tokenize_and_stem).
-    `path_to_file_list` is a path to a text file containing a list of files to be processed separated by line breaks.
 
-    Returns (`DataFrame`, `DataFrame`)
+    `path_to_seed_topics_file_list` is a path to a text file containing a list of files with sentences corresponding to
+    known topics. If the `doc_df` is passed, the input corpus will be used along with the seed topics documents to
+    generate the TF-IDF matrix.
+
+    Returns (numpy.ndarray, gensim.corpora.dictionary.Dictionary)
     """
 
     # Import seed topics documents
@@ -90,8 +92,8 @@ def create_tfidf(path_to_seed_topics_file_list, input_doc_df = None):
     # Bag of Words (BoW) is a list of all tokens by document
     bow_docs = list(seed_doc_df.tokens)
 
-    if input_doc_df is not None:
-        bow_docs = bow_docs + list(input_doc_df.tokens)
+    if doc_df is not None:
+        bow_docs = bow_docs + list(doc_df.tokens)
 
     # Create a dense TF-IDF matrix using document tokens and gensim
     dictionary = corpora.Dictionary(bow_docs)
@@ -104,18 +106,24 @@ def create_tfidf(path_to_seed_topics_file_list, input_doc_df = None):
     return tfidf_dense, dictionary
 
 # Cell
-def get_phrases(data, feature_names, tdm, window_size = 6, include_input_in_tfidf = False):
+def get_phrases(data:DataFrame, feature_names:dict, tdm:np.ndarray, window_size:int = 6,
+                include_input_in_tfidf:bool = False):
     """
-    Extracts the most expressive phrase of length `window_size` from each sentence and appends them to the input dataframe in a new 'phrase' column.
-    Sentences without phrases of sufficient length are removed.
+    Extracts the most expressive phrase from each sentence.
+
+    `feature_names` should be `dictionary.token2id` and `tdm` should be `tfidf` where `dictionary`
+    and `tfidf` are output from `create_tfidf`. `window_size` is the length of phrase extracted.
+    `include_input_in_tfidf` is **Need to clarify this**
+
+    Returns DataFrame
     """
 
-    # TODO: Clarify this
     if not include_input_in_tfidf:
         token_averages = np.max(tdm, axis=1)
 
     # Find the most expressive phrase for each sentence and add to dataframe
-    lambda_func = lambda sent: internal.get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm, token_averages)
+    lambda_func = lambda sent: internal.get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm,
+                                                   token_averages)
     phrases = data.apply(lambda_func, axis=1)
     data['phrase'] = phrases
 
@@ -126,8 +134,18 @@ def get_phrases(data, feature_names, tdm, window_size = 6, include_input_in_tfid
     return filtered_df
 
 # Cell
-def get_vectors(method, data, dictionary = None, tfidf = None, dimensions = 2, umap_neighbors = 15, path_to_w2v_bin_file = None, doc_df = None):
-    "Creates a word vector for each phrase in the dataframe."
+def get_vectors(method:str, data:DataFrame, dictionary:gensim.corpora.dictionary.Dictionary = None,
+                tfidf:np.ndarray = None, dimensions:int = 2, umap_neighbors:int = 15,
+                path_to_w2v_bin_file:str = None, doc_df:DataFrame = None):
+    """
+    Creates a word vector for each phrase in the dataframe.
+
+    Options for `method` are (tfidf, svd, umap, pretrained, local). `tfidf` and `dictionary` are output from
+    `create_tfidf`. `dimensions` is the number of dimensions to which SVD or UMAP reduce the TF-IDF matrix.
+    `path_to_w2v_bin_file` is the path to a pretrained Word2Vec .bin file.
+
+    Returns DataFrame
+    """
 
     # Create word vectors with TF-IDF
     if method == "tfidf":
@@ -177,8 +195,18 @@ def get_vectors(method, data, dictionary = None, tfidf = None, dimensions = 2, u
     return data
 
 # Cell
-def assign_clusters(data, method = "kmeans", dist_metric = "euclidean", k = None, height = None, show_chart = False, show_dendrogram = False):
-    "Clusters the sentences using phrase vectors."
+def assign_clusters(data:DataFrame, method:str = "kmeans", dist_metric:str = "euclidean", k:int = None,
+                    height:int = None, show_chart:bool = False, show_dendrogram:bool = False):
+    """
+    Clusters the sentences using phrase vectors.
+
+    Options for `method` are (kmeans, hac). Options for `dist_metric` are (cosine or anything accepted by
+    sklearn.metrics.pairwise_distances). `k` is the number of clusters for K-means clustering. `height` is the height
+    at which the HAC dendrogram should be cut. When `show_chart` is True, the chart of silhoute scores by possible k or
+    height is shown inline. When `show_dendrogram` is True, the HAC dendrogram is shown inline.
+
+    Returns DataFrame
+    """
 
     # Cluster using K-means algorithm
     if method == "kmeans":
@@ -186,7 +214,8 @@ def assign_clusters(data, method = "kmeans", dist_metric = "euclidean", k = None
 
     # Cluster using Hierarchical Agglomerative Clustering (HAC)
     elif method == "hac":
-        cluster_assignments = internal.get_cluster_assignments_hac(data, dist_metric = dist_metric, height = height, show_chart = show_chart, show_dendrogram = show_dendrogram)
+        cluster_assignments = internal.get_clusters_hac(data, dist_metric = dist_metric, height = height,
+                                                        show_chart = show_chart, show_dendrogram = show_dendrogram)
 
     # Invalid input parameter
     else:
@@ -196,8 +225,17 @@ def assign_clusters(data, method = "kmeans", dist_metric = "euclidean", k = None
     return data
 
 # Cell
-def visualize_clustering(data, method = "umap", dist_metric = "cosine", umap_neighbors = 15, display_inline = True, save_chart = False, chart_file = "cluster_visualization.html"):
-    "Visualize clustering in two dimensions."
+def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = "cosine", umap_neighbors:int = 15,
+                         show_chart = True, save_chart = False, chart_file = "cluster_visualization.html"):
+    """
+    Visualize clustering in two dimensions.
+
+    Options for `method` are (umap, mds, svd). Options for `dist_metric` are (cosine or anything accepted by
+    sklearn.metrics.pairwise_distances). When `show_chart` is True, the visualization is shown inline.
+    When `save_chart` is True, the visualization is saved to `chart_file`.
+
+    Returns None
+    """
 
     # Calculate distances between all pairs of phrases
     dist = pairwise_distances(list(data.vec), metric=dist_metric)
@@ -224,9 +262,10 @@ def visualize_clustering(data, method = "umap", dist_metric = "cosine", umap_nei
         raise Exception(f"Unrecognized method: '{method}'")
 
     # Print visualization to screen by default
-    if display_inline:
+    if show_chart:
         visualization_df = DataFrame(dict(id=list(data.id), cluster=list(data.cluster), phrase=list(data.phrase), x=x, y=y))
-        fig = px.scatter(visualization_df, x="x", y="y", hover_name="id", color="cluster", hover_data=["phrase","cluster"], color_continuous_scale='rainbow')
+        fig = px.scatter(visualization_df, x="x", y="y", hover_name="id", color="cluster", hover_data=["phrase","cluster"],
+                         color_continuous_scale='rainbow')
         fig.show()
 
     # Optionally save the chart to a file
@@ -234,8 +273,16 @@ def visualize_clustering(data, method = "umap", dist_metric = "cosine", umap_nei
         plotly.offline.plot(fig, filename=chart_file)
 
 # Cell
-def get_cluster_topics(data, doc_df = None, topics_per_cluster = 10, save_results = False, file_name = 'output/TopicClusterResults.txt'):
-    "Returns a dataframe containing a list of the main topics for each cluster."
+def get_cluster_topics(data:DataFrame, doc_df:DataFrame = None, topics_per_cluster:int = 10, save_results:bool = False,
+                       file_name:str = 'output/TopicClusterResults.txt'):
+    """
+    Returns a dataframe containing a list of the main topics for each cluster.
+
+    `topics_per_cluster` is the number of main topics per cluster. When `save_results` is True, the resulting dataframe
+    will be saved to `file_name`.
+
+    Returns DataFrame
+    """
 
     # Iterate distinct clusters
     rows = []
@@ -261,13 +308,20 @@ def get_cluster_topics(data, doc_df = None, topics_per_cluster = 10, save_result
 
 # Cell
 def evaluate(data, gold_file, save_results = False, file_name = "output/EvaluationResults.txt"):
-    "Evaluate precision, recall, and F1 against a gold standard dataset."
+    """
+    Evaluate precision, recall, and F1 against a gold standard dataset.
+
+    `gold_file` is a path to a text file containing a list IDs and labels. When `save_results` is True, the resulting
+    dataframe will be saved to `file_name`.
+
+    Returns DataFrame
+    """
 
     # Import gold standard list of IDs (doc.#.sent.#) and labels
-    gold_df = read_csv(gold_file, names=["id", "label"], sep="\t", encoding="utf-8")
+    gold_df = pd.read_csv(gold_file, names=["id", "label"], sep="\t", encoding="utf-8")
 
     # Inner join the actual labels with the assigned clusters for each document.
-    eval_df = merge(gold_df, data[["id", "cluster"]], on="id")
+    eval_df = pd.merge(gold_df, data[["id", "cluster"]], on="id")
 
     # Iterate labels in the gold standard dataset
     rows = []

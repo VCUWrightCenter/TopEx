@@ -12,7 +12,13 @@ import re
 
 # Cell
 def decontracted(text:str):
-    "Removes contractions from input `text`. Credit: https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python"
+    """
+    Removes contractions from input `text`.
+
+    Credit: https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python
+
+    Returns str
+    """
     contractions = [
         (r"won\'t", "will not"),
         (r"can\'t", "can not"),

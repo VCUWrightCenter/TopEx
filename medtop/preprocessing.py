@@ -60,13 +60,14 @@ def token_filter(token:str, stop_words:list):
     return match is not None and token not in stop_words
 
 # Cell
-def tokenize_and_stem(text):
+def tokenize_and_stem(text:str):
     """
     Parse out sentences, remove contractions, tokenize by white space, remove all punctuation,
     lemmatize tokens, and get parts of speech.
 
     Returns (list, list, list)
     """
+
     lemmatizer = nltk.WordNetLemmatizer()
     custom_stop_words = {"patient","mrs","hi","ob","1am","4month","o2","ed","ecmo","m3","ha","3rd","ai","csicu","wa",
                          "first","second","third","fourth","etc","eg","thus",",",".","'","(",")","!","...","'m","'s",

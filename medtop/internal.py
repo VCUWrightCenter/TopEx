@@ -7,20 +7,28 @@ __all__ = ['get_phrase', 'get_vector_tfidf', 'get_vector_w2v', 'w2v_pretrained',
 
 # Cell
 import csv
+import gensim
 import matplotlib.pyplot as plt
 from nbdev.imports import *
 from nbdev.export import *
 import numpy as np
 import pandas as pd
+from pandas import DataFrame, Series
 from scipy.cluster import hierarchy
 from scipy.cluster.hierarchy import ward, cut_tree, dendrogram
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, pairwise_distances
+from sklearn.metrics.pairwise import cosine_similarity
 from textblob import TextBlob
 
 # Cell
-def get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm, token_averages):
-    "Finds the most expressive phrase in a sentence."
+def get_phrase(sent:Series, window_size:int, feature_names:dict, include_input_in_tfidf:bool, tdm:np.ndarray,
+               token_averages:np.ndarray):
+    """
+    Finds the most expressive phrase in a sentence. This function is called in a lambda expression in `core.get_phrases`.
+
+    Returns list
+    """
     adj_adv_pos_list = ["JJ","JJR", "JJS", "RB", "RBR", "RBS"]
     phrase_scores = []
     top_phrase = None
@@ -58,45 +66,74 @@ def get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm, to
     return top_phrase
 
 # Cell
-def get_vector_tfidf(sent, dictionary, term_matrix):
-    "Create a word vector for a given sentence using a term matrix."
+def get_vector_tfidf(sent:Series, dictionary:gensim.corpora.dictionary.Dictionary, term_matrix:np.ndarray):
+    """
+    Create a word vector for a given sentence using a term matrix.
+    This function is called in a lambda expression in `core.get_vectors`.
+
+    Returns list
+    """
     vec_ids = [x[0] for x in dictionary.doc2bow(sent.phrase)]
     return term_matrix[vec_ids].sum(axis=0)
 
-def get_vector_w2v(sent, model):
-    "Create a word vector for a given sentence using a Word2Vec model."
+def get_vector_w2v(sent:Series, model:gensim.models.keyedvectors.Word2VecKeyedVectors):
+    """
+    Create a word vector for a given sentence using a Word2Vec model.
+    This function is called in a lambda expression in `core.get_vectors`.
+
+    Returns list
+    """
     tokens = [token for token in sent.phrase if token in model.wv.vocab]
     return model[tokens].sum(axis=0)
 
 # Cell
-def w2v_pretrained(bin_file):
-    "Load a pre-trained Word2Vec model from a bin file."
+def w2v_pretrained(bin_file:str):
+    """
+    Load a pre-trained Word2Vec model from a bin file.
+
+    Returns gensim.models.keyedvectors.Word2VecKeyedVectors
+    """
     return gensim.models.KeyedVectors.load_word2vec_format(bin_file, binary=True)
 
 # Cell
-def get_silhouette_score_hac(phrase_vecs, linkage_matrix, height):
-    "Assigns clusters to a list of word vectors for a given `height` and calculates the silhouette score of the clustering."
+def get_silhouette_score_hac(phrase_vecs:list, linkage_matrix:np.ndarray, height:int):
+    """
+    Assigns clusters to a list of word vectors for a given `height` and calculates the silhouette score of the clustering.
+
+    Returns float
+    """
     cluster_assignments = [x[0] for x in cut_tree(linkage_matrix, height=height)]
     return silhouette_score(phrase_vecs, cluster_assignments)
 
-def get_tree_height(root):
-    "Gets the height of a binary tree."
+def get_tree_height(root:hierarchy.ClusterNode):
+    """
+    Gets the height of a binary tree.
+
+    Returns int
+    """
     if root is None:
         return 1
     return max(get_tree_height(root.left), get_tree_height(root.right)) + 1
 
-def get_linkage_matrix(phrase_vecs, dist_metric):
-    "Creates a linkage matrix by calculating distance between phrase vectors."
+def get_linkage_matrix(phrase_vecs:list, dist_metric:str):
+    """
+    Creates a linkage matrix by calculating distance between phrase vectors.
+
+    Returns np.ndarray
+    """
     if dist_metric == "cosine":
         dist = 1 - cosine_similarity(phrase_vecs)
     else:
         dist = pairwise_distances(phrase_vecs, metric=dist_metric)
     return ward(dist)
 
-def get_optimal_height(data, linkage_matrix, show_dendrogram = False, show_chart = True, save_chart = False, chart_file = "HACSilhouette.png"):
+def get_optimal_height(data:DataFrame, linkage_matrix:np.ndarray, show_dendrogram:bool = False, show_chart:bool = True,
+                       save_chart:bool = False, chart_file:str = "HACSilhouette.png"):
     """
     Clusters the top phrase vectors and plots the silhoute coefficients for a range of dendrograph heights.
     Returns the optimal height value (highest silhoute coefficient)
+
+    Returns int
     """
     # Maximum cut point height is the height of the tree
     max_h = get_tree_height(hierarchy.to_tree(linkage_matrix)) + 1
@@ -122,8 +159,13 @@ def get_optimal_height(data, linkage_matrix, show_dendrogram = False, show_chart
     optimal_height = h_range[np.argmax(h_scores)]
     return optimal_height
 
-def get_clusters_hac(data, dist_metric, height = None, show_dendrogram = False, show_chart = False):
-    "Use Hierarchical Agglomerative Clustering (HAC) to cluster phrase vectors"
+def get_clusters_hac(data:DataFrame, dist_metric:str, height:int = None, show_dendrogram:bool = False,
+                     show_chart:bool = False):
+    """
+    Use Hierarchical Agglomerative Clustering (HAC) to cluster phrase vectors
+
+    Returns list
+    """
     linkage_matrix = get_linkage_matrix(list(data.vec), dist_metric)
 
     # Use optimal height if no height is specified
@@ -134,13 +176,23 @@ def get_clusters_hac(data, dist_metric, height = None, show_dendrogram = False, 
     return cluster_assignments
 
 # Cell
-def get_silhouette_score_kmeans(phrase_vecs, k):
-    "Assigns clusters to a list of word vectors for a given `k` and calculates the silhouette score of the clustering."
+def get_silhouette_score_kmeans(phrase_vecs:list, k:int):
+    """
+    Assigns clusters to a list of word vectors for a given `k` and calculates the silhouette score of the clustering.
+
+    Returns float
+    """
     cluster_assignments = KMeans(k).fit(phrase_vecs).predict(phrase_vecs)
     return silhouette_score(phrase_vecs, cluster_assignments)
 
-def get_optimal_k(data, show_chart = True, save_chart = False, chart_file = "KmeansSilhouette.png"):
-    "Calculates the optimal k-value (highest silhoute coefficient). Optionally prints a chart of silhouette score by k-value or saves it to disk."
+def get_optimal_k(data:DataFrame, show_chart:bool = True, save_chart:bool = False,
+                  chart_file:str = "KmeansSilhouette.png"):
+    """
+    Calculates the optimal k-value (highest silhoute coefficient).
+    Optionally prints a chart of silhouette score by k-value or saves it to disk.
+
+    Returns int
+    """
     phrase_vecs = list(data.vec)
     max_k = min(len(phrase_vecs), 100)
     k_range = range(2, max_k)
@@ -158,8 +210,12 @@ def get_optimal_k(data, show_chart = True, save_chart = False, chart_file = "Kme
     optimal_k = k_range[np.argmax(score)]
     return optimal_k
 
-def get_clusters_kmeans(data, k = None, show_chart = False):
-    "Use K-means algorithm to cluster phrase vectors"
+def get_clusters_kmeans(data:DataFrame, k:int = None, show_chart:bool = False):
+    """
+    Use K-means algorithm to cluster phrase vectors
+
+    Returns list
+    """
     phrase_vecs = list(data.vec)
 
     # Use optimal k if no k-value is specified
@@ -173,30 +229,42 @@ def get_clusters_kmeans(data, k = None, show_chart = False):
     return cluster_assignments
 
 # Cell
-def df_to_disk(df, file_name, mode="w", header=True):
-    "Writes a dataframe to disk as a tab delimited file."
+def df_to_disk(df:DataFrame, file_name:str, mode:str="w", header:bool=True):
+    """
+    Writes a dataframe to disk as a tab delimited file.
 
+    Returns None
+    """
     df.to_csv(file_name, sep='\t', mode=mode, header=header, encoding='utf-8', index=False, quoting=csv.QUOTE_NONE, quotechar="",  escapechar="\\")
     if mode == "w":
         print(f"Results saved to {file_name}")
 
+def sentences_to_disk(data:DataFrame, file_name:str = 'output/DocumentSentenceList.txt'):
+    """
+    Writes the raw sentences to a file organized by document and sentence number.
 
-def sentences_to_disk(data, file_name = 'output/DocumentSentenceList.txt'):
-    "Writes the raw sentences to a file organized by document and sentence number."
-
+    Returns None
+    """
     df = data[["id", "text"]].copy()
     df_to_disk(df, file_name)
 
 
-def write_cluster(cluster_rows, file_name, mode = 'a', header=False):
-    "Appends the rows for a single cluster to disk."
+def write_cluster(cluster_rows:DataFrame, file_name:str, mode:str = 'a', header:bool=False):
+    """
+    Appends the rows for a single cluster to disk.
 
+    Returns None
+    """
     df_to_disk(cluster_rows, file_name, mode=mode, header=header)
 
 
-def clusters_to_disk(data, doc_df, cluster_df, file_name = 'output/TopicClusterResults.txt'):
-    "Writes the sentences and phrases to a file organized by cluster and document."
+def clusters_to_disk(data:DataFrame, doc_df:DataFrame, cluster_df:DataFrame,
+                     file_name:str = 'output/TopicClusterResults.txt'):
+    """
+    Writes the sentences and phrases to a file organized by cluster and document.
 
+    Returns None
+    """
     # Create a dataframe containing the data to be saved to disk
     df = data[["cluster", "doc_id", "sent_id", "phrase", "text"]].copy()
     file_names = [doc_df.loc[c].file for c in data.doc_id]

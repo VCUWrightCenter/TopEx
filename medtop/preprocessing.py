@@ -51,18 +51,28 @@ def decontracted(text:str):
 
 # Cell
 def token_filter(token:str, stop_words:list):
-    "Returns False for stop words and tokens with no alpha characters, otherwise, True"
+    """
+    Checks if a token should be kept (True) or removed during pre-processing (i.e stop words, non-alpha tokens)
+
+    Returns bool
+    """
     match = re.match('[A-z]', token)
     return match is not None and token not in stop_words
 
 # Cell
 def tokenize_and_stem(text):
-    "Parse out sentences, remove contractions, tokenize by white space, and remove all punctuation, and lemmatize tokens"
+    """
+    Parse out sentences, remove contractions, tokenize by white space, remove all punctuation,
+    lemmatize tokens, and get parts of speech.
+
+    Returns (list, list, list)
+    """
     lemmatizer = nltk.WordNetLemmatizer()
-    custom_stop_words = {"patient","mrs","hi","ob","1am","4month","o2","ed","ecmo","m3","ha","3rd","ai","csicu","wa","first",
-                         "second","third","fourth","etc","eg","thus",",",".","'","(",")","!","...","'m","'s",'"',"?", "`",
-                         "say","many","things","new","much","get","really","since","way","also","one","two","three","four",
-                         "five","six","week","day","month","year","would","could","should","like","im","thing","v","u","d","g"}
+    custom_stop_words = {"patient","mrs","hi","ob","1am","4month","o2","ed","ecmo","m3","ha","3rd","ai","csicu","wa",
+                         "first","second","third","fourth","etc","eg","thus",",",".","'","(",")","!","...","'m","'s",
+                         '"',"?", "`","say","many","things","new","much","get","really","since","way","also","one",
+                         "two","three","four","five","six","week","day","month","year","would","could","should",
+                         "like","im","thing","v","u","d","g"}
     stop_words = set(stopwords.words('english')) | custom_stop_words
     table  = str.maketrans(' ', ' ', string.punctuation+"“"+"”")
     sent = nltk.sent_tokenize(text)

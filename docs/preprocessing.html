@@ -39,7 +39,7 @@ description: "Methods for preprocessing raw text data"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="decontracted" class="doc_header"><code>decontracted</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>decontracted</code>(<strong><code>text</code></strong>)</p>
+<h4 id="decontracted" class="doc_header"><code>decontracted</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>decontracted</code>(<strong><code>text</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>Removes contractions from input <code>text</code>. Credit: <a href="https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python">https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python</a></p>
 
@@ -92,7 +92,7 @@ description: "Methods for preprocessing raw text data"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="token_filter" class="doc_header"><code>token_filter</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>token_filter</code>(<strong><code>token</code></strong>, <strong><code>stop_words</code></strong>)</p>
+<h4 id="token_filter" class="doc_header"><code>token_filter</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/preprocessing.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>token_filter</code>(<strong><code>token</code></strong>:<code>str</code>, <strong><code>stop_words</code></strong>:<code>list</code>)</p>
 </blockquote>
 <p>Returns False for stop words and tokens with no alpha characters, otherwise, True</p>
 

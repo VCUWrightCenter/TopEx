@@ -11,7 +11,7 @@ import string
 import re
 
 # Cell
-def decontracted(text):
+def decontracted(text:str):
     "Removes contractions from input `text`. Credit: https://stackoverflow.com/questions/19790188/expanding-english-language-contractions-in-python"
     contractions = [
         (r"won\'t", "will not"),
@@ -44,7 +44,7 @@ def decontracted(text):
     return text
 
 # Cell
-def token_filter(token, stop_words):
+def token_filter(token:str, stop_words:list):
     "Returns False for stop words and tokens with no alpha characters, otherwise, True"
     match = re.match('[A-z]', token)
     return match is not None and token not in stop_words

@@ -6,11 +6,6 @@ Documentation is available at https://cctrbic.github.io/medtop/.
 > Extracting topics from reflective medical writings.
 
 
-```python
-# all_flag
-# Exempt this notebook from being run during GitHub CI.
-```
-
 ## Requirements
 `pip install medtop`  
 
@@ -18,7 +13,9 @@ Documentation is available at https://cctrbic.github.io/medtop/.
 
 ## How to use
 
-A template pipeline is provided below. Each step of the pipeline has configuration options for experimenting with various methods. These are detailed in the documentation for each method. Notably, the `import_docs`, `get_cluster_topics`, `visualize_clustering`, and `evaluate` methods all include the option to save results to a file.
+A template pipeline is provided below using a test dataset. You can read more about the test_data dataset [here](https://github.com/cctrbic/medtop/blob/master/test_data/README.md)
+
+Each step of the pipeline has configuration options for experimenting with various methods. These are detailed in the documentation for each method. Notably, the `import_docs`, `get_cluster_topics`, `visualize_clustering`, and `evaluate` methods all include the option to save results to a file.
 
 ## Example Pipeline
 ### Import data
@@ -26,21 +23,19 @@ Import and pre-process documents from a text file containing a list of all docum
 
 ```python
 from medtop.core import *
-path_to_file_list = 'data/corpus_file_list.txt'
-data, doc_df = import_docs(path_to_file_list, save_results = False)
+data, doc_df = import_docs('test_data/corpus_file_list.txt', save_results = False)
 ```
 
 ### Transform data
 Create word vectors from the most expressive phrase in each sentence of the imported documents.
 
 ```python
-path_to_seed_topics_file_list = 'data/seed_topics_file_list.txt'
-tfidf, dictionary = create_tfidf(path_to_seed_topics_file_list, doc_df)
-data = get_phrases(data, dictionary.token2id, tfidf, include_input_in_tfidf = False)
+tfidf, dictionary = create_tfidf('test_data/seed_topics_file_list.txt', doc_df)
+data = get_phrases(data, dictionary.token2id, tfidf, include_input_in_tfidf = True)
 data = get_vectors("tfidf", data, dictionary = dictionary, tfidf = tfidf)
 ```
 
-    Removed 41 sentences without phrases.
+    Removed 43 sentences without phrases.
     
 
 **Questions about unrepresentative names:**   
@@ -51,14 +46,164 @@ data = get_vectors("tfidf", data, dictionary = dictionary, tfidf = tfidf)
 Cluster the sentences into groups expressing similar ideas or topics.
 
 ```python
-data = assign_clusters(data, method = "hac")
+data = assign_clusters(data, method = "kmeans", k=4)
 cluster_df = get_cluster_topics(data, doc_df, save_results = False)
 visualize_clustering(data, method = "umap", show_chart = False)
+cluster_df
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cluster</th>
+      <th>topics</th>
+      <th>sent_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>[felt, guilt, lost, joy, lied, going, work, sa...</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>[felt, guilt, joy, shame, christmas, friend, n...</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>[felt, joy, got, found, shame, guilt, son, for...</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>[felt, sadness, died, friend, dog, heard, joy,...</td>
+      <td>40</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 ### Evaluate results
 
 ```python
-gold_file = "data/gold_standard.txt"
-results_df = evaluate(data, gold_file, save_results = False)
+gold_file = "test_data/gold.txt"
+evaluate(data, gold_file="test_data/gold.txt", save_results = False)
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>gold_examples</th>
+      <th>closest_cluster</th>
+      <th>closest_cluster_members</th>
+      <th>tp</th>
+      <th>fp</th>
+      <th>fn</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>guilt</td>
+      <td>{doc.2.sent.8, doc.2.sent.6, doc.6.sent.18, do...</td>
+      <td>1</td>
+      <td>{doc.2.sent.8, doc.2.sent.6, doc.4.sent.3, doc...</td>
+      <td>32</td>
+      <td>43</td>
+      <td>36</td>
+      <td>0.427</td>
+      <td>0.471</td>
+      <td>0.448</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>joy</td>
+      <td>{doc.4.sent.3, doc.5.sent.3, doc.6.sent.12, do...</td>
+      <td>1</td>
+      <td>{doc.2.sent.8, doc.2.sent.6, doc.4.sent.3, doc...</td>
+      <td>25</td>
+      <td>50</td>
+      <td>38</td>
+      <td>0.333</td>
+      <td>0.397</td>
+      <td>0.362</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>sadness</td>
+      <td>{doc.3.sent.7, doc.0.sent.17, doc.8.sent.4, do...</td>
+      <td>3</td>
+      <td>{doc.3.sent.7, doc.0.sent.17, doc.8.sent.4, do...</td>
+      <td>27</td>
+      <td>13</td>
+      <td>11</td>
+      <td>0.675</td>
+      <td>0.711</td>
+      <td>0.693</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>shame</td>
+      <td>{doc.3.sent.4, doc.6.sent.10, doc.3.sent.1, do...</td>
+      <td>1</td>
+      <td>{doc.2.sent.8, doc.2.sent.6, doc.4.sent.3, doc...</td>
+      <td>18</td>
+      <td>57</td>
+      <td>13</td>
+      <td>0.240</td>
+      <td>0.581</td>
+      <td>0.340</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+

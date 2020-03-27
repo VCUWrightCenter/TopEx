@@ -118,8 +118,7 @@ def get_phrases(data:DataFrame, feature_names:dict, tdm:np.ndarray, window_size:
     Returns DataFrame
     """
 
-    if not include_input_in_tfidf:
-        token_averages = np.max(tdm, axis=1)
+    token_averages = np.max(tdm, axis=1)
 
     # Find the most expressive phrase for each sentence and add to dataframe
     lambda_func = lambda sent: internal.get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm,
@@ -140,7 +139,7 @@ def get_vectors(method:str, data:DataFrame, dictionary:gensim.corpora.dictionary
     """
     Creates a word vector for each phrase in the dataframe.
 
-    Options for `method` are (tfidf, svd, umap, pretrained, local). `tfidf` and `dictionary` are output from
+    Options for `method` are ('tfidf', 'svd', 'umap', 'pretrained', 'local'). `tfidf` and `dictionary` are output from
     `create_tfidf`. `dimensions` is the number of dimensions to which SVD or UMAP reduce the TF-IDF matrix.
     `path_to_w2v_bin_file` is the path to a pretrained Word2Vec .bin file.
 
@@ -200,7 +199,7 @@ def assign_clusters(data:DataFrame, method:str = "kmeans", dist_metric:str = "eu
     """
     Clusters the sentences using phrase vectors.
 
-    Options for `method` are (kmeans, hac). Options for `dist_metric` are (cosine or anything accepted by
+    Options for `method` are ('kmeans', 'hac'). Options for `dist_metric` are ('cosine' or anything accepted by
     sklearn.metrics.pairwise_distances). `k` is the number of clusters for K-means clustering. `height` is the height
     at which the HAC dendrogram should be cut. When `show_chart` is True, the chart of silhoute scores by possible k or
     height is shown inline. When `show_dendrogram` is True, the HAC dendrogram is shown inline.
@@ -210,7 +209,7 @@ def assign_clusters(data:DataFrame, method:str = "kmeans", dist_metric:str = "eu
 
     # Cluster using K-means algorithm
     if method == "kmeans":
-        cluster_assignments = internal.get_cluster_assignments_kmeans(data, k, show_chart = show_chart)
+        cluster_assignments = internal.get_clusters_kmeans(data, k, show_chart = show_chart)
 
     # Cluster using Hierarchical Agglomerative Clustering (HAC)
     elif method == "hac":
@@ -230,7 +229,7 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
     """
     Visualize clustering in two dimensions.
 
-    Options for `method` are (umap, mds, svd). Options for `dist_metric` are (cosine or anything accepted by
+    Options for `method` are ('umap', 'mds', 'svd'). Options for `dist_metric` are ('cosine' or anything accepted by
     sklearn.metrics.pairwise_distances). When `show_chart` is True, the visualization is shown inline.
     When `save_chart` is True, the visualization is saved to `chart_file`.
 
@@ -276,7 +275,7 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
 def get_cluster_topics(data:DataFrame, doc_df:DataFrame = None, topics_per_cluster:int = 10, save_results:bool = False,
                        file_name:str = 'output/TopicClusterResults.txt'):
     """
-    Returns a dataframe containing a list of the main topics for each cluster.
+    Gets the main topics for each cluster.
 
     `topics_per_cluster` is the number of main topics per cluster. When `save_results` is True, the resulting dataframe
     will be saved to `file_name`.

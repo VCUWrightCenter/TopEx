@@ -7,7 +7,7 @@ Documentation is available at https://cctrbic.github.io/medtop/.
 
 
 ## Requirements
-`pip install medtop`  
+`pip install medtop` *Not actually available via pip yet
 
 `python -m nltk.downloader all`
 
@@ -82,7 +82,7 @@ cluster_df
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>[felt, guilt, lost, joy, lied, going, work, sa...</td>
+      <td>[felt, guilt, lost, lied, joy, sadness, made, ...</td>
       <td>14</td>
     </tr>
     <tr>
@@ -94,13 +94,13 @@ cluster_df
     <tr>
       <th>2</th>
       <td>2</td>
-      <td>[felt, joy, got, found, shame, guilt, son, for...</td>
+      <td>[felt, joy, got, found, guilt, shame, son, fin...</td>
       <td>25</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
-      <td>[felt, sadness, died, friend, dog, heard, joy,...</td>
+      <td>[felt, sadness, died, dog, friend, heard, joy,...</td>
       <td>40</td>
     </tr>
   </tbody>
@@ -151,11 +151,11 @@ evaluate(data, gold_file="test_data/gold.txt", save_results = False)
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <th>0</th>
       <td>guilt</td>
-      <td>{doc.2.sent.8, doc.2.sent.6, doc.6.sent.18, do...</td>
+      <td>{doc.8.sent.15, doc.2.sent.8, doc.3.sent.12, d...</td>
       <td>1</td>
-      <td>{doc.2.sent.8, doc.2.sent.6, doc.4.sent.3, doc...</td>
+      <td>{doc.0.sent.3, doc.7.sent.2, doc.2.sent.8, doc...</td>
       <td>32</td>
       <td>43</td>
       <td>36</td>
@@ -164,11 +164,11 @@ evaluate(data, gold_file="test_data/gold.txt", save_results = False)
       <td>0.448</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>joy</td>
-      <td>{doc.4.sent.3, doc.5.sent.3, doc.6.sent.12, do...</td>
+      <td>{doc.6.sent.11, doc.7.sent.2, doc.7.sent.0, do...</td>
       <td>1</td>
-      <td>{doc.2.sent.8, doc.2.sent.6, doc.4.sent.3, doc...</td>
+      <td>{doc.0.sent.3, doc.7.sent.2, doc.2.sent.8, doc...</td>
       <td>25</td>
       <td>50</td>
       <td>38</td>
@@ -177,11 +177,11 @@ evaluate(data, gold_file="test_data/gold.txt", save_results = False)
       <td>0.362</td>
     </tr>
     <tr>
-      <th>0</th>
+      <th>1</th>
       <td>sadness</td>
-      <td>{doc.3.sent.7, doc.0.sent.17, doc.8.sent.4, do...</td>
+      <td>{doc.7.sent.14, doc.8.sent.10, doc.3.sent.2, d...</td>
       <td>3</td>
-      <td>{doc.3.sent.7, doc.0.sent.17, doc.8.sent.4, do...</td>
+      <td>{doc.7.sent.14, doc.5.sent.12, doc.3.sent.2, d...</td>
       <td>27</td>
       <td>13</td>
       <td>11</td>
@@ -190,11 +190,11 @@ evaluate(data, gold_file="test_data/gold.txt", save_results = False)
       <td>0.693</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
       <td>shame</td>
-      <td>{doc.3.sent.4, doc.6.sent.10, doc.3.sent.1, do...</td>
+      <td>{doc.0.sent.3, doc.9.sent.18, doc.1.sent.2, do...</td>
       <td>1</td>
-      <td>{doc.2.sent.8, doc.2.sent.6, doc.4.sent.3, doc...</td>
+      <td>{doc.0.sent.3, doc.7.sent.2, doc.2.sent.8, doc...</td>
       <td>18</td>
       <td>57</td>
       <td>13</td>

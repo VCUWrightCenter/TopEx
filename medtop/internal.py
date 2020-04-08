@@ -2,12 +2,13 @@
 
 __all__ = ['get_phrase', 'get_vector_tfidf', 'get_vector_w2v', 'w2v_pretrained', 'get_silhouette_score_hac',
            'get_tree_height', 'get_linkage_matrix', 'get_optimal_height', 'get_clusters_hac',
-           'get_silhouette_score_kmeans', 'get_optimal_k', 'get_clusters_kmeans', 'df_to_disk', 'sentences_to_disk',
-           'write_cluster', 'clusters_to_disk']
+           'get_silhouette_score_kmeans', 'get_optimal_k', 'get_clusters_kmeans', 'get_topics_from_docs', 'df_to_disk',
+           'sentences_to_disk', 'write_cluster', 'clusters_to_disk']
 
 # Cell
 import csv
 import gensim
+from gensim import corpora, models
 import matplotlib.pyplot as plt
 from nbdev.imports import *
 from nbdev.export import *
@@ -227,6 +228,22 @@ def get_clusters_kmeans(data:DataFrame, k:int = None, show_chart:bool = False):
     cluster_assignments = kmeans.predict(phrase_vecs)
 
     return cluster_assignments
+
+# Cell
+def get_topics_from_docs(docs:list, topic_count:int):
+    """
+    Gets a list of `topic_count` topics for each list of tokens in `docs`.
+
+    Returns list
+    """
+    dictionary = corpora.Dictionary(docs)
+    corpus = [dictionary.doc2bow(text) for text in docs]
+
+    # Use Latent Dirichlet Allocation (LDA) to find the main topics
+    lda = models.LdaModel(corpus, num_topics=1, id2word=dictionary)
+    topics_matrix = lda.show_topics(formatted=False, num_words=topic_count)
+    topics = list(np.array(topics_matrix[0][1])[:,0])
+    return topics
 
 # Cell
 def df_to_disk(df:DataFrame, file_name:str, mode:str="w", header:bool=True):

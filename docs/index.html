@@ -59,10 +59,24 @@ description: "Extracting topics from reflective medical writings."
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">medtop.core</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span> <span class="o">=</span> <span class="n">import_docs</span><span class="p">(</span><span class="s1">&#39;test_data/corpus_file_list.txt&#39;</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span> <span class="o">=</span> <span class="n">import_docs</span><span class="p">(</span><span class="s1">&#39;test_data/corpus_file_list.txt&#39;</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Results saved to output/DocumentSentenceList.txt
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -125,7 +139,7 @@ description: "Extracting topics from reflective medical writings."
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">assign_clusters</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">cluster_df</span> <span class="o">=</span> <span class="n">get_cluster_topics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">cluster_df</span> <span class="o">=</span> <span class="n">get_cluster_topics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">visualize_clustering</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;umap&quot;</span><span class="p">,</span> <span class="n">show_chart</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">cluster_df</span>
 </pre></div>
@@ -136,6 +150,14 @@ description: "Extracting topics from reflective medical writings."
 
 <div class="output_wrapper">
 <div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Results saved to output/TopicClusterResults.txt
+</pre>
+</div>
+</div>
 
 <div class="output_area">
 
@@ -168,7 +190,7 @@ description: "Extracting topics from reflective medical writings."
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>[felt, guilt, lost, lied, joy, sadness, made, ...</td>
+      <td>[felt, guilt, lost, lied, joy, friend, sadness...</td>
       <td>14</td>
     </tr>
     <tr>
@@ -180,13 +202,13 @@ description: "Extracting topics from reflective medical writings."
     <tr>
       <th>2</th>
       <td>2</td>
-      <td>[felt, joy, got, found, guilt, shame, son, fin...</td>
+      <td>[felt, joy, got, found, guilt, shame, son, gav...</td>
       <td>25</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
-      <td>[felt, sadness, died, dog, friend, heard, joy,...</td>
+      <td>[felt, sadness, died, heard, friend, dog, joy,...</td>
       <td>40</td>
     </tr>
   </tbody>
@@ -258,11 +280,11 @@ description: "Extracting topics from reflective medical writings."
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <th>2</th>
       <td>guilt</td>
-      <td>{doc.8.sent.15, doc.2.sent.8, doc.3.sent.12, d...</td>
+      <td>{doc.5.sent.9, doc.4.sent.1, doc.9.sent.5, doc...</td>
       <td>1</td>
-      <td>{doc.0.sent.3, doc.7.sent.2, doc.2.sent.8, doc...</td>
+      <td>{doc.4.sent.1, doc.6.sent.9, doc.9.sent.17, do...</td>
       <td>32</td>
       <td>43</td>
       <td>36</td>
@@ -271,11 +293,11 @@ description: "Extracting topics from reflective medical writings."
       <td>0.448</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>0</th>
       <td>joy</td>
-      <td>{doc.6.sent.11, doc.7.sent.2, doc.7.sent.0, do...</td>
+      <td>{doc.2.sent.9, doc.5.sent.3, doc.6.sent.12, do...</td>
       <td>1</td>
-      <td>{doc.0.sent.3, doc.7.sent.2, doc.2.sent.8, doc...</td>
+      <td>{doc.4.sent.1, doc.6.sent.9, doc.9.sent.17, do...</td>
       <td>25</td>
       <td>50</td>
       <td>38</td>
@@ -284,11 +306,11 @@ description: "Extracting topics from reflective medical writings."
       <td>0.362</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>3</th>
       <td>sadness</td>
-      <td>{doc.7.sent.14, doc.8.sent.10, doc.3.sent.2, d...</td>
+      <td>{doc.3.sent.2, doc.7.sent.15, doc.0.sent.17, d...</td>
       <td>3</td>
-      <td>{doc.7.sent.14, doc.5.sent.12, doc.3.sent.2, d...</td>
+      <td>{doc.3.sent.2, doc.7.sent.15, doc.0.sent.17, d...</td>
       <td>27</td>
       <td>13</td>
       <td>11</td>
@@ -297,11 +319,11 @@ description: "Extracting topics from reflective medical writings."
       <td>0.693</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
       <td>shame</td>
-      <td>{doc.0.sent.3, doc.9.sent.18, doc.1.sent.2, do...</td>
+      <td>{doc.6.sent.9, doc.9.sent.17, doc.3.sent.15, d...</td>
       <td>1</td>
-      <td>{doc.0.sent.3, doc.7.sent.2, doc.2.sent.8, doc...</td>
+      <td>{doc.4.sent.1, doc.6.sent.9, doc.9.sent.17, do...</td>
       <td>18</td>
       <td>57</td>
       <td>13</td>

@@ -60,7 +60,7 @@ def token_filter(token:str, stop_words:list):
     return match is not None and token not in stop_words
 
 # Cell
-def tokenize_and_stem(text:str):
+def tokenize_and_stem(text:str, stop_words_file:str = 'stop_words.txt'):
     """
     Parse out sentences, remove contractions, tokenize by white space, remove all punctuation,
     lemmatize tokens, and get parts of speech.
@@ -68,13 +68,12 @@ def tokenize_and_stem(text:str):
     Returns (list, list, list)
     """
 
+    # Load custom stop words from file
+    with open(stop_words_file, encoding="utf-8") as file:
+        custom_stop_words = file.read().strip().split('\n')
+
     lemmatizer = nltk.WordNetLemmatizer()
-    custom_stop_words = {"patient","mrs","hi","ob","1am","4month","o2","ed","ecmo","m3","ha","3rd","ai","csicu","wa",
-                         "first","second","third","fourth","etc","eg","thus",",",".","'","(",")","!","...","'m","'s",
-                         '"',"?", "`","say","many","things","new","much","get","really","since","way","also","one",
-                         "two","three","four","five","six","week","day","month","year","would","could","should",
-                         "like","im","thing","v","u","d","g"}
-    stop_words = set(stopwords.words('english')) | custom_stop_words
+    stop_words = set(stopwords.words('english')) | set(custom_stop_words)
     table  = str.maketrans(' ', ' ', string.punctuation+"“"+"”")
     sent = nltk.sent_tokenize(text)
     sent_tokens = []

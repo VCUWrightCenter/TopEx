@@ -283,13 +283,13 @@ def clusters_to_disk(data:DataFrame, doc_df:DataFrame, cluster_df:DataFrame,
     Returns None
     """
     # Create a dataframe containing the data to be saved to disk
-    df = data[["cluster", "doc_id", "sent_id", "phrase", "text"]].copy()
+    df = data[["cluster", "doc_id", "sent_id", "text", "phrase"]].copy()
     file_names = [doc_df.loc[c].file for c in data.doc_id]
-    df.insert(loc=2, column='file', value=file_names)
+    df.insert(loc=3, column='file', value=file_names)
     df.sort_values(by=["cluster", "doc_id", "sent_id"], inplace=True)
 
     # Write document header
-    cluster_rows = pd.DataFrame(None, columns=data.columns)
+    cluster_rows = pd.DataFrame(None, columns=df.columns)
     write_cluster(cluster_rows, file_name, mode = 'w', header=True)
 
     # Write each cluster

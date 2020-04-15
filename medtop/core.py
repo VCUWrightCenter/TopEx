@@ -75,9 +75,9 @@ def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str 
     return data, doc_df
 
 # Cell
-def create_tfidf(path_to_seed_topics_file_list:str, doc_df:DataFrame = None):
+def create_tfidf(doc_df:DataFrame = None, path_to_seed_topics_file_list:str = None):
     """
-    Creates a dense TF-IDF matrix from the tokens in the seed topics documents and optionally, the input corpus.
+    Creates a dense TF-IDF matrix from the tokens in the seed topics documents and/or the input corpus.
 
     `path_to_seed_topics_file_list` is a path to a text file containing a list of files with sentences corresponding to
     known topics. If the `doc_df` is passed, the input corpus will be used along with the seed topics documents to
@@ -85,15 +85,16 @@ def create_tfidf(path_to_seed_topics_file_list:str, doc_df:DataFrame = None):
 
     Returns (numpy.ndarray, gensim.corpora.dictionary.Dictionary)
     """
-
-    # Import seed topics documents
-    _, seed_doc_df = import_docs(path_to_seed_topics_file_list)
-
     # Bag of Words (BoW) is a list of all tokens by document
-    bow_docs = list(seed_doc_df.tokens)
+    bow_docs = []
 
     if doc_df is not None:
         bow_docs = bow_docs + list(doc_df.tokens)
+
+    # Import seed topics documents
+    if path_to_seed_topics_file_list is not None:
+        _, seed_doc_df = import_docs(path_to_seed_topics_file_list)
+        bow_docs = bow_docs + list(seed_doc_df.tokens)
 
     # Create a dense TF-IDF matrix using document tokens and gensim
     dictionary = corpora.Dictionary(bow_docs)
@@ -107,24 +108,28 @@ def create_tfidf(path_to_seed_topics_file_list:str, doc_df:DataFrame = None):
 
 # Cell
 def get_phrases(data:DataFrame, feature_names:dict, tdm:np.ndarray, window_size:int = 6,
-                include_input_in_tfidf:bool = False):
+                include_input_in_tfidf:bool = True):
     """
     Extracts the most expressive phrase from each sentence.
 
     `feature_names` should be `dictionary.token2id` and `tdm` should be `tfidf` where `dictionary`
-    and `tfidf` are output from `create_tfidf`. `window_size` is the length of phrase extracted.
-    `include_input_in_tfidf` is **Need to clarify this**
+    and `tfidf` are output from `create_tfidf`. `window_size` is the length of phrase extracted, if a -1 is passed,
+    all tokens will be included (IMPORTANT: this option requires aggregating vectors in the next step.
+    When `include_input_in_tfidf` is True, token_scores are calculated using the TF-IDF, otherwise, token_scores
+    are calculated using `token_averages`.
 
     Returns DataFrame
     """
+    if window_size > 0:
+        token_averages = np.max(tdm, axis=1)
 
-    token_averages = np.max(tdm, axis=1)
-
-    # Find the most expressive phrase for each sentence and add to dataframe
-    lambda_func = lambda sent: internal.get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm,
-                                                   token_averages)
-    phrases = data.apply(lambda_func, axis=1)
-    data['phrase'] = phrases
+        # Find the most expressive phrase for each sentence and add to dataframe
+        lambda_func = lambda sent: internal.get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm,
+                                                       token_averages)
+        phrases = data.apply(lambda_func, axis=1)
+        data['phrase'] = phrases
+    else:
+        data['phrase'] = data.tokens
 
     # Remove records where phrase is None
     filtered_df = data[data.phrase.notnull()].copy().reset_index(drop=True)
@@ -139,7 +144,7 @@ def get_vectors(method:str, data:DataFrame, dictionary:gensim.corpora.dictionary
     """
     Creates a word vector for each phrase in the dataframe.
 
-    Options for `method` are ('tfidf', 'svd', 'umap', 'pretrained', 'local'). `tfidf` and `dictionary` are output from
+    Options for `method` are ('tfidf', 'svd', 'umap', 'pretrained', 'local'). Options for `method` are ('tfidf', 'svd', 'umap', 'pretrained', 'local').`tfidf` and `dictionary` are output from
     `create_tfidf`. `dimensions` is the number of dimensions to which SVD or UMAP reduce the TF-IDF matrix.
     `path_to_w2v_bin_file` is the path to a pretrained Word2Vec .bin file.
 

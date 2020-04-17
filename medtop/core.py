@@ -21,7 +21,8 @@ from sklearn.decomposition import TruncatedSVD
 import umap.umap_ as umap
 
 # Cell
-def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt'):
+def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt',
+               stop_words_file:str = 'stop_words.txt'):
     """
     Imports and pre-processes the list of documents contained in the input file.
 
@@ -49,7 +50,7 @@ def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str 
             doc_text = file_content.read()
 
         # Pre-process document into cleaned sentences
-        sent_tokens, sent_pos, raw_sent = preprocessing.tokenize_and_stem(doc_text)
+        sent_tokens, sent_pos, raw_sent = preprocessing.tokenize_and_stem(doc_text, stop_words_file=stop_words_file)
 
         # Populate a row in data for each sentence in the document
         for sent_id, _ in enumerate(sent_tokens):

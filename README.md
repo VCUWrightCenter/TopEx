@@ -29,6 +29,87 @@ data, doc_df = import_docs('test_data/corpus_file_list.txt', save_results = True
     Results saved to output/DocumentSentenceList.txt
     
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>doc_id</th>
+      <th>sent_id</th>
+      <th>text</th>
+      <th>tokens</th>
+      <th>pos_tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>doc.0.sent.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>I felt guilt because I was caught out lying ab...</td>
+      <td>[guilt, wa, caught, lying, diary, engagement, ...</td>
+      <td>[[guilt, NN], [was, VBD], [caught, VBN], [lyin...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>doc.0.sent.1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>I felt joy because I was going to South Africa...</td>
+      <td>[joy, wa, going, south, africa, see, partner, ...</td>
+      <td>[[joy, NN], [was, VBD], [going, VBG], [South, ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>doc.0.sent.2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>I felt joy because I was going to see my favou...</td>
+      <td>[joy, wa, going, see, favourite, music, artist...</td>
+      <td>[[joy, NN], [was, VBD], [going, VBG], [see, VB...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>doc.0.sent.3</td>
+      <td>0</td>
+      <td>3</td>
+      <td>I felt shame because I was not able to answer ...</td>
+      <td>[shame, wa, able, answer, simple, question, exam]</td>
+      <td>[[shame, NN], [was, VBD], [able, JJ], [answer,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>doc.0.sent.4</td>
+      <td>0</td>
+      <td>4</td>
+      <td>I felt joy because I was offered a promotion a...</td>
+      <td>[joy, wa, offered, promotion, work, head, depa...</td>
+      <td>[[joy, NN], [was, VBD], [offered, VBN], [promo...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 ### Transform data
 Create word vectors from the most expressive phrase in each sentence of the imported documents.
 

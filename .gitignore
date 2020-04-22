@@ -1,5 +1,7 @@
 data/*
 output/*
+cluster_visualization.html
+
 *.bak
 .gitattributes
 .last_checked

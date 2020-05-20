@@ -10,8 +10,6 @@ import csv
 import gensim
 from gensim import corpora, models
 import matplotlib.pyplot as plt
-from nbdev.imports import *
-from nbdev.export import *
 import numpy as np
 import pandas as pd
 from pandas import DataFrame, Series

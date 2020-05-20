@@ -21,7 +21,7 @@ Each step of the pipeline has configuration options for experimenting with vario
 ### Import data
 Import and pre-process documents from a text file containing a list of all documents.
 
-```python
+```
 from medtop.core import *
 data, doc_df = import_docs('test_data/corpus_file_list.txt', save_results = True)
 ```
@@ -34,7 +34,7 @@ Create word vectors from the most expressive phrase in each sentence of the impo
 
 NOTE: If `doc_df` is NOT passed to `create_tfidf`, you must set `include_input_in_tfidf=False` in `get_phrases`.
 
-```python
+```
 tfidf, dictionary = create_tfidf(doc_df, 'test_data/seed_topics_file_list.txt')
 data = get_phrases(data, dictionary.token2id, tfidf, include_input_in_tfidf = True)
 data = get_vectors("tfidf", data, dictionary = dictionary, tfidf = tfidf)
@@ -46,7 +46,7 @@ data = get_vectors("tfidf", data, dictionary = dictionary, tfidf = tfidf)
 ### Cluster data
 Cluster the sentences into groups expressing similar ideas or topics. If you aren't sure how many true clusters exist in the data, try running `assign_clusters` with the optional parameter `show_chart = True` to visual cluster quality with varying numbers of clusters. When using `method='hac'`, you can also use `show_dendrogram = True` see the cluster dendrogram.
 
-```python
+```
 data = assign_clusters(data, method = "kmeans", k=4)
 cluster_df = get_cluster_topics(data, doc_df, save_results = True)
 visualize_clustering(data, method = "svd", show_chart = False)
@@ -57,7 +57,7 @@ visualize_clustering(data, method = "svd", show_chart = False)
 
 ### Evaluate results
 
-```python
+```
 gold_file = "test_data/gold.txt"
 results_df = evaluate(data, gold_file="test_data/gold.txt", save_results = False)
 ```

@@ -22,7 +22,7 @@ import umap.umap_ as umap
 
 # Cell
 def import_docs(path_to_file_list:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt',
-               stop_words_file:str = 'stop_words.txt'):
+               stop_words_file:str = None):
     """
     Imports and pre-processes the list of documents contained in the input file.
 
@@ -231,7 +231,7 @@ def assign_clusters(data:DataFrame, method:str = "kmeans", dist_metric:str = "eu
 
 # Cell
 def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = "cosine", umap_neighbors:int = 15,
-                         show_chart = True, save_chart = False, chart_file = "cluster_visualization.html"):
+                         show_chart = True, save_chart = False, return_data = False, chart_file = "cluster_visualization.html"):
     """
     Visualize clustering in two dimensions.
 
@@ -239,7 +239,7 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
     sklearn.metrics.pairwise_distances). When `show_chart` is True, the visualization is shown inline.
     When `save_chart` is True, the visualization is saved to `chart_file`.
 
-    Returns None
+    Returns DataFrame
     """
 
     # Calculate distances between all pairs of phrases
@@ -276,6 +276,10 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
     # Optionally save the chart to a file
     if save_chart:
         plotly.offline.plot(fig, filename=chart_file)
+
+    # Return the data to display clusters
+    if return_data:
+        return pd.DataFrame(dict(label=data.id, cluster=data.cluster, phrase=data.phrase, text=data.text, x=x, y=y))
 
 # Cell
 def get_cluster_topics(data:DataFrame, doc_df:DataFrame = None, topics_per_cluster:int = 10, save_results:bool = False,

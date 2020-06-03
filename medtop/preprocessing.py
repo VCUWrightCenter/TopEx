@@ -9,6 +9,7 @@ from nltk.corpus import stopwords
 import numpy as np
 import string
 import re
+import os
 
 # Cell
 def decontracted(text:str):
@@ -60,7 +61,7 @@ def token_filter(token:str, stop_words:list):
     return match is not None and token not in stop_words
 
 # Cell
-def tokenize_and_stem(text:str, stop_words_file:str = 'stop_words.txt'):
+def tokenize_and_stem(text:str, stop_words_file:str=None):
     """
     Parse out sentences, remove contractions, tokenize by white space, remove all punctuation,
     lemmatize tokens, and get parts of speech.
@@ -68,9 +69,14 @@ def tokenize_and_stem(text:str, stop_words_file:str = 'stop_words.txt'):
     Returns (list, list, list)
     """
 
-    # Load custom stop words from file
-    with open(stop_words_file, encoding="utf-8") as file:
-        custom_stop_words = file.read().strip().split('\n')
+    # Load custom stop words from file if given
+    custom_stop_words = []
+    if stop_words_file is not None:
+        if os.path.isfile(stop_words_file):
+            with open(stop_words_file, encoding="utf-8") as file:
+                custom_stop_words = file.read().strip().split('\n')
+        else:
+            print(f'The stop words file {stop_words_file} does not exist. Ignoring and using defaults.')
 
     lemmatizer = nltk.WordNetLemmatizer()
     stop_words = set(stopwords.words('english')) | set(custom_stop_words)

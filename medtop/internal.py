@@ -11,6 +11,7 @@ import gensim
 from gensim import corpora, models
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 import pandas as pd
 from pandas import DataFrame, Series
 from scipy.cluster import hierarchy
@@ -250,6 +251,9 @@ def df_to_disk(df:DataFrame, file_name:str, mode:str="w", header:bool=True):
 
     Returns None
     """
+    # Create the output directory if it doesn't exist
+    os.makedirs(os.path.dirname(file_name), exist_ok=True)
+
     df.to_csv(file_name, sep='\t', mode=mode, header=header, encoding='utf-8', index=False, quoting=csv.QUOTE_NONE, quotechar="",  escapechar="\\")
     if mode == "w":
         print(f"Results saved to {file_name}")

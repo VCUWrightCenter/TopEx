@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import medtop.internal as internal
 import medtop.preprocessing as preprocessing
 import numpy as np
+import os
 import pandas as pd
 from pandas import DataFrame, Series
 import plotly
@@ -231,7 +232,8 @@ def assign_clusters(data:DataFrame, method:str = "kmeans", dist_metric:str = "eu
 
 # Cell
 def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = "cosine", umap_neighbors:int = 15,
-                         show_chart = True, save_chart = False, return_data = False, chart_file = "cluster_visualization.html"):
+                         show_chart = True, save_chart = False, return_data = False,
+                         chart_file = "output/cluster_visualization.html"):
     """
     Visualize clustering in two dimensions.
 
@@ -266,15 +268,19 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
     else:
         raise Exception(f"Unrecognized method: '{method}'")
 
+    visualization_df = DataFrame(dict(id=list(data.id), cluster=list(data.cluster), phrase=list(data.phrase), x=x, y=y))
+    fig = px.scatter(visualization_df, x="x", y="y", hover_name="id", color="cluster", hover_data=["phrase","cluster"],
+                         color_continuous_scale='rainbow')
+
     # Print visualization to screen by default
     if show_chart:
-        visualization_df = DataFrame(dict(id=list(data.id), cluster=list(data.cluster), phrase=list(data.phrase), x=x, y=y))
-        fig = px.scatter(visualization_df, x="x", y="y", hover_name="id", color="cluster", hover_data=["phrase","cluster"],
-                         color_continuous_scale='rainbow')
         fig.show()
 
     # Optionally save the chart to a file
     if save_chart:
+        # Create the output directory if it doesn't exist
+        os.makedirs(os.path.dirname(chart_file), exist_ok=True)
+
         plotly.offline.plot(fig, filename=chart_file)
 
     # Return the data to display clusters

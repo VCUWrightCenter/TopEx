@@ -11,6 +11,7 @@ import gensim
 from gensim import corpora, models
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 import pandas as pd
 from pandas import DataFrame, Series
 from scipy.cluster import hierarchy
@@ -22,9 +23,10 @@ from textblob import TextBlob
 
 # Cell
 def get_phrase(sent:Series, window_size:int, feature_names:dict, include_input_in_tfidf:bool, tdm:np.ndarray,
-               token_averages:np.ndarray):
+               token_averages:np.ndarray, include_sentiment:bool):
     """
     Finds the most expressive phrase in a sentence. This function is called in a lambda expression in `core.get_phrases`.
+    Passing `include_sentiment=False` will weight all tokens equally, ignoring sentiment and part of speech.
 
     Returns list
     """
@@ -39,8 +41,11 @@ def get_phrase(sent:Series, window_size:int, feature_names:dict, include_input_i
         phrase = sent.tokens[window]
         phrase_pos = sent.pos_tags[window]
 
-        weight = 1 + abs(TextBlob(" ".join(phrase)).sentiment.polarity)
         score = 0
+        weight = 1
+
+        if include_sentiment:
+            weight += abs(TextBlob(" ".join(phrase)).sentiment.polarity)
 
         for i, token in enumerate(phrase):
             # Skip tokens not in feature_names
@@ -53,8 +58,11 @@ def get_phrase(sent:Series, window_size:int, feature_names:dict, include_input_i
             # Token score comes from TF-IDf matrix if include_input_in_tfidf is set, otherwise, use tokens averages
             token_score = tdm[token_ix, sent.doc_id] if include_input_in_tfidf else token_averages[token_ix];
 
-            # Scale token_score by 3x if the token is an adjective or adverb
-            score += (token_score * 3) if pos in adj_adv_pos_list else token_score
+            # Scale token_score by 3x if including sentiment and the token is an adjective or adverb
+            if include_sentiment and pos in adj_adv_pos_list:
+                score += token_score * 3
+            else:
+                score += token_score
 
         # Update top_score if necessary
         phrase_score = score * weight
@@ -244,13 +252,16 @@ def get_topics_from_docs(docs:list, topic_count:int):
     return topics
 
 # Cell
-def df_to_disk(df:DataFrame, file_name:str, mode:str="w", header:bool=True):
+def df_to_disk(df:DataFrame, file_name:str, mode:str="w", header:bool=True, sep='\t'):
     """
     Writes a dataframe to disk as a tab delimited file.
 
     Returns None
     """
-    df.to_csv(file_name, sep='\t', mode=mode, header=header, encoding='utf-8', index=False, quoting=csv.QUOTE_NONE, quotechar="",  escapechar="\\")
+    # Create the output directory if it doesn't exist
+    os.makedirs(os.path.dirname(file_name), exist_ok=True)
+
+    df.to_csv(file_name, sep=sep, mode=mode, header=header, encoding='utf-8', index=False, quoting=csv.QUOTE_NONE, quotechar="",  escapechar="\\")
     if mode == "w":
         print(f"Results saved to {file_name}")
 
@@ -282,8 +293,8 @@ def clusters_to_disk(data:DataFrame, doc_df:DataFrame, cluster_df:DataFrame,
     """
     # Create a dataframe containing the data to be saved to disk
     df = data[["cluster", "doc_id", "sent_id", "text", "phrase"]].copy()
-    file_names = [doc_df.loc[c].file for c in data.doc_id]
-    df.insert(loc=3, column='file', value=file_names)
+    doc_names = [doc_df.loc[c].doc_name for c in data.doc_id]
+    df.insert(loc=3, column='doc_name', value=doc_names)
     df.sort_values(by=["cluster", "doc_id", "sent_id"], inplace=True)
 
     # Write document header

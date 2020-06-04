@@ -18,9 +18,6 @@ entries:
     - output: web,pdf
       title: Preprocessing
       url: /preprocessing
-    - output: web,pdf
-      title: Title
-      url: /sandbox
     output: web
     title: medtop
   output: web

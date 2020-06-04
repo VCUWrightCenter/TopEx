@@ -2,7 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"import_docs": "core.ipynb",
+index = {"import_data": "core.ipynb",
+         "import_from_files": "core.ipynb",
+         "import_from_csv": "core.ipynb",
          "create_tfidf": "core.ipynb",
          "get_phrases": "core.ipynb",
          "get_vectors": "core.ipynb",

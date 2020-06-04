@@ -22,7 +22,7 @@ from sklearn.decomposition import TruncatedSVD
 import umap.umap_ as umap
 
 # Cell
-def import_data(raw_docs:DataFrame, save_results:bool, file_name:str, stop_words_file:str):
+def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None, stop_words_file:str=None):
     """
     Imports and pre-processes the documents from the `raw_docs` dataframe
 
@@ -105,14 +105,15 @@ def import_from_csv(path_to_csv:str, save_results:bool = False, file_name:str = 
     return data, doc_df
 
 # Cell
-def create_tfidf(doc_df:DataFrame = None, path_to_seed_topics_file_list:str = None, path_to_seed_topics_csv:str = None):
+def create_tfidf(doc_df:DataFrame=None, path_to_seed_topics_file_list:str=None, path_to_seed_topics_csv:str=None,
+                seed_topics_df:DataFrame=None):
     """
     Creates a dense TF-IDF matrix from the tokens in the seed topics documents and/or the input corpus.
 
     `path_to_seed_topics_file_list` is a path to a text file containing a list of files with sentences corresponding to
     known topics. Use the `path_to_seed_topics_csv` if you would prefer to load all seed topics documents from a single,
-    pipe-delimited csv file. If the `doc_df` is passed, the input corpus will be used along with the seed topics documents to
-    generate the TF-IDF matrix.
+    pipe-delimited csv file. If the `doc_df` is passed, the input corpus will be used along with the seed topics documents
+    to generate the TF-IDF matrix.
 
     Returns (numpy.ndarray, gensim.corpora.dictionary.Dictionary)
     """
@@ -128,6 +129,9 @@ def create_tfidf(doc_df:DataFrame = None, path_to_seed_topics_file_list:str = No
         bow_docs = bow_docs + list(seed_doc_df.tokens)
     elif path_to_seed_topics_csv is not None:
         _, seed_doc_df = import_from_csv(path_to_seed_topics_csv)
+        bow_docs = bow_docs + list(seed_doc_df.tokens)
+    elif seed_topics_df is not None:
+        _, seed_doc_df = import_data(seed_topics_df)
         bow_docs = bow_docs + list(seed_doc_df.tokens)
 
     # Create a dense TF-IDF matrix using document tokens and gensim

@@ -33,7 +33,7 @@ def import_data(raw_docs:DataFrame, save_results:bool, file_name:str, stop_words
     """
 
     # Create a dataframe containing the doc_id, file name, and raw text of each document
-    doc_cols = ["doc_id", "doc_name", "text", "tokens"]
+    doc_cols = ["id", "doc_name", "text", "tokens"]
     doc_rows = []
 
     # Create a dataframe containing the id, doc_id, sent_id, raw text, tokens, and PoS tags for each sentence
@@ -300,8 +300,14 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
     else:
         raise Exception(f"Unrecognized method: '{method}'")
 
-    visualization_df = DataFrame(dict(id=list(data.id), cluster=list(data.cluster), phrase=list(data.phrase), x=x, y=y))
-    fig = px.scatter(visualization_df, x="x", y="y", hover_name="id", color="cluster", hover_data=["phrase","cluster"],
+    visualization_df = DataFrame(dict(label=list(data.id), cluster=list(data.cluster), phrase=list(data.phrase),
+                                      text=list(data.text), x=x, y=y))
+
+    # To keep the visualization legible, limit
+    max_phrase = 10
+    vis_df = visualization_df.copy()
+    vis_df.phrase = vis_df.apply(lambda x: x.phrase[:max_phrase] + ['...'] if len(x.phrase)>max_phrase else x.phrase, axis=1)
+    fig = px.scatter(vis_df, x="x", y="y", hover_name="label", color="cluster", hover_data=["phrase","cluster"],
                          color_continuous_scale='rainbow')
 
     # Print visualization to screen by default
@@ -317,7 +323,7 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
 
     # Return the data to display clusters
     if return_data:
-        return pd.DataFrame(dict(label=data.id, cluster=data.cluster, phrase=data.phrase, text=data.text, x=x, y=y))
+        return visualization_df
 
 # Cell
 def get_cluster_topics(data:DataFrame, doc_df:DataFrame = None, topics_per_cluster:int = 10, save_results:bool = False,

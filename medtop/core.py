@@ -142,7 +142,7 @@ def create_tfidf(doc_df:DataFrame = None, path_to_seed_topics_file_list:str = No
 
 # Cell
 def get_phrases(data:DataFrame, feature_names:dict, tdm:np.ndarray, window_size:int = 6,
-                include_input_in_tfidf:bool = True):
+                include_input_in_tfidf:bool = True, include_sentiment:bool=True):
     """
     Extracts the most expressive phrase from each sentence.
 
@@ -150,7 +150,8 @@ def get_phrases(data:DataFrame, feature_names:dict, tdm:np.ndarray, window_size:
     and `tfidf` are output from `create_tfidf`. `window_size` is the length of phrase extracted, if a -1 is passed,
     all tokens will be included (IMPORTANT: this option requires aggregating vectors in the next step.
     When `include_input_in_tfidf` is True, token_scores are calculated using the TF-IDF, otherwise, token_scores
-    are calculated using `token_averages`.
+    are calculated using `token_averages`. When `include_sentiment` is False, sentiment and token part of speech are
+    ignored when scoring phrases.
 
     Returns DataFrame
     """
@@ -159,7 +160,7 @@ def get_phrases(data:DataFrame, feature_names:dict, tdm:np.ndarray, window_size:
 
         # Find the most expressive phrase for each sentence and add to dataframe
         lambda_func = lambda sent: internal.get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm,
-                                                       token_averages)
+                                                       token_averages, include_sentiment)
         phrases = data.apply(lambda_func, axis=1)
         data['phrase'] = phrases
     else:

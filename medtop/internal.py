@@ -23,9 +23,10 @@ from textblob import TextBlob
 
 # Cell
 def get_phrase(sent:Series, window_size:int, feature_names:dict, include_input_in_tfidf:bool, tdm:np.ndarray,
-               token_averages:np.ndarray):
+               token_averages:np.ndarray, include_sentiment:bool):
     """
     Finds the most expressive phrase in a sentence. This function is called in a lambda expression in `core.get_phrases`.
+    Passing `include_sentiment=False` will weight all tokens equally, ignoring sentiment and part of speech.
 
     Returns list
     """
@@ -40,8 +41,11 @@ def get_phrase(sent:Series, window_size:int, feature_names:dict, include_input_i
         phrase = sent.tokens[window]
         phrase_pos = sent.pos_tags[window]
 
-        weight = 1 + abs(TextBlob(" ".join(phrase)).sentiment.polarity)
         score = 0
+        weight = 1
+
+        if include_sentiment:
+            weight += abs(TextBlob(" ".join(phrase)).sentiment.polarity)
 
         for i, token in enumerate(phrase):
             # Skip tokens not in feature_names
@@ -54,8 +58,11 @@ def get_phrase(sent:Series, window_size:int, feature_names:dict, include_input_i
             # Token score comes from TF-IDf matrix if include_input_in_tfidf is set, otherwise, use tokens averages
             token_score = tdm[token_ix, sent.doc_id] if include_input_in_tfidf else token_averages[token_ix];
 
-            # Scale token_score by 3x if the token is an adjective or adverb
-            score += (token_score * 3) if pos in adj_adv_pos_list else token_score
+            # Scale token_score by 3x if including sentiment and the token is an adjective or adverb
+            if include_sentiment and pos in adj_adv_pos_list:
+                score += token_score * 3
+            else:
+                score += token_score
 
         # Update top_score if necessary
         phrase_score = score * weight

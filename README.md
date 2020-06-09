@@ -7,9 +7,11 @@ Documentation is available at https://amyolex.github.io/medtop/.
 
 
 ## Requirements
-`pip install medtop`
+MedTop is only compatible with 64-bit python. You can check which version of python you're using in your virtual environment with the following code.
 
-`python -m nltk.downloader all`
+`import platform; platform.architecture()[0];`
+
+`pip install medtop`
 
 ## How to use
 
@@ -52,7 +54,7 @@ Cluster the sentences into groups expressing similar ideas or topics. If you are
 ```python
 data = assign_clusters(data, method = "kmeans", k=4)
 cluster_df = get_cluster_topics(data, doc_df, save_results = False)
-visualize_clustering(data, method = "svd", show_chart = False)
+visualize_clustering(data, method = "umap", show_chart = False)
 ```
 
 ### Evaluate results

@@ -75,8 +75,6 @@ def tokenize_and_stem(text:str, stop_words_file:str=None):
         if os.path.isfile(stop_words_file):
             with open(stop_words_file, encoding="utf-8") as file:
                 custom_stop_words = file.read().strip().split('\n')
-        else:
-            print(f'The stop words file {stop_words_file} does not exist. Ignoring and using defaults.')
 
     lemmatizer = nltk.WordNetLemmatizer()
     stop_words = set(stopwords.words('english')) | set(custom_stop_words)

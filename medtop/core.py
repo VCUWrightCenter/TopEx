@@ -263,7 +263,7 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
     """
     Visualize clustering in two dimensions.
 
-    Options for `method` are ('umap', 'mds', 'svd'). Options for `dist_metric` are ('cosine' or anything accepted by
+    Options for `method` are ('umap', 'tsne', 'mds', 'svd'). Options for `dist_metric` are ('cosine' or anything accepted by
     sklearn.metrics.pairwise_distances). When `show_chart` is True, the visualization is shown inline.
     When `save_chart` is True, the visualization is saved to `chart_file`.
 

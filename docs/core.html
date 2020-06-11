@@ -292,7 +292,7 @@ height is shown inline. When <code>show_dendrogram</code> is True, the HAC dendr
 <h4 id="visualize_clustering" class="doc_header"><code>visualize_clustering</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L260" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>visualize_clustering</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>method</code></strong>:<code>str</code>=<em><code>'umap'</code></em>, <strong><code>dist_metric</code></strong>:<code>str</code>=<em><code>'cosine'</code></em>, <strong><code>umap_neighbors</code></strong>:<code>int</code>=<em><code>15</code></em>, <strong><code>show_chart</code></strong>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>=<em><code>False</code></em>, <strong><code>return_data</code></strong>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>=<em><code>'output/cluster_visualization.html'</code></em>)</p>
 </blockquote>
 <p>Visualize clustering in two dimensions.</p>
-<p>Options for <code>method</code> are ('umap', 'mds', 'svd'). Options for <code>dist_metric</code> are ('cosine' or anything accepted by
+<p>Options for <code>method</code> are ('umap', 'tsne', 'mds', 'svd'). Options for <code>dist_metric</code> are ('cosine' or anything accepted by
 sklearn.metrics.pairwise_distances). When <code>show_chart</code> is True, the visualization is shown inline.
 When <code>save_chart</code> is True, the visualization is saved to <code>chart_file</code>.</p>
 <p>Returns DataFrame</p>

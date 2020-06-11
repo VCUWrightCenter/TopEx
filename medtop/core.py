@@ -15,7 +15,7 @@ import pandas as pd
 from pandas import DataFrame, Series
 import plotly
 import plotly.express as px
-from sklearn.manifold import MDS
+from sklearn.manifold import MDS, TSNE
 from sklearn.metrics import silhouette_score, pairwise_distances
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.decomposition import TruncatedSVD
@@ -32,36 +32,21 @@ def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None,
     Returns (DataFrame, DataFrame)
     """
 
-    # Create a dataframe containing the doc_id, file name, and raw text of each document
-    doc_cols = ["id", "doc_name", "text", "tokens"]
-    doc_rows = []
+    # Get stop_words list
+    stop_words = preprocessing.get_stop_words(stop_words_file)
+
+    # Process all raw documents
+    processed_docs = [
+        preprocessing.process_doc(doc_id, text, stop_words) for doc_id, text in enumerate(raw_docs.text)]
 
     # Create a dataframe containing the id, doc_id, sent_id, raw text, tokens, and PoS tags for each sentence
-    data_cols = ["id", "doc_id", "sent_id", "text", "tokens", "pos_tags"]
-    data_rows = []
+    data_rows = [sent for doc in processed_docs for sent in doc[1]]
+    data = DataFrame(data_rows, columns = ["id", "doc_id", "sent_id", "text", "tokens", "pos_tags"])
 
-    for doc_id in range(len(raw_docs)):
-        doc = raw_docs.iloc[doc_id]
-
-        # Pre-process document into cleaned sentences
-        sent_tokens, sent_pos, raw_sent = preprocessing.tokenize_and_stem(doc.text, stop_words_file=stop_words_file)
-
-        # Populate a row in data for each sentence in the document
-        for sent_id, _ in enumerate(sent_tokens):
-            row_id = f"doc.{doc_id}.sent.{sent_id}"
-            sent_text = raw_sent[sent_id]
-            tokens = sent_tokens[sent_id]
-            pos_tags = sent_pos[sent_id]
-            data_rows.append(Series([row_id, doc_id, sent_id, sent_text, tokens, pos_tags], index=data_cols))
-
-        # Populate a row in doc_df for each file loaded
-        doc_tokens = [token for sent in sent_tokens for token in sent]
-        doc_row = Series([doc_id, doc.doc_name, doc.text, doc_tokens], index=doc_cols)
-        doc_rows.append(doc_row)
-
-    # Create dataframes from lists of Series
-    data = DataFrame(data_rows)
-    doc_df = DataFrame(doc_rows)
+    # Create a dataframe containing the doc_id, file name, and raw text of each document
+    doc_rows = [doc[0] for doc in processed_docs]
+    doc_df = DataFrame(doc_rows, columns = ["id", "doc_name", "text", "tokens"])
+    doc_df['doc_name'] = [raw_docs.iloc[i].doc_name for i in doc_df.id]
 
     # Optionally save the results to disk
     if save_results:
@@ -145,14 +130,14 @@ def create_tfidf(doc_df:DataFrame=None, path_to_seed_topics_file_list:str=None, 
     return tfidf_dense, dictionary
 
 # Cell
-def get_phrases(data:DataFrame, feature_names:dict, tdm:np.ndarray, window_size:int = 6,
+def get_phrases(data:DataFrame, vocab:dict, tfidf:np.ndarray, window_size:int = 6,
                 include_input_in_tfidf:bool = True, include_sentiment:bool=True):
     """
     Extracts the most expressive phrase from each sentence.
 
-    `feature_names` should be `dictionary.token2id` and `tdm` should be `tfidf` where `dictionary`
-    and `tfidf` are output from `create_tfidf`. `window_size` is the length of phrase extracted, if a -1 is passed,
-    all tokens will be included (IMPORTANT: this option requires aggregating vectors in the next step.
+    `feature_names` should be `dictionary.token2id` and `vocab` should be `dictionary.token2id` from the output of
+    `create_tfidf`. `window_size` is the length of phrase extracted, if a -1 is passed, all tokens will be included
+    (IMPORTANT: this option requires aggregating vectors in the next step.)
     When `include_input_in_tfidf` is True, token_scores are calculated using the TF-IDF, otherwise, token_scores
     are calculated using `token_averages`. When `include_sentiment` is False, sentiment and token part of speech are
     ignored when scoring phrases.
@@ -160,19 +145,23 @@ def get_phrases(data:DataFrame, feature_names:dict, tdm:np.ndarray, window_size:
     Returns DataFrame
     """
     if window_size > 0:
-        token_averages = np.max(tdm, axis=1)
+        token_averages = np.max(tfidf, axis=1)
+
+        # Remove records where len(tokens) < window_size
+        filtered_df = data[data.tokens.map(len)>=window_size].copy().reset_index(drop=True)
+        print(f"Removed {len(data) - len(filtered_df)} sentences without phrases.")
 
         # Find the most expressive phrase for each sentence and add to dataframe
-        lambda_func = lambda sent: internal.get_phrase(sent, window_size, feature_names, include_input_in_tfidf, tdm,
+        lambda_func = lambda sent: internal.get_phrase(sent, window_size, vocab, include_input_in_tfidf, tfidf,
                                                        token_averages, include_sentiment)
-        phrases = data.apply(lambda_func, axis=1)
-        data['phrase'] = phrases
+        phrases = filtered_df.apply(lambda_func, axis=1)
+        filtered_df['phrase'] = phrases
     else:
-        data['phrase'] = data.tokens
+        # Remove records with no tokens
+        filtered_df = data[data.tokens.map(len)>=0].copy().reset_index(drop=True)
+        print(f"Removed {len(data) - len(filtered_df)} sentences without phrases.")
 
-    # Remove records where phrase is None
-    filtered_df = data[data.phrase.notnull()].copy().reset_index(drop=True)
-    print(f"Removed {len(data) - len(filtered_df)} sentences without phrases.")
+        filtered_df['phrase'] = filtered_df.tokens
 
     return filtered_df
 
@@ -289,6 +278,11 @@ def visualize_clustering(data:DataFrame, method:str = "umap", dist_metric:str = 
         reducer = umap.UMAP(n_neighbors=umap_neighbors, min_dist=.1, metric='cosine', random_state=42)
         embedding = reducer.fit_transform(dist)
         x, y = embedding[:, 0], embedding[:, 1]
+
+    elif method == "tsne":
+        vec = [list(x) for x in data.vec]
+        tsne2d = TSNE(n_components=2).fit_transform(vec)
+        x, y = tsne2d[:, 0], tsne2d[:, 1]
 
     # Visualize the clusters using Multi-Dimensional Scaling (MDS)
     elif method == "mds":

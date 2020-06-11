@@ -52,7 +52,7 @@ data = get_vectors("tfidf", data, dictionary = dictionary, tfidf = tfidf)
 Cluster the sentences into groups expressing similar ideas or topics. If you aren't sure how many true clusters exist in the data, try running `assign_clusters` with the optional parameter `show_chart = True` to visual cluster quality with varying numbers of clusters. When using `method='hac'`, you can also use `show_dendrogram = True` see the cluster dendrogram.
 
 ```python
-data = assign_clusters(data, method = "kmeans", k=4)
+data = assign_clusters(data, method = "hac")
 cluster_df = get_cluster_topics(data, doc_df, save_results = False)
 visualize_clustering(data, method = "umap", show_chart = False)
 ```

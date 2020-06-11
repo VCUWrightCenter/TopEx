@@ -74,7 +74,7 @@ doc_df = get_phrases(doc_df, dictionary.token2id, tfidf, include_input_in_tfidf 
 doc_df = get_vectors("tfidf", doc_df, dictionary = dictionary, tfidf = tfidf)
 doc_df = assign_clusters(doc_df, method = "kmeans", k=4)
 cluster_df = get_cluster_topics(data, doc_df, save_results = False)
-visualize_clustering(data, method = "svd", show_chart = False)
+visualize_clustering(data, method = "umap", show_chart = False)
 ```
 
     Removed 0 sentences without phrases.

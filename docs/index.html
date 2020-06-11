@@ -154,7 +154,7 @@ description: "Extracting topics from reflective medical writings."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">assign_clusters</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">assign_clusters</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;hac&quot;</span><span class="p">)</span>
 <span class="n">cluster_df</span> <span class="o">=</span> <span class="n">get_cluster_topics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">visualize_clustering</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;umap&quot;</span><span class="p">,</span> <span class="n">show_chart</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>

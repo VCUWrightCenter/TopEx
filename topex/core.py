@@ -7,8 +7,8 @@ __all__ = ['import_data', 'import_from_files', 'import_from_csv', 'create_tfidf'
 import gensim
 from gensim import corpora, models, matutils
 import matplotlib.pyplot as plt
-import medtop.internal as internal
-import medtop.preprocessing as preprocessing
+import topex.internal as internal
+import topex.preprocessing as preprocessing
 import numpy as np
 import os
 import pandas as pd
@@ -26,7 +26,7 @@ def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None,
     """
     Imports and pre-processes the documents from the `raw_docs` dataframe
 
-    Document pre-processing is handled in [`tokenize_and_stem`](/medtop/preprocessing#tokenize_and_stem).
+    Document pre-processing is handled in [`tokenize_and_stem`](/topex/preprocessing#tokenize_and_stem).
     `path_to_file_list` is a path to a text file containing a list of files to be processed separated by line breaks.
 
     Returns (DataFrame, DataFrame)

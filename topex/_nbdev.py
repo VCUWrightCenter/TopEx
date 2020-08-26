@@ -44,8 +44,8 @@ modules = ["core.py",
            "internal.py",
            "preprocessing.py"]
 
-doc_url = "https://etfrenchvcu.github.io/medtop/"
+doc_url = "https://VCUWrightCenter.github.io/TopEx/"
 
-git_url = "https://github.com/etfrenchvcu/medtop/tree/master/"
+git_url = "VCUWrightCenter"
 
 def custom_doc_links(name): return None

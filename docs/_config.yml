@@ -1,7 +1,7 @@
-repository: etfrenchvcu/medtop
+repository: VCUWrightCenter/topex
 output: web
-topnav_title: medtop
-site_title: medtop
+topnav_title: topex
+site_title: topex
 company_name: Virginia Commonwealth University
 description: Extracts topics
 # Set to false to disable KaTeX math
@@ -61,4 +61,4 @@ sidebars:
 permalink: pretty
 
 theme: jekyll-theme-merlot
-baseurl: /medtop/
+baseurl: /TopEx/

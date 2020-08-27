@@ -1,21 +1,21 @@
-![CI](https://github.com/AmyOlex/medtop/workflows/CI/badge.svg) 
+![CI](https://github.com/VCUWrightCenter/TopEx/workflows/CI/badge.svg) 
 
-Documentation is available at https://amyolex.github.io/medtop/.
+Documentation is available at https://VCUWrightCenter.github.io/TopEx/.
 
-# MedTop
-> Extracting topics from reflective medical writings.
+# TopEx
+> Topic exploration in unstructured text documents.
 
 
 ## Requirements
-MedTop is only compatible with 64-bit python. You can check which version of python you're using in your virtual environment with the following code.
+TopEx is only compatible with 64-bit python. You can check which version of python you're using in your virtual environment with the following code.
 
 `import platform; platform.architecture()[0];`
 
-`pip install medtop`
+`pip install topex`
 
 ## How to use
 
-A template pipeline is provided below using a test dataset. You can read more about the test_data dataset [here](https://github.com/cctrbic/medtop/blob/master/test_data/README.md)
+A template pipeline is provided below using a test dataset. You can read more about the test_data dataset [here](https://github.com/VCUWrightCenter/TopEx/tree/master/test_data/README.md)
 
 Each step of the pipeline has configuration options for experimenting with various methods. These are detailed in the documentation for each method. Notably, the `import_docs`, `get_cluster_topics`, `visualize_clustering`, and `evaluate` methods all include the option to save results to a file.
 
@@ -24,7 +24,7 @@ Each step of the pipeline has configuration options for experimenting with vario
 Import and pre-process documents from a text file containing a list of all documents.
 
 ```python
-from medtop.core import *
+from topex.core import *
 data, doc_df = import_from_files('test_data/corpus_file_list.txt', stop_words_file='stop_words.txt', save_results = False)
 ```
 

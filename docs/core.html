@@ -5,8 +5,8 @@ title: Core
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "MedTop core API"
-description: "MedTop core API"
+summary: "TopEx core API"
+description: "TopEx core API"
 ---
 <!--
 
@@ -52,10 +52,10 @@ description: "MedTop core API"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="import_data" class="doc_header"><code>import_data</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L25" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_data</code>(<strong><code>raw_docs</code></strong>:<code>DataFrame</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
+<h4 id="import_data" class="doc_header"><code>import_data</code><a href="VCUWrightCentertopex/core.py#L25" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_data</code>(<strong><code>raw_docs</code></strong>:<code>DataFrame</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Imports and pre-processes the documents from the <code>raw_docs</code> dataframe</p>
-<p>Document pre-processing is handled in <a href="/medtop/preprocessing#tokenize_and_stem"><code>tokenize_and_stem</code></a>.
+<p>Document pre-processing is handled in <a href="/TopEx/preprocessing#tokenize_and_stem"><code>tokenize_and_stem</code></a>.
 <code>path_to_file_list</code> is a path to a text file containing a list of files to be processed separated by line breaks.</p>
 <p>Returns (DataFrame, DataFrame)</p>
 
@@ -80,7 +80,7 @@ description: "MedTop core API"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="import_from_files" class="doc_header"><code>import_from_files</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_from_files</code>(<strong><code>path_to_file_list</code></strong>:<code>str</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/DocumentSentenceList.txt'</code></em>, <strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
+<h4 id="import_from_files" class="doc_header"><code>import_from_files</code><a href="VCUWrightCentertopex/core.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_from_files</code>(<strong><code>path_to_file_list</code></strong>:<code>str</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/DocumentSentenceList.txt'</code></em>, <strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Imports and pre-processes a list of documents contained in <code>path_to_file_list</code>.</p>
 <p>Returns (DataFrame, DataFrame)</p>
@@ -106,7 +106,7 @@ description: "MedTop core API"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="import_from_csv" class="doc_header"><code>import_from_csv</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L80" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_from_csv</code>(<strong><code>path_to_csv</code></strong>:<code>str</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/DocumentSentenceList.txt'</code></em>, <strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
+<h4 id="import_from_csv" class="doc_header"><code>import_from_csv</code><a href="VCUWrightCentertopex/core.py#L80" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>import_from_csv</code>(<strong><code>path_to_csv</code></strong>:<code>str</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/DocumentSentenceList.txt'</code></em>, <strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Imports and pre-processes documents from a pipe-demilited csv file. File should be formatted with two columns:
 "doc_name" and "text"</p>
@@ -140,7 +140,7 @@ description: "MedTop core API"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_tfidf" class="doc_header"><code>create_tfidf</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_tfidf</code>(<strong><code>doc_df</code></strong>:<code>DataFrame</code>=<em><code>None</code></em>, <strong><code>path_to_seed_topics_file_list</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>path_to_seed_topics_csv</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>seed_topics_df</code></strong>:<code>DataFrame</code>=<em><code>None</code></em>)</p>
+<h4 id="create_tfidf" class="doc_header"><code>create_tfidf</code><a href="VCUWrightCentertopex/core.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_tfidf</code>(<strong><code>doc_df</code></strong>:<code>DataFrame</code>=<em><code>None</code></em>, <strong><code>path_to_seed_topics_file_list</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>path_to_seed_topics_csv</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>seed_topics_df</code></strong>:<code>DataFrame</code>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Creates a dense TF-IDF matrix from the tokens in the seed topics documents and/or the input corpus.</p>
 <p><code>path_to_seed_topics_file_list</code> is a path to a text file containing a list of files with sentences corresponding to
@@ -177,11 +177,11 @@ to generate the TF-IDF matrix.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_phrases" class="doc_header"><code>get_phrases</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_phrases</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>window_size</code></strong>:<code>int</code>=<em><code>6</code></em>, <strong><code>include_input_in_tfidf</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>include_sentiment</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
+<h4 id="get_phrases" class="doc_header"><code>get_phrases</code><a href="VCUWrightCentertopex/core.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_phrases</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>window_size</code></strong>:<code>int</code>=<em><code>6</code></em>, <strong><code>include_input_in_tfidf</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>include_sentiment</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Extracts the most expressive phrase from each sentence.</p>
 <p><code>feature_names</code> should be <code>dictionary.token2id</code> and <code>vocab</code> should be <code>dictionary.token2id</code> from the output of
-<a href="/medtop/core#create_tfidf"><code>create_tfidf</code></a>. <code>window_size</code> is the length of phrase extracted, if a -1 is passed, all tokens will be included
+<a href="/TopEx/core#create_tfidf"><code>create_tfidf</code></a>. <code>window_size</code> is the length of phrase extracted, if a -1 is passed, all tokens will be included
 (IMPORTANT: this option requires aggregating vectors in the next step.)
 When <code>include_input_in_tfidf</code> is True, token_scores are calculated using the TF-IDF, otherwise, token_scores
 are calculated using <code>token_averages</code>. When <code>include_sentiment</code> is False, sentiment and token part of speech are
@@ -216,11 +216,11 @@ ignored when scoring phrases.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_vectors" class="doc_header"><code>get_vectors</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L169" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_vectors</code>(<strong><code>method</code></strong>:<code>str</code>, <strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>dictionary</code></strong>:<code>Dictionary</code>=<em><code>None</code></em>, <strong><code>tfidf</code></strong>:<code>ndarray</code>=<em><code>None</code></em>, <strong><code>dimensions</code></strong>:<code>int</code>=<em><code>2</code></em>, <strong><code>umap_neighbors</code></strong>:<code>int</code>=<em><code>15</code></em>, <strong><code>path_to_w2v_bin_file</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>doc_df</code></strong>:<code>DataFrame</code>=<em><code>None</code></em>)</p>
+<h4 id="get_vectors" class="doc_header"><code>get_vectors</code><a href="VCUWrightCentertopex/core.py#L169" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_vectors</code>(<strong><code>method</code></strong>:<code>str</code>, <strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>dictionary</code></strong>:<code>Dictionary</code>=<em><code>None</code></em>, <strong><code>tfidf</code></strong>:<code>ndarray</code>=<em><code>None</code></em>, <strong><code>dimensions</code></strong>:<code>int</code>=<em><code>2</code></em>, <strong><code>umap_neighbors</code></strong>:<code>int</code>=<em><code>15</code></em>, <strong><code>path_to_w2v_bin_file</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>doc_df</code></strong>:<code>DataFrame</code>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Creates a word vector for each phrase in the dataframe.</p>
 <p>Options for <code>method</code> are ('tfidf', 'svd', 'umap', 'pretrained', 'local'). Options for <code>method</code> are ('tfidf', 'svd', 'umap', 'pretrained', 'local').<code>tfidf</code> and <code>dictionary</code> are output from
-<a href="/medtop/core#create_tfidf"><code>create_tfidf</code></a>. <code>dimensions</code> is the number of dimensions to which SVD or UMAP reduce the TF-IDF matrix.
+<a href="/TopEx/core#create_tfidf"><code>create_tfidf</code></a>. <code>dimensions</code> is the number of dimensions to which SVD or UMAP reduce the TF-IDF matrix.
 <code>path_to_w2v_bin_file</code> is the path to a pretrained Word2Vec .bin file.</p>
 <p>Returns DataFrame</p>
 
@@ -252,7 +252,7 @@ ignored when scoring phrases.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="assign_clusters" class="doc_header"><code>assign_clusters</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L230" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>assign_clusters</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>method</code></strong>:<code>str</code>=<em><code>'kmeans'</code></em>, <strong><code>dist_metric</code></strong>:<code>str</code>=<em><code>'euclidean'</code></em>, <strong><code>k</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>height</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>show_dendrogram</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="assign_clusters" class="doc_header"><code>assign_clusters</code><a href="VCUWrightCentertopex/core.py#L230" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>assign_clusters</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>method</code></strong>:<code>str</code>=<em><code>'kmeans'</code></em>, <strong><code>dist_metric</code></strong>:<code>str</code>=<em><code>'euclidean'</code></em>, <strong><code>k</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>height</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>show_dendrogram</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Clusters the sentences using phrase vectors.</p>
 <p>Options for <code>method</code> are ('kmeans', 'hac'). Options for <code>dist_metric</code> are ('cosine' or anything accepted by
@@ -289,7 +289,7 @@ height is shown inline. When <code>show_dendrogram</code> is True, the HAC dendr
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="visualize_clustering" class="doc_header"><code>visualize_clustering</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L260" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>visualize_clustering</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>method</code></strong>:<code>str</code>=<em><code>'umap'</code></em>, <strong><code>dist_metric</code></strong>:<code>str</code>=<em><code>'cosine'</code></em>, <strong><code>umap_neighbors</code></strong>:<code>int</code>=<em><code>15</code></em>, <strong><code>show_chart</code></strong>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>=<em><code>False</code></em>, <strong><code>return_data</code></strong>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>=<em><code>'output/cluster_visualization.html'</code></em>)</p>
+<h4 id="visualize_clustering" class="doc_header"><code>visualize_clustering</code><a href="VCUWrightCentertopex/core.py#L260" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>visualize_clustering</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>method</code></strong>:<code>str</code>=<em><code>'umap'</code></em>, <strong><code>dist_metric</code></strong>:<code>str</code>=<em><code>'cosine'</code></em>, <strong><code>umap_neighbors</code></strong>:<code>int</code>=<em><code>15</code></em>, <strong><code>show_chart</code></strong>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>=<em><code>False</code></em>, <strong><code>return_data</code></strong>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>=<em><code>'output/cluster_visualization.html'</code></em>)</p>
 </blockquote>
 <p>Visualize clustering in two dimensions.</p>
 <p>Options for <code>method</code> are ('umap', 'tsne', 'mds', 'svd'). Options for <code>dist_metric</code> are ('cosine' or anything accepted by
@@ -325,7 +325,7 @@ When <code>save_chart</code> is True, the visualization is saved to <code>chart_
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_cluster_topics" class="doc_header"><code>get_cluster_topics</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L328" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_topics</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>doc_df</code></strong>:<code>DataFrame</code>=<em><code>None</code></em>, <strong><code>topics_per_cluster</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/TopicClusterResults.txt'</code></em>)</p>
+<h4 id="get_cluster_topics" class="doc_header"><code>get_cluster_topics</code><a href="VCUWrightCentertopex/core.py#L328" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_topics</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>doc_df</code></strong>:<code>DataFrame</code>=<em><code>None</code></em>, <strong><code>topics_per_cluster</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/TopicClusterResults.txt'</code></em>)</p>
 </blockquote>
 <p>Gets the main topics for each cluster.</p>
 <p><code>topics_per_cluster</code> is the number of main topics per cluster. When <code>save_results</code> is True, the resulting dataframe
@@ -360,7 +360,7 @@ will be saved to <code>file_name</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_doc_topics" class="doc_header"><code>get_doc_topics</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L356" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_topics</code>(<strong><code>doc_df</code></strong>:<code>DataFrame</code>, <strong><code>topics_per_doc</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/TopicDocumentResults.txt'</code></em>)</p>
+<h4 id="get_doc_topics" class="doc_header"><code>get_doc_topics</code><a href="VCUWrightCentertopex/core.py#L356" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_topics</code>(<strong><code>doc_df</code></strong>:<code>DataFrame</code>, <strong><code>topics_per_doc</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/TopicDocumentResults.txt'</code></em>)</p>
 </blockquote>
 <p>Gets the main topics for each document.</p>
 <p><code>topics_per_doc</code> is the number of topics extracted per document. When <code>save_results</code> is True, the resulting dataframe
@@ -395,7 +395,7 @@ will be saved to <code>file_name</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="evaluate" class="doc_header"><code>evaluate</code><a href="https://github.com/etfrenchvcu/medtop/tree/master/medtop/core.py#L375" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate</code>(<strong><code>data</code></strong>, <strong><code>gold_file</code></strong>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/EvaluationResults.txt'</code></em>)</p>
+<h4 id="evaluate" class="doc_header"><code>evaluate</code><a href="VCUWrightCentertopex/core.py#L375" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate</code>(<strong><code>data</code></strong>, <strong><code>gold_file</code></strong>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/EvaluationResults.txt'</code></em>)</p>
 </blockquote>
 <p>Evaluate precision, recall, and F1 against a gold standard dataset.</p>
 <p><code>gold_file</code> is a path to a text file containing a list IDs and labels. When <code>save_results</code> is True, the resulting

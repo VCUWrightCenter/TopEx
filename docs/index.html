@@ -64,8 +64,8 @@ description: "Topic exploration in unstructured text documents."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">topex.core</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span> <span class="o">=</span> <span class="n">import_from_files</span><span class="p">(</span><span class="s1">&#39;test_data/corpus_file_list.txt&#39;</span><span class="p">,</span> <span class="n">stop_words_file</span><span class="o">=</span><span class="s1">&#39;stop_words.txt&#39;</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">topex.core</span> <span class="k">as</span> <span class="nn">topex</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">import_from_files</span><span class="p">(</span><span class="s1">&#39;test_data/corpus_file_list.txt&#39;</span><span class="p">,</span> <span class="n">stop_words_file</span><span class="o">=</span><span class="s1">&#39;stop_words.txt&#39;</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -89,7 +89,7 @@ description: "Topic exploration in unstructured text documents."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span> <span class="o">=</span> <span class="n">import_from_csv</span><span class="p">(</span><span class="s1">&#39;test_data/corpus.txt&#39;</span><span class="p">,</span> <span class="n">stop_words_file</span><span class="o">=</span><span class="s1">&#39;stop_words.txt&#39;</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">import_from_csv</span><span class="p">(</span><span class="s1">&#39;test_data/corpus.txt&#39;</span><span class="p">,</span> <span class="n">stop_words_file</span><span class="o">=</span><span class="s1">&#39;stop_words.txt&#39;</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -114,9 +114,9 @@ description: "Topic exploration in unstructured text documents."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tfidf</span><span class="p">,</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">create_tfidf</span><span class="p">(</span><span class="n">doc_df</span><span class="p">,</span> <span class="n">path_to_seed_topics_file_list</span><span class="o">=</span><span class="s1">&#39;test_data/seed_topics_file_list.txt&#39;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">get_phrases</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">token2id</span><span class="p">,</span> <span class="n">tfidf</span><span class="p">,</span> <span class="n">include_input_in_tfidf</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">include_sentiment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="s2">&quot;tfidf&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tfidf</span><span class="p">,</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">create_tfidf</span><span class="p">(</span><span class="n">doc_df</span><span class="p">,</span> <span class="n">path_to_seed_topics_file_list</span><span class="o">=</span><span class="s1">&#39;test_data/seed_topics_file_list.txt&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">get_phrases</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">token2id</span><span class="p">,</span> <span class="n">tfidf</span><span class="p">,</span> <span class="n">include_input_in_tfidf</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">include_sentiment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">get_vectors</span><span class="p">(</span><span class="s2">&quot;tfidf&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -154,9 +154,36 @@ description: "Topic exploration in unstructured text documents."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">assign_clusters</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;hac&quot;</span><span class="p">)</span>
-<span class="n">cluster_df</span> <span class="o">=</span> <span class="n">get_cluster_topics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">visualize_clustering</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;umap&quot;</span><span class="p">,</span> <span class="n">show_chart</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">max_height</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">assign_clusters</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;hac&quot;</span><span class="p">,</span> <span class="n">show_chart</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">viz_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">visualize_clustering</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;umap&quot;</span><span class="p">,</span> <span class="n">show_chart</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cluster-size-exploration">Cluster size exploration<a class="anchor-link" href="#Cluster-size-exploration"> </a></h3><p>Determining the correct number of clusters can often be as much art as science, so we've included a mechanism to 
+quickly iterate through various values of <code>k</code> or cut heights for the HAC tree. Mapping the data points into the x,y coordinate plane need only be performed once as it depends solely on the vector representation of each sentence and the <a href="/TopEx/core#visualize_clustering"><code>visualize_clustering</code></a> method returns those values in a dataframe, which can be used to quickly redraw the visualization after updating cluster assignments using a different <code>k</code> or <code>height</code>. Similarly, computing the tree for HAC clustering can be done once and then cut at different heights to produce different clusters. <a href="/TopEx/core#assign_clusters"><code>assign_clusters</code></a> returns the <code>linkage_matrix</code> and <code>max_height</code> at which you can cut the tree.</p>
+<p>Use the <a href="/TopEx/core#recluster"><code>recluster</code></a> method to experiment with different values of <code>k</code> or <code>height</code>. You can also, remove noise from the visualization by setting the <code>min_cluster_size</code> parameter. This only hides points from the visualization and does not remove them from <code>data</code>.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># data, cluster_df = topex.recluster(data, viz_df, cluster_method=&#39;kmeans&#39;, k=25, min_cluster_size=6, show_chart=False)</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">cluster_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">recluster</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">viz_df</span><span class="p">,</span> <span class="n">linkage_matrix</span><span class="o">=</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">cluster_method</span><span class="o">=</span><span class="s1">&#39;hac&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> 
+                                   <span class="n">min_cluster_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">show_chart</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -180,7 +207,8 @@ description: "Topic exploration in unstructured text documents."
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gold_file</span> <span class="o">=</span> <span class="s2">&quot;test_data/gold.txt&quot;</span>
-<span class="n">results_df</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">gold_file</span><span class="o">=</span><span class="s2">&quot;test_data/gold.txt&quot;</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">cluster_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">get_cluster_topics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">gold_file</span><span class="o">=</span><span class="s2">&quot;test_data/gold.txt&quot;</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -205,11 +233,11 @@ description: "Topic exploration in unstructured text documents."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc_df</span> <span class="o">=</span> <span class="n">get_phrases</span><span class="p">(</span><span class="n">doc_df</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">token2id</span><span class="p">,</span> <span class="n">tfidf</span><span class="p">,</span> <span class="n">include_input_in_tfidf</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">doc_df</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="s2">&quot;tfidf&quot;</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">)</span>
-<span class="n">doc_df</span> <span class="o">=</span> <span class="n">assign_clusters</span><span class="p">(</span><span class="n">doc_df</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">cluster_df</span> <span class="o">=</span> <span class="n">get_cluster_topics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">visualize_clustering</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;umap&quot;</span><span class="p">,</span> <span class="n">show_chart</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">get_phrases</span><span class="p">(</span><span class="n">doc_df</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">token2id</span><span class="p">,</span> <span class="n">tfidf</span><span class="p">,</span> <span class="n">include_input_in_tfidf</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">doc_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">get_vectors</span><span class="p">(</span><span class="s2">&quot;tfidf&quot;</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">,</span> <span class="n">tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">)</span>
+<span class="n">doc_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">assign_clusters</span><span class="p">(</span><span class="n">doc_df</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">cluster_df</span> <span class="o">=</span> <span class="n">topex</span><span class="o">.</span><span class="n">get_cluster_topics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">doc_df</span><span class="p">,</span> <span class="n">save_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">topex</span><span class="o">.</span><span class="n">visualize_clustering</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;umap&quot;</span><span class="p">,</span> <span class="n">show_chart</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>

@@ -2,6 +2,7 @@ data/*
 output/*
 cluster_visualization.html
 .pypirc
+**/_sandbox.*
 
 *.bak
 .gitattributes

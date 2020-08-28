@@ -1,8 +1,8 @@
 data/*
 output/*
-medtop/test.py
 cluster_visualization.html
 .pypirc
+**/_sandbox.*
 
 *.bak
 .gitattributes

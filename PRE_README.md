@@ -1,3 +1,3 @@
-![CI](https://github.com/AmyOlex/medtop/workflows/CI/badge.svg) 
+![CI](https://github.com/VCUWrightCenter/TopEx/workflows/CI/badge.svg) 
 
-Documentation is available at https://amyolex.github.io/medtop/.
+Documentation is available at https://VCUWrightCenter.github.io/TopEx/.

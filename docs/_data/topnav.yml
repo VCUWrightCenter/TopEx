@@ -2,7 +2,7 @@ topnav:
 - title: Topnav
   items:
     - title: GitHub
-      external_url: https://github.com/etfrenchvcu/medtop
+      external_url: https://github.com/VCUWrightCenter/TopEx
 
 #Topnav dropdowns
 topnav_dropdowns:

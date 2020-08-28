@@ -9,8 +9,12 @@ index = {"import_data": "core.ipynb",
          "get_phrases": "core.ipynb",
          "get_vectors": "core.ipynb",
          "assign_clusters": "core.ipynb",
+         "reassign_hac_clusters": "core.ipynb",
+         "reassign_kmeans_clusters": "core.ipynb",
          "visualize_clustering": "core.ipynb",
+         "visualize_df": "core.ipynb",
          "get_cluster_topics": "core.ipynb",
+         "recluster": "core.ipynb",
          "get_doc_topics": "core.ipynb",
          "evaluate": "core.ipynb",
          "score_phrase": "internal.ipynb",
@@ -19,13 +23,14 @@ index = {"import_data": "core.ipynb",
          "get_vector_tfidf": "internal.ipynb",
          "get_vector_w2v": "internal.ipynb",
          "w2v_pretrained": "internal.ipynb",
+         "get_cluster_assignments_hac": "internal.ipynb",
          "get_silhouette_score_hac": "internal.ipynb",
          "get_tree_height": "internal.ipynb",
-         "get_linkage_matrix": "internal.ipynb",
          "get_optimal_height": "internal.ipynb",
          "get_clusters_hac": "internal.ipynb",
          "get_silhouette_score_kmeans": "internal.ipynb",
          "get_optimal_k": "internal.ipynb",
+         "get_cluster_assignments_kmeans": "internal.ipynb",
          "get_clusters_kmeans": "internal.ipynb",
          "get_topics_from_docs": "internal.ipynb",
          "df_to_disk": "internal.ipynb",
@@ -44,8 +49,8 @@ modules = ["core.py",
            "internal.py",
            "preprocessing.py"]
 
-doc_url = "https://etfrenchvcu.github.io/medtop/"
+doc_url = "https://VCUWrightCenter.github.io/TopEx/"
 
-git_url = "https://github.com/etfrenchvcu/medtop/tree/master/"
+git_url = "VCUWrightCenter"
 
 def custom_doc_links(name): return None

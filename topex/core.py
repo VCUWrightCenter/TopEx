@@ -412,8 +412,15 @@ def recluster(data:DataFrame, viz_df:DataFrame, cluster_method:str,
     # Compute cluster_df
     cluster_df = get_cluster_topics(data, topics_per_cluster=topics_per_cluster, save_results=False)
 
-    # Visualize new clusters
-    visualize_df(viz_df, cluster_df, min_cluster_size=min_cluster_size, show_chart=show_chart)
+    if show_chart == True:
+        visualize_df(viz_df, cluster_df, min_cluster_size=min_cluster_size, show_chart=show_chart)
+
+    # Mark "valid" clusters containing the min_cluster_size points
+    if min_cluster_size > 0 and cluster_df is not None:
+        valid = list(cluster_df[cluster_df.sent_count >= min_cluster_size].cluster)
+        data['valid'] = data.cluster.isin(valid)
+    else:
+        data['valid'] = True
 
     return data, cluster_df
 

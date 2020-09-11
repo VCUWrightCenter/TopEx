@@ -426,29 +426,6 @@ will be saved to <code>file_name</code>.</p>
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-1-d1ed1956ad5d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">      2</span> def recluster(data:DataFrame, viz_df:DataFrame, cluster_method:str, 
-<span class="ansi-green-fg">      3</span>               linkage_matrix<span class="ansi-yellow-intense-fg ansi-bold">:</span>np<span class="ansi-yellow-intense-fg ansi-bold">.</span>ndarray<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> height<span class="ansi-yellow-intense-fg ansi-bold">:</span>int<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> k<span class="ansi-yellow-intense-fg ansi-bold">:</span>int<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> min_cluster_size<span class="ansi-yellow-intense-fg ansi-bold">:</span>int<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">,</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 4</span><span class="ansi-yellow-intense-fg ansi-bold">               topics_per_cluster:int=10):
-</span><span class="ansi-green-fg">      5</span>     &#34;&#34;&#34;
-<span class="ansi-green-fg">      6</span>     Recomputes clusters <span class="ansi-green-intense-fg ansi-bold">with</span> a new threshold using the output of a previous clustering<span class="ansi-yellow-intense-fg ansi-bold">.</span>
-
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;DataFrame&#39; is not defined</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -496,7 +473,7 @@ will be saved to <code>file_name</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_doc_topics" class="doc_header"><code>get_doc_topics</code><a href="VCUWrightCentertopex/core.py#L421" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_topics</code>(<strong><code>doc_df</code></strong>:<code>DataFrame</code>, <strong><code>topics_per_doc</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/TopicDocumentResults.txt'</code></em>)</p>
+<h4 id="get_doc_topics" class="doc_header"><code>get_doc_topics</code><a href="VCUWrightCentertopex/core.py#L428" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_doc_topics</code>(<strong><code>doc_df</code></strong>:<code>DataFrame</code>, <strong><code>topics_per_doc</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/TopicDocumentResults.txt'</code></em>)</p>
 </blockquote>
 <p>Gets the main topics for each document.</p>
 <p><code>topics_per_doc</code> is the number of topics extracted per document. When <code>save_results</code> is True, the resulting dataframe
@@ -531,7 +508,7 @@ will be saved to <code>file_name</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="evaluate" class="doc_header"><code>evaluate</code><a href="VCUWrightCentertopex/core.py#L440" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate</code>(<strong><code>data</code></strong>, <strong><code>gold_file</code></strong>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/EvaluationResults.txt'</code></em>)</p>
+<h4 id="evaluate" class="doc_header"><code>evaluate</code><a href="VCUWrightCentertopex/core.py#L447" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate</code>(<strong><code>data</code></strong>, <strong><code>gold_file</code></strong>, <strong><code>save_results</code></strong>=<em><code>False</code></em>, <strong><code>file_name</code></strong>=<em><code>'output/EvaluationResults.txt'</code></em>)</p>
 </blockquote>
 <p>Evaluate precision, recall, and F1 against a gold standard dataset.</p>
 <p><code>gold_file</code> is a path to a text file containing a list IDs and labels. When <code>save_results</code> is True, the resulting

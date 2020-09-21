@@ -42,7 +42,7 @@ NOTE: If `doc_df` is NOT passed to `create_tfidf`, you must set `include_input_i
 ```python
 tfidf, dictionary = topex.create_tfidf(doc_df, path_to_seed_topics_file_list='test_data/seed_topics_file_list.txt')
 data = topex.get_phrases(data, dictionary.token2id, tfidf, include_input_in_tfidf = True, include_sentiment=True)
-data = topex.get_vectors("tfidf", data, dictionary = dictionary, tfidf = tfidf)
+data = topex.get_vectors("svd", data, dictionary = dictionary, tfidf = tfidf, dimensions=min(200,tfidf.shape[1]-1))
 ```
 
     Removed 67 sentences without phrases.
@@ -83,7 +83,7 @@ To cluster documents, simply import data and create the TF-IDF as above, but ext
 
 ```python
 doc_df = topex.get_phrases(doc_df, dictionary.token2id, tfidf, include_input_in_tfidf = True, window_size=-1)
-doc_df = topex.get_vectors("tfidf", doc_df, dictionary = dictionary, tfidf = tfidf)
+doc_df = topex.get_vectors("svd", doc_df, dictionary = dictionary, tfidf = tfidf)
 doc_df = topex.assign_clusters(doc_df, method = "kmeans", k=4)
 cluster_df = topex.get_cluster_topics(data, doc_df, save_results = False)
 topex.visualize_clustering(data, method = "umap", show_chart = False)

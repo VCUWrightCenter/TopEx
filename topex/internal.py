@@ -33,17 +33,17 @@ def score_phrase(phrase:list, score:float, include_sentiment:bool):
 
     return score * weight
 
-def score_token(token:str, pos:str, doc_id:int, vocab:dict, tfidf:np.ndarray, token_averages:np.ndarray,
-                include_input:bool, include_sentiment:bool):
+def score_token(token:str, pos:str, doc_id:int, vocab:dict, tfidf:np.ndarray, max_token_scores:np.ndarray,
+                tfidf_corpus:str, include_sentiment:bool):
     "Calculates the importance of a single token"
     score = 0
     weight = 1
 
     # Only score tokens in vocabulary
     if token in list(vocab.keys()):
-        # Token score comes from TF-IDf matrix if include_input is set, otherwise, use tokens averages
+        # Token score comes from TF-IDf matrix if tfidf_corpus='clustering' is set, otherwise, use max token score
         token_ix = vocab[token]
-        score = tfidf[token_ix, doc_id] if include_input else token_averages[token_ix];
+        score = tfidf[token_ix, doc_id] if tfidf_corpus=='clustering' else max_token_scores[token_ix];
 
         # Scale token_score by 3x if including sentiment and the token is an adjective or adverb
         if include_sentiment and pos in ["JJ","JJR", "JJS", "RB", "RBR", "RBS"]:
@@ -51,8 +51,8 @@ def score_token(token:str, pos:str, doc_id:int, vocab:dict, tfidf:np.ndarray, to
 
     return score
 
-def get_phrase(sent:Series, window_size:int, vocab:dict, include_input:bool, tfidf:np.ndarray,
-                                                       token_averages:np.ndarray, include_sentiment:bool):
+def get_phrase(sent:Series, window_size:int, vocab:dict, tfidf_corpus:str, tfidf:np.ndarray,
+                                                       max_token_scores:np.ndarray, include_sentiment:bool):
     """
     Finds the most expressive phrase in a sentence. This function is called in a lambda expression in `core.get_phrases`.
     Passing `include_sentiment=False` will weight all tokens equally, ignoring sentiment and part of speech.
@@ -63,7 +63,7 @@ def get_phrase(sent:Series, window_size:int, vocab:dict, include_input:bool, tfi
 
     # Score each token in the sentence
     token_scores = [
-        score_token(t, sent.pos_tags[i], sent.doc_id, vocab, tfidf, token_averages, include_input, include_sentiment)
+        score_token(t, sent.pos_tags[i], sent.doc_id, vocab, tfidf, max_token_scores, tfidf_corpus, include_sentiment)
         for i, t in enumerate(tokens)]
 
     # Score each phrase in the sentence

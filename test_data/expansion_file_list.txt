@@ -1,0 +1,4 @@
+test_data/expansion_corpus/guilt.txt
+test_data/expansion_corpus/shame.txt
+test_data/expansion_corpus/sadness.txt
+test_data/expansion_corpus/joy.txt

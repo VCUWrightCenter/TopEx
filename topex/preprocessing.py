@@ -77,7 +77,7 @@ def decontracted(text:str):
     return text
 
 # Cell
-def get_stop_words(stop_words_file:str=None):
+def get_stop_words(stop_words_file:str=None, stop_words_list:list=None):
     "Gets a list of all stop words"
     # Load custom stop words from file if given
     custom_stop_words = []
@@ -85,6 +85,9 @@ def get_stop_words(stop_words_file:str=None):
         if os.path.isfile(stop_words_file):
             with open(stop_words_file, encoding="utf-8") as file:
                 custom_stop_words = file.read().strip().split('\n')
+
+    if stop_words_list is not None:
+        custom_stop_words = custom_stop_words + stop_words_list
 
     stop_words = set(stopwords.words('english')) | set(custom_stop_words)
     return stop_words

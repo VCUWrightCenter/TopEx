@@ -23,7 +23,8 @@ from sklearn.decomposition import TruncatedSVD
 import umap.umap_ as umap
 
 # Cell
-def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None, stop_words_file:str=None):
+def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None, stop_words_file:str=None,
+                stop_words_list:list=None):
     """
     Imports and pre-processes the documents from the `raw_docs` dataframe
 
@@ -34,7 +35,7 @@ def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None,
     """
 
     # Get stop_words list
-    stop_words = preprocessing.get_stop_words(stop_words_file)
+    stop_words = preprocessing.get_stop_words(stop_words_file=stop_words_file, stop_words_list=stop_words_list)
 
     # Process all raw documents
     processed_docs = [
@@ -56,7 +57,7 @@ def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None,
     return data, doc_df
 
 def import_from_files(path_to_file_list:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt',
-               stop_words_file:str = None):
+               stop_words_file:str = None, stop_words_list:list=None):
     """
     Imports and pre-processes a list of documents contained in `path_to_file_list`.
 
@@ -75,11 +76,12 @@ def import_from_files(path_to_file_list:str, save_results:bool = False, file_nam
             docs.append(doc_text)
 
     raw_docs = pd.DataFrame(dict(doc_name=file_list, text=docs))
-    data, doc_df = import_data(raw_docs, save_results, file_name, stop_words_file)
+    data, doc_df = import_data(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
+                               stop_words_list=stop_words_list)
     return data, doc_df
 
 def import_from_csv(path_to_csv:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt',
-               stop_words_file:str = None):
+               stop_words_file:str = None, stop_words_list:list=None):
     """
     Imports and pre-processes documents from a pipe-demilited csv file. File should be formatted with two columns:
     "doc_name" and "text"
@@ -87,7 +89,8 @@ def import_from_csv(path_to_csv:str, save_results:bool = False, file_name:str = 
     Returns (DataFrame, DataFrame)
     """
     raw_docs = pd.read_csv(path_to_csv, sep='|')
-    data, doc_df = import_data(raw_docs, save_results, file_name, stop_words_file)
+    data, doc_df = import_data(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
+                               stop_words_list=stop_words_list)
     return data, doc_df
 
 # Cell

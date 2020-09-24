@@ -35,13 +35,16 @@ data, doc_df = topex.import_from_csv('test_data/corpus.txt', stop_words_file='st
 ```
 
 ### Transform data
-Create word vectors from the most expressive phrase in each sentence of the imported documents. Seed documents can be passed as a single CSV similar to corpus documents in the import step.
+Create word vectors from the most expressive phrase in each sentence of the imported documents. Expansion documents can be passed as a single CSV similar to corpus documents in the import step. Options for `tfidf_corpus` are ('clustering', 'expansion', 'both')
 
-NOTE: If `doc_df` is NOT passed to `create_tfidf`, you must set `include_input_in_tfidf=False` in `get_phrases`.
+- *Clustering Corpus*: The set of documents the user wants to analyze and cluster.
+- *Expansion Corpus*: A set of additional documents uploaded by the user that are either 1) added to the Clustering Corpus to create the TF-IDF, or 2) are the only set of documents used to create the TF-IDF.
+- *Background Corpus*: The set of documents used to create the TF-IDF matrix. Can be composed of 1) only the Clustering Corpus, 2) only the Expansion Corpus, or 3) the concatenation of the Clustering and Expansion Corpus.
 
 ```python
-tfidf, dictionary = topex.create_tfidf(doc_df, path_to_seed_topics_file_list='test_data/seed_topics_file_list.txt')
-data = topex.get_phrases(data, dictionary.token2id, tfidf, include_input_in_tfidf = True, include_sentiment=True)
+tfidf_corpus='both'
+tfidf, dictionary = topex.create_tfidf(tfidf_corpus, doc_df, path_to_expansion_file_list='test_data/expansion_file_list.txt')
+data = topex.get_phrases(data, dictionary.token2id, tfidf, tfidf_corpus=tfidf_corpus, include_sentiment=True)
 data = topex.get_vectors("svd", data, dictionary = dictionary, tfidf = tfidf, dimensions=min(200,tfidf.shape[1]-1))
 ```
 
@@ -82,7 +85,8 @@ results_df = topex.evaluate(data, gold_file="test_data/gold.txt", save_results =
 To cluster documents, simply import data and create the TF-IDF as above, but extract phrase, create the vectors, and cluster using the `doc_df` dataframe. Passing the parameter `window_size=-1` to `get_phrases` tells the method to use all tokens instead of selecting a subset of length `window_size`.
 
 ```python
-doc_df = topex.get_phrases(doc_df, dictionary.token2id, tfidf, include_input_in_tfidf = True, window_size=-1)
+tfidf_corpus='both'
+doc_df = topex.get_phrases(doc_df, dictionary.token2id, tfidf, tfidf_corpus=tfidf_corpus, window_size=-1)
 doc_df = topex.get_vectors("svd", doc_df, dictionary = dictionary, tfidf = tfidf)
 doc_df = topex.assign_clusters(doc_df, method = "kmeans", k=4)
 cluster_df = topex.get_cluster_topics(data, doc_df, save_results = False)

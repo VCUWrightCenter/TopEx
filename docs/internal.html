@@ -90,7 +90,7 @@ description: "Internal TopEx methods"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="score_token" class="doc_header"><code>score_token</code><a href="VCUWrightCentertopex/internal.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>score_token</code>(<strong><code>token</code></strong>:<code>str</code>, <strong><code>pos</code></strong>:<code>str</code>, <strong><code>doc_id</code></strong>:<code>int</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>token_averages</code></strong>:<code>ndarray</code>, <strong><code>include_input</code></strong>:<code>bool</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
+<h4 id="score_token" class="doc_header"><code>score_token</code><a href="VCUWrightCentertopex/internal.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>score_token</code>(<strong><code>token</code></strong>:<code>str</code>, <strong><code>pos</code></strong>:<code>str</code>, <strong><code>doc_id</code></strong>:<code>int</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>max_token_scores</code></strong>:<code>ndarray</code>, <strong><code>tfidf_corpus</code></strong>:<code>str</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
 </blockquote>
 <p>Calculates the importance of a single token</p>
 
@@ -115,7 +115,7 @@ description: "Internal TopEx methods"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_phrase" class="doc_header"><code>get_phrase</code><a href="VCUWrightCentertopex/internal.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_phrase</code>(<strong><code>sent</code></strong>:<code>Series</code>, <strong><code>window_size</code></strong>:<code>int</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>include_input</code></strong>:<code>bool</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>token_averages</code></strong>:<code>ndarray</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
+<h4 id="get_phrase" class="doc_header"><code>get_phrase</code><a href="VCUWrightCentertopex/internal.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_phrase</code>(<strong><code>sent</code></strong>:<code>Series</code>, <strong><code>window_size</code></strong>:<code>int</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf_corpus</code></strong>:<code>str</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>max_token_scores</code></strong>:<code>ndarray</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
 </blockquote>
 <p>Finds the most expressive phrase in a sentence. This function is called in a lambda expression in <code>core.get_phrases</code>.
 Passing <code>include_sentiment=False</code> will weight all tokens equally, ignoring sentiment and part of speech.</p>

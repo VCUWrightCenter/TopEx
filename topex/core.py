@@ -94,10 +94,11 @@ def import_from_csv(path_to_csv:str, save_results:bool = False, file_name:str = 
     return data, doc_df
 
 # Cell
-def create_tfidf(doc_df:DataFrame=None, path_to_seed_topics_file_list:str=None, path_to_seed_topics_csv:str=None,
-                seed_topics_df:DataFrame=None):
+def create_tfidf(tfidf_corpus:str='both', doc_df:DataFrame=None, path_to_expansion_file_list:str=None,
+                 path_to_expansion_csv:str=None, expansion_df:DataFrame=None):
     """
-    Creates a dense TF-IDF matrix from the tokens in the seed topics documents and/or the input corpus.
+    Creates a dense TF-IDF matrix from the tokens in some combination of the clustering corpus and/or expansion corpus.
+    This combination is determined by `tfidf_corpus` which has possible values (both, clustering, expansion).
 
     `path_to_seed_topics_file_list` is a path to a text file containing a list of files with sentences corresponding to
     known topics. Use the `path_to_seed_topics_csv` if you would prefer to load all seed topics documents from a single,
@@ -109,19 +110,24 @@ def create_tfidf(doc_df:DataFrame=None, path_to_seed_topics_file_list:str=None, 
     # Bag of Words (BoW) is a list of all tokens by document
     bow_docs = []
 
-    if doc_df is not None:
+    # Add clustering corpus to BoW
+    if tfidf_corpus in ('both','clustering'):
+        assert doc_df is not None, f"Optional parameter: 'doc_df' is required for tfidf_corpus: {tfidf_corpus}."
         bow_docs = bow_docs + list(doc_df.tokens)
 
-    # Import seed topics documents
-    if path_to_seed_topics_file_list is not None:
-        _, seed_doc_df = import_from_files(path_to_seed_topics_file_list)
-        bow_docs = bow_docs + list(seed_doc_df.tokens)
-    elif path_to_seed_topics_csv is not None:
-        _, seed_doc_df = import_from_csv(path_to_seed_topics_csv)
-        bow_docs = bow_docs + list(seed_doc_df.tokens)
-    elif seed_topics_df is not None:
-        _, seed_doc_df = import_data(seed_topics_df)
-        bow_docs = bow_docs + list(seed_doc_df.tokens)
+    # Add expansion corpus to BoW
+    if tfidf_corpus in ('both','expansion'):
+        expansion_docs_df = None
+        if path_to_expansion_file_list is not None:
+            _, expansion_docs_df = import_from_files(path_to_expansion_file_list)
+        elif path_to_expansion_csv is not None:
+            _, expansion_docs_df = import_from_csv(path_to_expansion_csv)
+        elif expansion_df is not None:
+            _, expansion_docs_df = import_data(expansion_df)
+
+        assert expansion_docs_df is not None, f"Unable to load expansion docs. Check expansion parameter or set tfidf_corpus to 'clustering'."
+
+        bow_docs = bow_docs + list(expansion_docs_df.tokens)
 
     # Create a dense TF-IDF matrix using document tokens and gensim
     dictionary = corpora.Dictionary(bow_docs)
@@ -135,29 +141,29 @@ def create_tfidf(doc_df:DataFrame=None, path_to_seed_topics_file_list:str=None, 
 
 # Cell
 def get_phrases(data:DataFrame, vocab:dict, tfidf:np.ndarray, window_size:int = 6,
-                include_input_in_tfidf:bool = True, include_sentiment:bool=True):
+                tfidf_corpus:str='clustering', include_sentiment:bool=True):
     """
     Extracts the most expressive phrase from each sentence.
 
     `feature_names` should be `dictionary.token2id` and `vocab` should be `dictionary.token2id` from the output of
     `create_tfidf`. `window_size` is the length of phrase extracted, if a -1 is passed, all tokens will be included
     (IMPORTANT: this option requires aggregating vectors in the next step.)
-    When `include_input_in_tfidf` is True, token_scores are calculated using the TF-IDF, otherwise, token_scores
-    are calculated using `token_averages`. When `include_sentiment` is False, sentiment and token part of speech are
-    ignored when scoring phrases.
+    When `tfidf_corpus='clustering'`, token_scores are calculated using the TF-IDF, otherwise, token_scores
+    are calculated using `max_token_scores` (max scores for each token in all documents. When `include_sentiment` is False,
+    sentiment and token part of speech are ignored when scoring phrases.
 
     Returns DataFrame
     """
     if window_size > 0:
-        token_averages = np.max(tfidf, axis=1)
+        max_token_scores = np.max(tfidf, axis=1)
 
         # Remove records where len(tokens) < window_size
         filtered_df = data[data.tokens.map(len)>=window_size].copy().reset_index(drop=True)
         print(f"Removed {len(data) - len(filtered_df)} sentences without phrases.")
 
         # Find the most expressive phrase for each sentence and add to dataframe
-        lambda_func = lambda sent: internal.get_phrase(sent, window_size, vocab, include_input_in_tfidf, tfidf,
-                                                       token_averages, include_sentiment)
+        lambda_func = lambda sent: internal.get_phrase(sent, window_size, vocab, tfidf_corpus, tfidf,
+                                                       max_token_scores, include_sentiment)
         phrases = filtered_df.apply(lambda_func, axis=1)
         filtered_df['phrase'] = phrases
     else:

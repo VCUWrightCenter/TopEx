@@ -48,7 +48,7 @@ data = topex.get_phrases(data, dictionary.token2id, tfidf, tfidf_corpus=tfidf_co
 data = topex.get_vectors("svd", data, dictionary = dictionary, tfidf = tfidf, dimensions=min(200,tfidf.shape[1]-1))
 ```
 
-    Removed 67 sentences without phrases.
+    Removed 75 sentences without phrases.
     
 
 ### Cluster data

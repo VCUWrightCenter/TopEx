@@ -40,13 +40,13 @@ def score_token(token:str, pos:str, doc_id:int, vocab:dict, tfidf:np.ndarray, ma
     weight = 1
 
     # Only score tokens in vocabulary
-    if token in list(vocab.keys()):
+    if token in vocab:
         # Token score comes from TF-IDf matrix if tfidf_corpus='clustering' is set, otherwise, use max token score
         token_ix = vocab[token]
         score = tfidf[token_ix, doc_id] if tfidf_corpus=='clustering' else max_token_scores[token_ix];
 
         # Scale token_score by 3x if including sentiment and the token is an adjective or adverb
-        if include_sentiment and pos in ["JJ","JJR", "JJS", "RB", "RBR", "RBS"]:
+        if include_sentiment and pos in ['ADJ', 'ADV']:
             score *= 3
 
     return score
@@ -122,7 +122,14 @@ def get_silhouette_score_hac(phrase_vecs:list, linkage_matrix:np.ndarray, height
     Returns float
     """
     cluster_assignments = get_cluster_assignments_hac(linkage_matrix, height)
-    return silhouette_score(phrase_vecs, cluster_assignments)
+
+    # Getting weird errors for trying invalid ranges for unknown reasons. Wrapping in try/except to handle
+    try:
+        score = silhouette_score(phrase_vecs, cluster_assignments)
+    except:
+        score = -1
+
+    return score
 
 def get_tree_height(root:hierarchy.ClusterNode):
     """

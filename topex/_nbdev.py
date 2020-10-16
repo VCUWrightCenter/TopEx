@@ -37,17 +37,20 @@ index = {"import_data": "core.ipynb",
          "sentences_to_disk": "internal.ipynb",
          "write_cluster": "internal.ipynb",
          "clusters_to_disk": "internal.ipynb",
-         "process_sentence": "preprocessing.ipynb",
-         "process_doc": "preprocessing.ipynb",
-         "decontracted": "preprocessing.ipynb",
+         "nlp": "preprocessing.ipynb",
+         "preprocess_docs": "preprocessing.ipynb",
          "get_stop_words": "preprocessing.ipynb",
-         "token_filter": "preprocessing.ipynb",
-         "get_tokens": "preprocessing.ipynb",
-         "tokenize_and_stem": "preprocessing.ipynb"}
+         "process_sentence": "preprocessing_orig.ipynb",
+         "process_doc": "preprocessing_orig.ipynb",
+         "decontracted": "preprocessing_orig.ipynb",
+         "token_filter": "preprocessing_orig.ipynb",
+         "get_tokens": "preprocessing_orig.ipynb",
+         "tokenize_and_stem": "preprocessing_orig.ipynb"}
 
 modules = ["core.py",
            "internal.py",
-           "preprocessing.py"]
+           "preprocessing.py",
+           "preprocessing_orig.py"]
 
 doc_url = "https://VCUWrightCenter.github.io/TopEx/"
 

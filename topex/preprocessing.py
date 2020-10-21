@@ -27,14 +27,14 @@ def preprocess_docs(doc_df:DataFrame, save_results:bool=False, file_name:str=Non
     docs = list(nlp.pipe(texts))
 
     # 3) Create DataFrame of documents
-    doc_df['tokens'] = [[token.lemma_.lower() for token in doc if not token.is_stop] for doc in docs]
+    doc_df['tokens'] = [[token.lemma_.lower() for token in doc if not token.is_stop and token.is_alpha] for doc in docs]
 
     # 4) Create DataFrame of sentences
     rows = []
     for doc_id, doc in enumerate(docs):
         for sent_id, sent in enumerate(doc.sents):
             uid = f"doc.{doc_id}.sent.{sent_id}"
-            sent_tokens = list([token for token in sent if not token.is_stop])
+            sent_tokens = list([token for token in sent if not token.is_stop and token.is_alpha])
             text = sent.text
             lemmas = [t.lemma_.lower() for t in sent_tokens]
             tags = [t.pos_ for t in sent_tokens]

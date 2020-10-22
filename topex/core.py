@@ -34,21 +34,9 @@ def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None,
     Returns (DataFrame, DataFrame)
     """
 
-    # Get stop_words list
-    stop_words = preprocessing.get_stop_words(stop_words_file=stop_words_file, stop_words_list=stop_words_list)
-
-    # Process all raw documents
-    processed_docs = [
-        preprocessing.process_doc(doc_id, text, stop_words) for doc_id, text in enumerate(raw_docs.text)]
-
-    # Create a dataframe containing the id, doc_id, sent_id, raw text, tokens, and PoS tags for each sentence
-    data_rows = [sent for doc in processed_docs for sent in doc[1]]
-    data = DataFrame(data_rows, columns = ["id", "doc_id", "sent_id", "text", "tokens", "pos_tags"])
-
-    # Create a dataframe containing the doc_id, file name, and raw text of each document
-    doc_rows = [doc[0] for doc in processed_docs]
-    doc_df = DataFrame(doc_rows, columns = ["id", "doc_name", "text", "tokens"])
-    doc_df['doc_name'] = [raw_docs.iloc[i].doc_name for i in doc_df.id]
+    raw_docs['id'] = range(len(raw_docs))
+    data, doc_df = preprocessing.preprocess_docs(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
+                               stop_words_list=stop_words_list)
 
     # Optionally save the results to disk
     if save_results:
@@ -60,14 +48,13 @@ def import_from_files(path_to_file_list:str, save_results:bool = False, file_nam
                stop_words_file:str = None, stop_words_list:list=None):
     """
     Imports and pre-processes a list of documents contained in `path_to_file_list`.
-
     Returns (DataFrame, DataFrame)
     """
-
     # Extract list of files from the text document
     with open(path_to_file_list, encoding="utf-8") as file:
         file_list = file.read().strip().split('\n')
 
+    # 1) Import raw text documents
     docs = []
     for file in file_list:
         # Read documents
@@ -75,8 +62,8 @@ def import_from_files(path_to_file_list:str, save_results:bool = False, file_nam
             doc_text = file_content.read()
             docs.append(doc_text)
 
-    raw_docs = pd.DataFrame(dict(doc_name=file_list, text=docs))
-    data, doc_df = import_data(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
+    raw_docs = DataFrame(dict(id=range(len(docs)), doc_name=file_list, text=docs))
+    data, doc_df = preprocessing.preprocess_docs(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
                                stop_words_list=stop_words_list)
     return data, doc_df
 
@@ -89,7 +76,8 @@ def import_from_csv(path_to_csv:str, save_results:bool = False, file_name:str = 
     Returns (DataFrame, DataFrame)
     """
     raw_docs = pd.read_csv(path_to_csv, sep='|')
-    data, doc_df = import_data(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
+    raw_docs['id'] = range(len(raw_docs))
+    data, doc_df = preprocessing.preprocess_docs(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
                                stop_words_list=stop_words_list)
     return data, doc_df
 

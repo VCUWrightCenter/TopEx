@@ -37,13 +37,9 @@ index = {"import_data": "core.ipynb",
          "sentences_to_disk": "internal.ipynb",
          "write_cluster": "internal.ipynb",
          "clusters_to_disk": "internal.ipynb",
-         "process_sentence": "preprocessing.ipynb",
-         "process_doc": "preprocessing.ipynb",
-         "decontracted": "preprocessing.ipynb",
-         "get_stop_words": "preprocessing.ipynb",
-         "token_filter": "preprocessing.ipynb",
-         "get_tokens": "preprocessing.ipynb",
-         "tokenize_and_stem": "preprocessing.ipynb"}
+         "nlp": "preprocessing.ipynb",
+         "preprocess_docs": "preprocessing.ipynb",
+         "get_stop_words": "preprocessing.ipynb"}
 
 modules = ["core.py",
            "internal.py",

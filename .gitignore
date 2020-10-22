@@ -1,5 +1,10 @@
 data/*
 output/*
+corpus/*
+restats
+small.txt
+files.txt
+corpus_file_list.txt
 cluster_visualization.html
 .pypirc
 **/_sandbox.*

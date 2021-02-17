@@ -24,7 +24,7 @@ import umap.umap_ as umap
 
 # Cell
 def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None, stop_words_file:str=None,
-                stop_words_list:list=None):
+                stop_words_list:list=None, custom_stopwords_only:bool=False):
     """
     Imports and pre-processes the documents from the `raw_docs` dataframe
 
@@ -36,7 +36,7 @@ def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None,
 
     raw_docs['id'] = range(len(raw_docs))
     data, doc_df = preprocessing.preprocess_docs(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
-                               stop_words_list=stop_words_list)
+                               stop_words_list=stop_words_list, custom_stopwords_only=custom_stopwords_only)
 
     # Optionally save the results to disk
     if save_results:
@@ -45,7 +45,7 @@ def import_data(raw_docs:DataFrame, save_results:bool=False, file_name:str=None,
     return data, doc_df
 
 def import_from_files(path_to_file_list:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt',
-               stop_words_file:str = None, stop_words_list:list=None):
+               stop_words_file:str = None, stop_words_list:list=None, custom_stopwords_only:bool=False):
     """
     Imports and pre-processes a list of documents contained in `path_to_file_list`.
     Returns (DataFrame, DataFrame)
@@ -64,11 +64,11 @@ def import_from_files(path_to_file_list:str, save_results:bool = False, file_nam
 
     raw_docs = DataFrame(dict(id=range(len(docs)), doc_name=file_list, text=docs))
     data, doc_df = preprocessing.preprocess_docs(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
-                               stop_words_list=stop_words_list)
+                               stop_words_list=stop_words_list, custom_stopwords_only=custom_stopwords_only)
     return data, doc_df
 
 def import_from_csv(path_to_csv:str, save_results:bool = False, file_name:str = 'output/DocumentSentenceList.txt',
-               stop_words_file:str = None, stop_words_list:list=None):
+               stop_words_file:str = None, stop_words_list:list=None, custom_stopwords_only:bool=False):
     """
     Imports and pre-processes documents from a pipe-demilited csv file. File should be formatted with two columns:
     "doc_name" and "text"
@@ -78,7 +78,7 @@ def import_from_csv(path_to_csv:str, save_results:bool = False, file_name:str = 
     raw_docs = pd.read_csv(path_to_csv, sep='|')
     raw_docs['id'] = range(len(raw_docs))
     data, doc_df = preprocessing.preprocess_docs(raw_docs, save_results, file_name, stop_words_file=stop_words_file,
-                               stop_words_list=stop_words_list)
+                               stop_words_list=stop_words_list, custom_stopwords_only=custom_stopwords_only)
     return data, doc_df
 
 # Cell

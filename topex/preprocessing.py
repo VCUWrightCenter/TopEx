@@ -13,7 +13,8 @@ nlp.add_pipe(nlp.create_pipe("sentencizer")) # Add sentence break parser
 # Cell
 def token_filter(token, stopwords:list, custom_stopwords_only:bool=False):
     "Filters out stopwords and tokens without alpha characters"
-    include_token = any(map(token.shape_.__contains__, ['X','x'])) and token.lemma_ not in stopwords and token.text not in stopwords
+    include_token = any(map(token.shape_.__contains__, ['X','x'])) and token.lemma_ not in stopwords \
+        and token.text.lower() not in stopwords
 
     if not custom_stopwords_only and include_token:
         include_token = not token.is_stop
@@ -30,7 +31,6 @@ def preprocess_docs(doc_df:DataFrame, save_results:bool=False, file_name:str=Non
     """
     # 1) Get Stopwords
     stopwords = get_stop_words(stop_words_file=stop_words_file,stop_words_list=stop_words_list)
-    nlp.Defaults.stop_words |= set(stopwords)
 
     # 2) Process docs with spaCy
     texts = list(doc_df.text)
@@ -72,4 +72,4 @@ def get_stop_words(stop_words_file:str=None, stop_words_list:list=None):
     if stop_words_list is not None:
         custom_stop_words |= set(stop_words_list)
 
-    return list(set(custom_stop_words))
+    return list(set([w.lower() for w in custom_stop_words]))

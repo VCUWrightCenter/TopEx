@@ -1,0 +1,321 @@
+id|text|doc_name
+doc.0.sent.0|We describe the first case of hyperacute reversible encephalopathy following COVID-19 vaccination.|34284342
+doc.0.sent.1|A patient presented with acute onset encephalopathy, mainly characterized by agitation and confusion, rapidly responsive to high dosage steroid therapy and complete remission within 3 days from onset.|34284342
+doc.0.sent.2|The clinical manifestation was related with systemic and CSF cytokine hyperproduction, responsive to steroid therapy.|34284342
+doc.0.sent.3|Although the occurrence of encephalopathy after vaccination may be just a casual temporal association, we speculate that the cytokine-storm could be the result of an excessive innate immune response against the vaccine, in a predisposed patient susceptible to autoimmunity.|34284342
+doc.1.sent.0|COVID-19 pandemic has forced important changes in health care worldwide.|34284323
+doc.1.sent.1|Stroke care networks have been affected, especially during peak periods.|34284323
+doc.1.sent.2|We assessed the impact of the pandemic and lockdowns in stroke admissions and care in Latin America.|34284323
+doc.1.sent.3|A multinational study (7 countries, 18 centers) of patients admitted during the pandemic outbreak (March-June 2020).|34284323
+doc.1.sent.5|Numbers of cases, stroke etiology and severity, acute care and hospitalization outcomes were assessed.|34284323
+doc.1.sent.6|Most countries reported mild decreases in stroke admissions compared to the same period of 2019 (1187 vs. 1166, p = 0.03).|34284323
+doc.1.sent.7|Among stroke subtypes, there was a reduction in ischemic strokes (IS) admissions (78.3% vs. 73.9%, p = 0.01) compared with 2019, especially in IS with NIHSS 0-5 (50.1% vs. 44.9%, p = 0.03).|34284323
+doc.1.sent.8|A substantial increase in the proportion of stroke admissions beyond 48 h from symptoms onset was observed (13.8% vs. 20.5%, p < 0.001).|34284323
+doc.1.sent.9|Nevertheless, no differences in total reperfusion treatment rates were observed, with similar door-to-needle, door-to-CT, and door-to-groin times in both periods.|34284323
+doc.1.sent.10|Other stroke outcomes, as all-type mortality during hospitalization (4.9% vs. 9.7%, p < 0.001), length of stay (IQR 1-5 days vs. 0-9 days, p < 0.001), and likelihood to be discharged home (91.6% vs. 83.0%, p < 0.001), were compromised during COVID-19 lockdown period.|34284323
+doc.1.sent.11|In this Latin America survey, there was a mild decrease in admissions of IS during the COVID-19 lockdown period, with a significant delay in time to consultations and worse hospitalization outcomes.|34284323
+doc.2.sent.0|Current literature has focused on testing saliva in symptomatic patients, and little information is available regarding saliva performance in asymptomatic severe acute respiratory syndrome-coronavirus-2 (SARS-CoV-2) infection.|34284319
+doc.2.sent.1|We compared paired saliva and nasopharyngeal swabs (NPS) collected from 33 symptomatic and 12 asymptomatic known SARS-CoV-2-positive patients.|34284319
+doc.2.sent.2|Saliva had an overall sensitivity of 59%, a specificity of 95%, and a negative predictive value of 98%.|34284319
+doc.2.sent.3|Saliva demonstrated higher sensitivity in symptomatic (80%) vs. asymptomatic individuals (36%) (P = 0.006), and in high-risk (symptomatic, febrile and/or with comorbidities) (82%) vs. low-risk (asymptomatic, afebrile, and no comorbidities) (22%) patients (P = 0.0002).|34284319
+doc.2.sent.4|Cycle threshold (Ct) values in NPS specimens were higher in saliva-negative vs. saliva-positive cases (P = 0.02 and <0.001).|34284319
+doc.2.sent.5|Overall, these findings show that despite saliva's low sensitivity in asymptomatic SARS-CoV-2 infections, it can detect infections with lower Ct values and a potentially higher chance of viral transmission.|34284319
+doc.2.sent.6|Additional studies are warranted to fully evaluate saliva as a screening test for coronavirus disease-2019.|34284319
+doc.3.sent.0|We aimed to explore the risk profiles attributable to psychosocial and behavioural problems during the coronavirus disease 2019 pandemic.|34284318
+doc.3.sent.1|To this end, we created a risk-prediction nomogram model.|34284318
+doc.3.sent.2|A national multicentre study was conducted through an online questionnaire involving 12,186 children (6-11 years old) and adolescents (12-16 years old).|34284318
+doc.3.sent.3|Respondents' psychosocial and behavioural functioning were assessed using the Achenbach Child Behaviour Checklist (CBCL).|34284318
+doc.3.sent.4|Data were analysed using STATA software and R-language.|34284318
+doc.3.sent.5|The positive detection rate of psychological problems within Wuhan was greater than that outside Wuhan for schizoid (P = 0.005), and depression (P = 0.030) in children, and for somatic complaints (P = 0.048), immaturity (P = 0.023), and delinquent behaviour (P = 0.046) in adolescents.|34284318
+doc.3.sent.6|After graded multivariable adjustment, seven factors associated with psychological problems in children and adolescents outside Wuhan were parent-child conflict (odds ratio (OR): 4.94, 95% confidence interval (95% CI): 4.27-5.72), sleep problems (OR: 4.05, 95% CI: 3.77-4.36), online study time (OR: 0.41, 95% CI: 0.37-0.47), physical activity time (OR: 0.510, 95% CI: 0.44-0.59), number of close friends (OR: 0.51, 95% CI: 0.44-0.6), time spent playing videogames (OR: 2.26, 95% CI: 1.90-2.69) and eating disorders (OR: 2.71, 95% CI: 2.35-3.11) (all P < 0.001).|34284318
+doc.3.sent.7|Contrastingly, within Wuhan, only the first four factors, namely, parent-child conflict (5.95, 2.82-12.57), sleep problems (4.47, 3.06-6.54), online study time (0.37, 0.22-0.64), and physical activity time (0.42, 0.22-0.80) were identified (all P < 0.01).|34284318
+doc.3.sent.8|Accordingly, nomogram models were created with significant attributes and had decent prediction performance with C-indexes over 80%.|34284318
+doc.3.sent.9|A cross-sectional study and self-reported measures.|34284318
+doc.3.sent.10|Besides the four significant risk factors within and outside Wuhan, the three additional factors outside Wuhan deserve special attention.|34284318
+doc.3.sent.11|The prediction nomogram models constructed in this study have important clinical and public health implications for psychosocial and behavioural assessment.|34284318
+doc.4.sent.0|We examined changes in psychological outcomes related to the COVID-19 pandemic (ie psychological stress, perceived control, and perceived ability to cope) and changes in sleep health in the American Indian Blackfeet community over 4 months (August 24, 2020-November 30, 2020).|34284315
+doc.4.sent.1|American Indian adults residing on the Blackfeet reservation (n = 167) completed measures of perceived control over contracting COVID-19, perceived ability to cope with pandemic stressors, psychological stress linked to the pandemic, and a measure of sleep health each month.|34284315
+doc.4.sent.2|Linear-effects mixed models were used to examine changes in our outcomes.|34284315
+doc.4.sent.3|Community members who reported more control over contracting the virus had better sleep health relative to those who reported less control (B = 0.72, SE = 0.29, p = 0.015).|34284315
+doc.4.sent.4|Further, during months when individuals felt they had more control over contracting the virus compared to their average perceived control levels, they had better sleep health relative to their own average (B = 1.06, SE = 0.13, p < 0.001).|34284315
+doc.4.sent.5|Average sleep health was the lowest in October, 2020, the month during which COVID-19 incidence was at its highest on the reservation.|34284315
+doc.4.sent.6|Declines in sleep health linked to low levels of control over contracting COVID-19 may exacerbate high incidence of chronic mental and physical health conditions in tribal communities.|34284315
+doc.4.sent.7|Interventions which highlight strategies known to reduce risk of contracting the virus, may increase perceived control and sleep health, and thus may improve downstream health outcomes for this at-risk population.|34284315
+doc.5.sent.0|The COVID-19 pandemic has had considerable behavioral health implications globally.|34284311
+doc.5.sent.1|One subgroup that may be of particular concern is U.S. veterans, who are susceptible to mental health and substance use concerns.|34284311
+doc.5.sent.2|The current study aimed to investigate changes in alcohol use and binge drinking before and during the first year of the pandemic among U.S. veterans, and how pre-pandemic mental health disorders, namely posttraumatic stress disorder (PTSD), and COVID-19-related factors like loneliness, negative reactions to COVID-19, and economic hardship influenced alcohol use trends.|34284311
+doc.5.sent.3|1230 veterans were recruited in February 2020 as part of a larger survey study on veteran health behaviors.|34284311
+doc.5.sent.4|Veterans were asked to complete follow-up assessments throughout the pandemic at 6, 9, and 12- months.|34284311
+doc.5.sent.5|Overall, veterans reported a significant decrease in alcohol use (IRR = 0.98) and binge drinking (IRR = 0.11) However, women, racial/ethnic minority veterans, and those with pre-existing PTSD exhibited smaller decreases in alcohol use and binge drinking and overall higher rates of use compared to men, White veterans, and those without PTSD.|34284311
+doc.5.sent.6|Both economic hardship and negative reactions to COVID-19 were associated with greater alcohol and binge drinking whereas loneliness showed a negative association with alcohol use and binge drinking.|34284311
+doc.5.sent.7|Veterans reported decreases in alcohol use and binge drinking throughout the pandemic, with heterogeneity in these outcomes noted for higher risk groups.|34284311
+doc.5.sent.8|Special research and clinical attention should be given to the behavioral health care needs of veterans in the post-pandemic period.|34284311
+doc.6.sent.0|Novel coronavirus disease 2019 (COVID-19) has spread across the globe; and surprisingly, no potentially protective or therapeutic antiviral molecules are available to treat severe acute respiratory syndrome coronavirus-2 (SARS-CoV-2) infection.|34284268
+doc.6.sent.1|However, zinc (Zn) and copper (Cu) have been shown to exert protective effects due to their antioxidant, anti-inflammatory, and antiviral properties.|34284268
+doc.6.sent.2|Therefore, it is hypothesized that supplementation with Zn and Cu alone or as an adjuvant may be beneficial with promising efficacy and a favorable safety profile to mitigate symptoms, as well as halt progression of the severe form of SARS-CoV-2 infection.|34284268
+doc.6.sent.3|The objective of this review is to discuss the proposed underlying molecular mechanisms and their implications for combating SARS-CoV-2 infection in response to Zn and Cu administration.|34284268
+doc.6.sent.4|Several clinical trials have also included the use of Zn as an adjuvant therapy with dietary regimens/antiviral drugs against COVID-19 infection.|34284268
+doc.6.sent.5|Overall, this review summarizes that nutritional intervention with Zn and Cu may offer an alternative treatment strategy by eliciting their virucidal effects through several fundamental molecular cascades, such as, modulation of immune responses, redox signaling, autophagy, and obstruction of viral entry and genome replication during SARS-CoV-2 infection.|34284268
+doc.7.sent.0|Most countries are dependent on nonpharmaceutical public health interventions such as social distancing, contact tracing, and case isolation to mitigate COVID-19 spread until medicines or vaccines widely available.|34284227
+doc.7.sent.1|Minimal research has been performed on the independent and combined impact of each of these interventions based on empirical case data.|34284227
+doc.7.sent.2|We obtained data from all confirmed COVID-19 cases from January 7th to February 22nd 2020 in Zhejiang Province, China, to fit an age-stratified compartmental model using human contact information before and during the outbreak.|34284227
+doc.7.sent.3|The effectiveness of social distancing, contact tracing, and case isolation was studied and compared in simulation.|34284227
+doc.7.sent.4|We also simulated a two-phase reopening scenario to assess whether various strategies combining nonpharmaceutical interventions are likely to achieve population-level control of a second-wave epidemic.|34284227
+doc.7.sent.5|Our study sample included 1,218 symptomatic cases with COVID-19, of which 664 had no inter-province travel history.|34284227
+doc.7.sent.6|Results suggest that 36.5 % (95 % CI, 12.8-57.1) of contacts were quarantined, and approximately five days (95 % CI, 2.2-11.0) were needed to detect and isolate a case.|34284227
+doc.7.sent.7|As contact networks would increase after societal and economic reopening, avoiding a second wave without strengthening nonpharmaceutical interventions compared to the first wave it would be exceedingly difficult.|34284227
+doc.7.sent.8|Continuous attention and further improvement of nonpharmaceutical interventions are needed in second-wave prevention.|34284227
+doc.8.sent.0|Symptomatic or asymptomatic COVID-19 infection has been reported in vaccination.|34284226
+doc.8.sent.1|In the current article, we try to elucidate various causes behind COVID-19 infection and mortality following COVID-19 vaccination and suggest possible strategies to counteract this threat.|34284226
+doc.8.sent.2|We carried out a comprehensive review of the literature using suitable keywords such as 'COVID-19', 'Pandemics', 'Vaccines', 'Mortality', 'deaths', 'infections', and 'India' on the search engines of PubMed, SCOPUS, Google Scholar, and ResearchGate in from January to May 2021.|34284226
+doc.8.sent.3|Epidemiology, risk factors, Adverse Events Following Immunization (AEFI) and mortality after COVID-19 vaccination were assessed.|34284226
+doc.8.sent.4|A number of factors have been associated with symptomatic or asymptomatic COVID-19 infection reported after vaccination.|34284226
+doc.8.sent.5|A high viral load, comorbidities, mutant strains, Variants of Concern (VOC) leading to Vaccine escape and casual attitude towards COVID Appropriate Behaviors appear to be the most important factors for infection and deaths after COVID-19 vaccination.|34284226
+doc.8.sent.6|COVID-19 Infection and mortality after COVID-19 vaccination are of great concern.|34284226
+doc.8.sent.7|Application of COVID Appropriate Behaviour (CAB) before and after vaccination is essential for the population.|34284226
+doc.8.sent.8|Effective Vaccines against mutant strains and enhanced vaccination drive are key strategies to avoid this quintessential threat.|34284226
+doc.8.sent.9|Early medical intervention in high-risk groups can prevent overall mortality.|34284226
+doc.9.sent.0|Migrant workers are one of the most vulnerable population groups during the coronavirus disease 2019 (COVID-19) pandemic.|34284218
+doc.9.sent.1|This study investigated knowledge and awareness of COVID-19 among Indonesian migrant workers (IMWs) in Macao (SAR), Hong Kong (SAR), and Taiwan.|34284218
+doc.9.sent.3|Data were collected through an online survey in February and March 2020 to gain information on (1) participants' sociodemographic characteristics, (2) experience and awareness regarding COVID-19 information, and (3) knowledge and understanding of COVID-19.|34284218
+doc.9.sent.4|A series of Chi-squared, t-test, and logistic regression analyses were conducted.|34284218
+doc.9.sent.6|Knowledge of COVID-19 was obtained from multiple sources, including a large proportion from online social media.|34284218
+doc.9.sent.7|However, participants who obtained information from their employer, local social networks, and migrant organisations answered a greater number of questions correctly.|34284218
+doc.9.sent.8|One-third of participants reported receiving hoax, fake news, and incorrect information and obtained information from unverified sources.|34284218
+doc.9.sent.9|Participants were most interested in information about how to cure COVID-19, and 57.8% knew that no specific drug or vaccine was currently available.|34284218
+doc.9.sent.10|Almost all participants correctly identified fever and wearing a facemask as the main COVID-19 symptom and prevention strategy, respectively.|34284218
+doc.9.sent.11|Participants with senior high school or higher education and who worked as domestic or care workers had a greater knowledge of COVID-19 than their counterparts.|34284218
+doc.9.sent.12|Public health communication strategies using multiple channels, including employers and community organisations, would help to minimise COVID-19 knowledge gaps.|34284218
+doc.9.sent.13|In addition, it is recommended that digital literacy content is added to public health campaigns.|34284218
+doc.10.sent.0|Natural Killer (NK) cells are considered the first line of defense against viral infections and tumors.|34284214
+doc.10.sent.1|Several factors affect NK cytotoxic activity rendering it dysfunctional and thereby impeding the ability to scavenge abnormal cells as a part of immune escaping mechanisms induced by different types of cancers.|34284214
+doc.10.sent.2|NK cells play a crucial role augmenting the activity of various types of anticancer mAb since dysfunctional NK cells are the main reason for the low response to these therapies.|34284214
+doc.10.sent.3|To this light, we examined the phenotypic characters of the circulating NK cells isolated from HCC patients compared to healthy controls.|34284214
+doc.10.sent.4|Then, dysfunctional NK cells, from HCC patients, were reactivated with cytokines cocktail and their cytotoxic activity with the anti-EGFR mAb "cetuximab" was investigated.|34284214
+doc.10.sent.5|This showed a downregulation of patients NK cells activating receptors (NKP30, NKP46, NKG2D and CD16) as well as CD56 and up-regulation of NKG2A inhibitory receptor.|34284214
+doc.11.sent.0|This study investigates changes in air quality conditions during the restricted COVID-19 lockdown period in 2020 across 21 metropolitan areas in the Middle East and how these relate to surface urban heat island (SUHI) characteristics.|34284210
+doc.11.sent.1|Based on satellite observations of atmospheric gases from Sentinel-5, results indicate significant reductions in the levels of atmospheric pollutants, particularly nitrogen dioxide (NO|34284210
+doc.12.sent.0|The COVID-19 pandemic has considerably impacted surgical practice.|34284156
+doc.12.sent.1|The present study aimed to investigate the effects of the pandemic on neurosurgical practice and the safety of the resumption of elective procedures through implementing screening protocols in a high-volume academic public center in Iran as one of the countries severely affected by the pandemic.|34284156
+doc.12.sent.2|This unmatched case-control study compared two populations of patients who underwent neurosurgical procedures between June 1, 2019- September 1, 2019, and the same period in 2020.|34284156
+doc.12.sent.3|In the prospective part of the study, patients who underwent elective procedures were tested for SARS-CoV-2 infection postoperatively to evaluate the viability of our screening protocol.|34284156
+doc.12.sent.4|Elective and emergency procedures showed significant reduction (59.4%, n=168 vs 71.3%, n=380) and increase (28.7%, n=153 vs 40.6%, n=115) in their percentages during the pandemic period, respectively (p=0.003).|34284156
+doc.12.sent.5|The proportional distribution of neurosurgical categories remained unchanged during the pandemic period.|34284156
+doc.12.sent.6|Poisson regression showed that the reduction in total daily admissions and some categories, including spine, trauma, oncology, and infection were significantly correlated with the pandemic period.|34284156
+doc.12.sent.7|Among patients who underwent elective procedures, 0 (0.0%) and 26 (16.25%) had positive test results on day-30 and 60 postoperatively, respectively.|34284156
+doc.12.sent.8|Overall mortality rates were comparable between the pre-COVID-19 and COVID-19 periods, yet patients with concurrent SARS-CoV-2 infection showed substantially higher mortality rates (65%).|34284156
+doc.12.sent.9|By implementing safety and screening protocols with proper resource allocation, we can maintain the emergency care capacity while minimizing the risk of hospital-acquired SARS-CoV-2 infection, complications, and mortality among neurosurgical patients during the pandemic period.|34284156
+doc.12.sent.10|Similarly, for elective procedures, according to available resources, we can allocate hospital beds for patients with a higher risk of delayed hospitalization and reassure those who are concerned about the risk of hospital-acquired infection.|34284156
+doc.13.sent.0|Diabetes is a known risk factor for severe coronavirus disease 2019 (COVID-19).|34284145
+doc.13.sent.1|We conducted this study to determine if there is a correlation between hemoglobin AThis is a retrospective, single-center, observational study of patients with diabetes (as defined by an HbAFive hundred and six patients were included.|34284145
+doc.13.sent.3|There was no statistical difference in the primary or secondary outcomes between the quartiles except acute kidney injury was less frequent in quartile 4.|34284145
+doc.14.sent.0|Clinical epidemiology, the "basic science for clinical medicine"|34284101
+doc.15.sent.0|Patients on maintenance hemodialysis (MHD), which are at high risk of infection by SARS-CoV-2 virus and death due to COVID-19, have been prioritized for vaccination.|34284044
+doc.15.sent.1|However, because they were excluded from pivotal studies and have weakened immune responses, it is not known whether these patients are protected after the "standard" two doses of mRNA vaccines.|34284044
+doc.15.sent.2|To answer this, anti-spike receptor binding domain (RBD) IgG and interferon gamma-producing CD4|34284044
+doc.16.sent.1|Ophthalmological abnormalities are relatively rare among COVID-19-infected patients.|34284038
+doc.16.sent.2|The aim of our study was to report orbital and visual pathways MRI findings in a nationwide multicenter cohort of patients with severe COVID-19.|34284038
+doc.16.sent.3|This IRB-approved retrospective multi-center study included participants presenting with severe COVID-19, who underwent brain MRI from March 4129 participants (43 [33%] women and 86 [67%] men, mean age 63 ± 14 years) were included in the study.|34284038
+doc.16.sent.4|17/129 (13%) patients had abnormal MRI findings of the orbit or visual pathways.|34284038
+doc.16.sent.5|11/17 (65%) patients had a FLAIR-WI hyperintense optic disc.|34284038
+doc.16.sent.6|6/17 (35%) patients had abnormal signal of at least one of the visual pathway structures: 6/6 (100%) of the optic nerve, 1/6 (17%) of the optic chiasm, 2/6 (33%) of the optic tract and 1/6 (17%) of the optic radiations.|34284038
+doc.16.sent.7|Our study showed that a substantial number of patients with severe COVID-19 presented with abnormal MRI findings of the orbit or visual pathways, which might lead to potentially severe visual impairment.|34284038
+doc.17.sent.0|In chronic liver disease (CLD) patients with or without cirrhosis, existing studies on the outcomes with SARS-CoV-2 infection have limited generalizability.|34284037
+doc.17.sent.1|We used the National COVID Cohort Collaborative (N3C), a harmonized electronic health record (EHR) dataset of 6.4 million, to describe SARS-CoV-2 outcomes in patients with CLD and cirrhosis.|34284037
+doc.17.sent.2|We identified all CLD patients with or without cirrhosis who had SARS-CoV-2 testing in the N3C Data Enclave as of 7/1/2021.|34284037
+doc.17.sent.3|We used survival analyses to associate SARS-CoV-2 infection, presence of cirrhosis, and clinical factors with the primary outcome of 30-day mortality.|34284037
+doc.17.sent.4|We isolated 220,727 patients with CLD and SARS-CoV-2 test status: 128,864 (58%) Non-Cirrhosis/Negative, 29,446 (13%) Non-Cirrhosis/Positive, 53,476 (24%) Cirrhosis/Negative, and 8,941 (4%) Cirrhosis/Positive patients.|34284037
+doc.17.sent.5|Thirty-day all-cause mortality rates were 3.9% in Cirrhosis/Negative and 8.9% in Cirrhosis/Positive patients.|34284037
+doc.17.sent.6|Compared to Cirrhosis/Negative, Cirrhosis/Positive had 2.38-times adjusted hazard of death at 30 days.|34284037
+doc.17.sent.7|Compared to Non-Cirrhosis/Positive, Cirrhosis/Positive had 3.31-times adjusted hazard of death at 30 days.|34284037
+doc.17.sent.8|In stratified analyses among patients with cirrhosis with increased age, obesity, and comorbid conditions (diabetes, heart failure, and pulmonary disease); SARS-CoV-2 infection was associated with increased adjusted hazards of death.|34284037
+doc.17.sent.9|In this study of ∼221,000 nationally-representative, diverse, and gender-balanced CLD patients; we found SARS-CoV-2 infection in patients with cirrhosis was associated with 2.38-times mortality hazard, and the presence of cirrhosis among CLD patients infected with SARS-CoV-2 was associated with 3.31-times mortality hazard.|34284037
+doc.17.sent.10|These results provide an additional impetus for increasing vaccination uptake and further research regarding immune responses to vaccines in patients with severe liver disease.|34284037
+doc.18.sent.0|In a national survey of 2,074 US parents of children <12 years old conducted in March 2021, 49.4% reported plans to vaccinate their child for COVID-19 when available.|34284035
+doc.18.sent.1|Lower income and less education were associated with greater parental vaccine hesitancy/resistance; safety and lack of need were primary reasons for vaccine hesitancy/resistance.|34284035
+doc.19.sent.0|The transmembrane serine protease 2 (TMPRSS2) is a key molecule for SARS-CoV-2 invading human host cells.|34284028
+doc.19.sent.1|To provide insights into SARS-CoV-2 infection of various human tissues and understand the potential mechanism of SARS-CoV-2 infection, we investigated TMPRSS2 expression in various normal human tissues and SARS-CoV-2-infected human tissues.|34284028
+doc.19.sent.2|Using publicly available datasets, we performed computational analyses of TMPRSS2 expression levels in 30 normal human tissues, and compared them between males and females and between younger (ages ≤ 49 years) and older (ages > 49 years) populations in these tissues.|34284028
+doc.19.sent.3|We found that TMPRSS2 expression levels were the highest in the prostate, stomach, pancreas, lungs, small intestine, and salivary gland.|34284028
+doc.19.sent.4|The TMPRSS2 protein had relatively high expression levels in the parathyroid gland, stomach, small intestine, pancreas, kidneys, seminal vesicle, epididymis, and prostate.|34284028
+doc.19.sent.5|However, TMPRSS2 expression levels were not significantly different between females and males or between younger and older populations in these tissues.|34284028
+doc.19.sent.6|The pathways enriched in TMPRSS2-upregulated pan-tissue were mainly involved in immune, metabolism, cell growth and proliferation, stromal signatures, and cancer and other diseases.|34284028
+doc.19.sent.7|Many cytokine genes displayed positive expression correlations with TMPRSS2 in pan-tissue, including TNF-α, IL-1, IL-2, IL-4, IL-7, IL-8, IL-12, IL-18, IFN-α, MCP-1, G-CSF, and IP-10.|34284028
+doc.19.sent.8|We further analyzed TMPRSS2 expression levels in nasopharyngeal swabs from SARS-CoV-2-infected patients.|34284028
+doc.19.sent.9|TMPRSS2 expression levels showed no significant difference between males and females or between younger and older patients.|34284028
+doc.19.sent.10|However, they were significantly lower in SARS-CoV-2-infected than in healthy individuals and patients with other viral acute respiratory illnesses.|34284028
+doc.19.sent.11|Interestingly, TMPRSS2 expression levels were positively correlated with the enrichment levels of four immune signatures (B cells, CD8|34284028
+doc.20.sent.0|Finding the Next Resident Physicians in the COVID-19 Global Pandemic: An Applicant Survey on the 2020 Virtual Urology Residency Match OBJECTIVE: To assess interviewing applicant perceptions of a virtual urology residency interview in the setting of changes mandated by COVID-19 and to determine applicant preference for virtual or in-person interviews.|34284010
+doc.20.sent.1|Applicant perceptions of multiple interview components were queried to identify program specific and interview modality specific strengths or weaknesses in the 2020-2021 Urology Match.|34284010
+doc.20.sent.2|A 12-question multiple choice and free text survey was emailed to 66 virtually interviewed applicants for open residency positions at a metropolitan training program after conclusion of interviews.|34284010
+doc.20.sent.3|Items of interest included interview type preference, overall interview impression, and recommendations for improvement.|34284010
+doc.20.sent.4|A total of 50/66 (76%) applicants completed the survey corresponding to approximately 11% of the 2020 national urology applicant pool.|34284010
+doc.20.sent.5|A total of 49/50 (96%) respondents assessed faculty interaction and the virtual platform positively.|34284010
+doc.20.sent.6|A total of 38/50 (76%) was satisfied with their resident interaction and 32/50 (64%) applicants stated they were able to satisfactorily evaluate the site and program.|34284010
+doc.20.sent.7|Ultimately, 39/50 (78%) respondents would have preferred an in-person interview to our virtual interview.|34284010
+doc.20.sent.8|Respondents cited challenges in assessing program culture and program physical site virtually.|34284010
+doc.20.sent.9|The majority of survey respondents indicated a preference for in-person interviews.|34284010
+doc.20.sent.10|A smaller proportion of applicants preferred virtual interviews citing their convenience and lower cost.|34284010
+doc.20.sent.11|Efforts to improve the virtual interview experience may focus on improving applicant-resident interaction and remote site assessment.|34284010
+doc.21.sent.1|Reports of COVID-19 infection in recently transplanted patients are scarce.|34283959
+doc.21.sent.2|We present a 60-year-old patient with COVID-19 infection, diagnosed six days after transplantation.|34283959
+doc.21.sent.3|His clinical course revealed two phases: Initially, there were mild respiratory symptoms for which he was treated with remdesivir and noninvasive respiratory support.|34283959
+doc.21.sent.4|In a second phase with clinical deterioration on postoperative day 22, further respiratory decline led to the administration of convalescent plasma, with satisfactory response and further improvement of his condition.|34283959
+doc.22.sent.0|Testing asymptomatic people for SARS-CoV-2 aims to reduce COVID-19 transmission.|34283945
+doc.22.sent.1|Screening programmes' effectiveness depends upon testing strategy, sample handling logistics, test sensitivity and individual behaviour, in addition to dynamics of viral transmission.|34283945
+doc.22.sent.3|We investigated the interaction between these factors to determine how to optimize reduction of transmission.|34283945
+doc.22.sent.4|We estimate that under idealistic assumptions 70% of transmission may be averted, but under realistic assumptions only 7% may be averted.|34283945
+doc.22.sent.5|We show that programmes that overwhelm laboratory capacity or reduce isolation of those with minor symptoms have increased transmission compared with those that do not: programmes need to be designed to avoid these issues, or they will be ineffective or even counter-productive.|34283945
+doc.22.sent.6|Our model allows optimal selection of whom to test, quantifies the balance between accuracy and timeliness, and quantifies potential impacts of behavioural interventions.|34283945
+doc.22.sent.7|We anticipate our model can be used to understand optimal screening strategies for other infectious diseases with substantially different dynamics.|34283945
+doc.23.sent.0|Coronavirus disease 2019 (COVID-19), caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), has spread worldwide.|34283900
+doc.23.sent.1|The aim this study was to investigate the association of diabetes with severity and mortality among hospitalized patients with COVID-19 in Wuhan, China.|34283900
+doc.23.sent.2|This retrospective, single-center case study enrolled a total of 564 patients diagnosed with COVID-19 at the Seventh Hospital of Wuhan City, between January 20 and March 15, 2020.|34283900
+doc.23.sent.5|A total of 85 (15.1%) patients were diagnosed with diabetes on admission (median age, 65.0 [range, 34-91] years).|34283900
+doc.23.sent.6|Patients with diabetes had significantly higher proportions of critical cases (24 [28.2%] vs. 66 [13.8%]) and in-hospital mortality (17 [20%] vs. 38 [7.9%]).|34283900
+doc.23.sent.7|Moreover, patients with diabetes presented abnormal levels of multiple indicators concerning lymphopenia, inflammation, heart, liver, kidney, and lung function on admission, while diabetic patient group still display higher troponin T (TnT) levels when approaching discharge.|34283900
+doc.23.sent.8|The Kaplan-Meier survival curve indicated a trend toward poorer survival in diabetic patients compared to non-diabetic patients, also evidenced by abnormal laboratory biomarker changes regarding multiple system impairments among COVID-19 patients with diabetes with in-hospital death.|34283900
+doc.23.sent.9|The detailed clinical investigation of 564 hospitalized patients with COVID-19 indicated a considerable association between diabetes and COVID-19 severity or mortality.|34283900
+doc.23.sent.10|Thus, more intensive treatment may be considered for COVID-19 patients with diabetes, especially regarding to cardiac injury.|34283900
+doc.24.sent.0|Since March 2020, millions of children have been confined to their homes and restricted from in-person activities, radically changing the dynamics of parent-child relationships.|34283892
+doc.24.sent.1|This study examines the association between coronavirus disease 2019 (COVID-19) impact and the mental health of parents and school-aged children; specifically, whether qualities of the parent-child relationship moderated the relationship between parents' emotional health (EH) and children's emotional and behavioral health (EBH).|34283892
+doc.24.sent.2|Data from this Internet-based study of a community sample were collected in March-May 2020.|34283892
+doc.24.sent.3|Parents (N = 158, 92.4% White, 96.2% female) reported on COVID-19 impacts, their own EH, perceptions of their relationship with their eldest child between 6 and 12 years-old, and the EBH of that child.|34283892
+doc.24.sent.4|Responses to questions about COVID-19 impact were assigned weighted values and used to create a COVID-19 impact scale.|34283892
+doc.24.sent.5|Hierarchical linear regressions revealed that greater COVID-19 impact was associated with greater parents' EH issues only, and parents' EH was a significant positive predictor of children's EBH.|34283892
+doc.24.sent.6|Positive qualities and conflict in the parent-child relationship moderated the link between parents' and children's EH.|34283892
+doc.24.sent.7|At higher levels of relationship conflict and lower levels of positivity, there were stronger positive associations between parents' and children's EH.|34283892
+doc.24.sent.8|Parent-child relationship quality did not moderate the association between parents' EH and children's behavioral health (BH).|34283892
+doc.24.sent.9|These cross-sectional study results suggest that beyond focusing on symptom management, families may benefit from supports targeting the parent-child relationship.|34283892
+doc.25.sent.0|Context - The main focus of education in most pathology residency and subspecialty pathology fellowships is the light microscopic examination of pathology specimens.|34283888
+doc.25.sent.1|Classes with multiheaded scopes are the most popular among pathology trainees.|34283888
+doc.25.sent.2|Until recently, it was difficult to us to imagine that this educational approach could change.|34283888
+doc.25.sent.3|In the beginning of March 2020 our country faced a serious challenge, which all of us now known as coronavirus disease 2019 (COVID-19) pandemic.|34283888
+doc.25.sent.4|The rules of social distancing and work from home were applied.|34283888
+doc.25.sent.5|These types of restrictions were implemented in almost all parts of our life including work and pathology education.|34283888
+doc.25.sent.6|Objective - To share our experience in the Department of Hematopathology at The University of Texas MD Anderson Cancer Center during COVID-19 pandemic.|34283888
+doc.25.sent.8|We show how we overcame many obstacles to learning by building one of the largest virtual hematopathology educational platforms via Cisco WebEx and using social media, in particular Twitter.|34283888
+doc.25.sent.9|These tools facilitated the learning of hematopathology by medical students, pathology trainees, and practicing pathologists from all over the world.|34283888
+doc.25.sent.10|Data Sources - During the three months of the pandemic (April, May and June 2020), we evaluated the visitors' attendance to MD Anderson Cancer Center Hematopathology Virtual Educational Platform using data collected by Cisco WebEx website.|34283888
+doc.25.sent.11|For examination of the impact of the hematopathology community on Twitter on medical education the analytic metrics obtained from Symplur LLC (www.symplur.com, 04/27/2020) were used via its Symplur Signals program.|34283888
+doc.25.sent.12|Conclusions - Our experience using the MD Anderson Hematopathology Virtual Platform showed that there is substantial, global interest and desire for virtual hematopathology education, especially during the pandemic time.|34283888
+doc.26.sent.0|The majority of studies report that the Covid-19 pandemic lockdown did not have a detrimental effect on glycaemia.|34283880
+doc.26.sent.1|We sought to explore the impact of lockdown on glycaemia and whether this is sustained following easing of restrictions.|34283880
+doc.26.sent.2|Retrospective, observational analysis in adults and children with type 1 diabetes attending a UK specialist centre, using real-time or intermittently scanned continuous glucose monitoring.|34283880
+doc.26.sent.3|Data from the following 28-day time periods were collected: (i) pre-lockdown; (ii) during lockdown; (iii) immediately after lockdown; and (iv) a month following relaxation of restrictions (coinciding with Government-subsidised restaurant food).|34283880
+doc.26.sent.4|Data were analysed for times in glycaemic ranges and are expressed as median (IQR).|34283880
+doc.26.sent.5|145 adults aged 35.5 (25.8-51.3) years with diabetes duration of 19.0 (7.0-29.0) years on multiple daily injections of insulin (60%) and continuous insulin infusion (40%) were included.|34283880
+doc.26.sent.6|In adults, % time in range (70-180mg/dL) increased during lockdown (60.2 (45.2-69.3)%) compared to pre-lockdown (56.7 (43.5-65.3)%; p<0.001).|34283880
+doc.26.sent.8|Similarly, % time above range (>180mg/dL) reduced in lockdown compared to pre-lockdown (p = 0.01), which was sustained thereafter.|34283880
+doc.26.sent.9|In children, no significant changes to glycaemia were observed during lockdown.|34283880
+doc.26.sent.10|In multivariable analysis, a greater increase in %TIR 3.9-10mmol/L (70-180mg/dL) during lockdown was associated with higher levels of deprivation (coefficient: 4.208, 95% CI 0.588 to 7.828; p = 0.02).|34283880
+doc.26.sent.11|Glycaemia in adults improved during lockdown, with people from more deprived areas most likely to benefit.|34283880
+doc.26.sent.12|This effect was sustained after easing of restrictions, with government-subsidised restaurant eating having no adverse impact on glycaemia.|34283880
+doc.27.sent.0|New York City and Long Island, NY were early foci of the COVID-19 epidemic in the US.|34283876
+doc.27.sent.1|The effects of COVID-19 on different sub-populations, and its key epidemiologic parameters remain unknown or highly uncertain.|34283876
+doc.27.sent.2|We investigated the epidemiology of COVID-19 from January to August of 2020 in an established academic monitoring cohort of N = 9,697 middle-aged World Trade Center responders residing in Long Island, NY.|34283876
+doc.27.sent.3|A seroprevalence survey and a series of cross-sectional surveys were nested in a prospective cohort study.|34283876
+doc.27.sent.4|Measures included IgG antibody testing, SARS-CoV-2 polymerase chain reaction (PCR) testing, review of electronic medical records, and surveys of symptoms.|34283876
+doc.27.sent.5|Correlates of infection were analyzed with multivariable logistic regression.|34283876
+doc.27.sent.6|The cohort was predominantly men in their mid-fifties; 6,597 cohort members were successfully contacted (68%); 1,042 (11%) individuals participated in the seroprevalence survey; and 369 individuals (5.6% of 6,597 study participants) underwent PCR testing.|34283876
+doc.27.sent.7|The estimated standardized cumulative incidence was 21.9% (95%CI: 20.1-23.9%), the asymptomatic proportion was 16.4% (36/219; 95%CI: 11.8-22.0%), the case hospitalization ratio was 9.4% (36/385; 95%CI: 6.6-12.7%), the case fatality ratio was 1.8% (7/385; 95%CI: 0.7-3.7%), and the hospitalization fatality ratio was 8.3% (3/36; 95%CI: 1.8-22.5%).|34283876
+doc.27.sent.8|Confirmed SARS-CoV-2 infection was associated with younger age, race/ethnicity, and being currently employed.|34283876
+doc.27.sent.9|The results of the present study suggest a high cumulative incidence of SARS-CoV-2 among WTC responders in the spring and summer of 2020 and contribute to narrowing the plausible range of the proportion of infections that exhibit no symptoms.|34283876
+doc.27.sent.10|An increased risk of infection among younger employed individuals is likely to reflect a higher probability of exposure to the virus, and the racial disparities in the infection risk warrant further investigation.|34283876
+doc.28.sent.0|The coronavirus disease (COVID-19) is the global public health challenge currently persisting at a grand scale.|34283860
+doc.28.sent.1|A method that meets the rapid quantitative detection of antibodies to assess the body's immune response from natural COVID-19 illness or vaccines' effects is urgently needed.|34283860
+doc.28.sent.2|In the present study, an attempt was made to integrate a newly designed spectrometer to the COVID-19 test strip procedure; this augmentation provides the quantitative capacity to a lateral flow immunoassay (LFIA).|34283860
+doc.28.sent.3|Optical interpretation of results by quantitative α index, rather than visual qualification, can be done quickly, in 5-10 minutes.|34283860
+doc.28.sent.4|The developed product was compared with several other serological IgM/IgG antibody reagents on the market by recruiting 111 participants suspected of having COVID-19 infection from March to May 2020 in a hospital.|34283860
+doc.28.sent.5|Taking RT-PCR as the diagnostic gold standard, the quantitative spectral LIFA platform could correctly detect all 12 COVID-19 patients.|34283860
+doc.28.sent.6|Concerning RT-PCR negative patients, all three antibody testing methods found positive cases.|34283860
+doc.28.sent.7|The optical-based platform exhibited the ability of early detection of immunoglobulins of RT-PCR negative patients.|34283860
+doc.28.sent.8|There was an apparent trend that elevation of IgM levels in the acute phase of infection; then IgG levels rose later.|34283860
+doc.28.sent.9|It exhibited the risk of a false-negative diagnosis of RT-PCR in COVID-19 testing.|34283860
+doc.28.sent.10|The significant detection ability of this new optical-based platform demonstrated clinical potential.|34283860
+doc.29.sent.0|The global Coronavirus or COVID-19 pandemic exposed the weakness of healthcare systems including laboratory systems and is a call to action for unprecedented collaboration and partnerships to deal with the global crisis.|34283847
+doc.29.sent.1|The United States (U.S.) President's Emergency Plan for AIDS Relief (PEPFAR) establishes the global HIV/AIDS treatment agenda in alignment with the UNAIDS 90-90-90 treatment targets to achieve epidemic control related to enhanced testing, treatment, and viral suppression.|34283847
+doc.29.sent.2|A strategic PEPFAR priority area recognizes that large-scale collective efforts and sharing of resources bear greater potential impact for lasting change than any single organization or entity can achieve alone.|34283847
+doc.29.sent.3|An important vehicle utilized within the global public health context is the public-private partnership (PPP) model whereby multiple international organizations forge unified project charters to collectively reach mutually agreed goals.|34283847
+doc.29.sent.4|While touted as an ideal mechanism to synthesize resources and maximize gain in numerous applications, little is known from a seasoned stakeholder perspective regarding PPP implementation and sustainability issues.|34283847
+doc.29.sent.5|The purpose of this research is to holistically examine perceptions of PPP model sustainability related to inputs and impacts among a collective network of stakeholders experienced with PEPFAR workforce development, laboratory-system strengthening project implementation.|34283847
+doc.29.sent.6|Interviews were conducted with frontline stakeholders from public and private sector organizations based in the US and select PEPFAR-supported priority countries.|34283847
+doc.29.sent.7|Analysis revealed three dominant themes: PPP impacts, keys of successful collaboration, and logistical challenges and opportunities to enhance sustainability of PPP outcomes in the future.|34283847
+doc.30.sent.0|Nasopharyngeal (NP) swabs are considered "gold standard" for diagnosing SARS-CoV-2 infections, but anterior nares or mid-turbinate swabs (nasal swabs) are often used.|34283845
+doc.30.sent.1|We performed a meta-analysis comparing the sensitivity of nasal and nasopharyngeal swabs against a composite reference standard for the initial diagnosis of SARS-CoV-2 infection in ambulatory patients.|34283845
+doc.30.sent.3|Data sources included studies appearing between January 1, 2020 and March 20, 2021, identified by searches of PubMed, medRxiv and bioRxiv.|34283845
+doc.30.sent.4|Studies included at least 20 subjects who simultaneously provided nasal and nasopharyngeal specimens for reverse transcription-polymerase chain reaction testing, and for which confusion matrices could be constructed.|34283845
+doc.30.sent.5|Authors individually assessed studies for inclusion and compared assessments.|34283845
+doc.30.sent.6|Each author independently extracted all data elements; differences were reconciled by review of initial data sources.|34283845
+doc.30.sent.7|Extracted data included specimen site, patient characteristics, collection site, and confusion matrices comparing results for nasal and nasopharyngeal swabs.|34283845
+doc.30.sent.8|Assessed against a composite reference standard, anterior nares swabs are less sensitive (82% - 88%) than nasopharyngeal swabs (98%).|34283845
+doc.30.sent.9|For populations with 10% specimen positivity, the negative predictive values of all swab types were greater than 98%.|34283845
+doc.30.sent.10|Mid-turbinate and anterior nares swabs seem to perform similarly.|34283845
+doc.30.sent.11|The lower sensitivity associated with nasal swab SARS-CoV-2 diagnosis is justified by the ability to screen more patients and reduced personal protective equipment requirements.|34283845
+doc.30.sent.12|Our conclusions are limited by the small number of studies and the significant heterogeneity of study designs and study outcomes.|34283845
+doc.31.sent.0|In the recent COVID-19 pandemic, mathematical modeling constitutes an important tool to evaluate the prospective effectiveness of non-pharmaceutical interventions (NPIs) and to guide policy-making.|34283842
+doc.31.sent.1|Most research is, however, centered around characterizing the epidemic based on point estimates like the average infectiousness or the average number of contacts.|34283842
+doc.31.sent.2|In this work, we use stochastic simulations to investigate the consequences of a population's heterogeneity regarding connectivity and individual viral load levels.|34283842
+doc.31.sent.3|Therefore, we translate a COVID-19 ODE model to a stochastic multi-agent system.|34283842
+doc.31.sent.4|We use contact networks to model complex interaction structures and a probabilistic infection rate to model individual viral load variation.|34283842
+doc.31.sent.5|We observe a large dependency of the dispersion and dynamical evolution on the population's heterogeneity that is not adequately captured by point estimates, for instance, used in ODE models.|34283842
+doc.31.sent.6|In particular, models that assume the same clinical and transmission parameters may lead to different conclusions, depending on different types of heterogeneity in the population.|34283842
+doc.31.sent.7|For instance, the existence of hubs in the contact network leads to an initial increase of dispersion and the effective reproduction number, but to a lower herd immunity threshold (HIT) compared to homogeneous populations or a population where the heterogeneity stems solely from individual infectivity variations.|34283842
+doc.32.sent.0|Contact mixing plays a key role in the spread of COVID-19.|34283839
+doc.32.sent.1|Thus, mobility restrictions of varying degrees up to and including nationwide lockdowns have been implemented in over 200 countries.|34283839
+doc.32.sent.2|To appropriately target the timing, location, and severity of measures intended to encourage social distancing at a country level, it is essential to predict when and where outbreaks will occur, and how widespread they will be.|34283839
+doc.32.sent.3|We analyze aggregated, anonymized health data and cell phone mobility data from Israel.|34283839
+doc.32.sent.4|We develop predictive models for daily new cases and the test positivity rate over the next 7 days for different geographic regions in Israel.|34283839
+doc.32.sent.5|We evaluate model goodness of fit using root mean squared error (RMSE).|34283839
+doc.32.sent.6|We use these predictions in a five-tier categorization scheme to predict the severity of COVID-19 in each region over the next week.|34283839
+doc.32.sent.7|We measure magnitude accuracy (MA), the extent to which the correct severity tier is predicted.|34283839
+doc.32.sent.8|Models using mobility data outperformed models that did not use mobility data, reducing RMSE by 17.3% when predicting new cases and by 10.2% when predicting the test positivity rate.|34283839
+doc.32.sent.9|The best set of predictors for new cases consisted of 1-day lag of past 7-day average new cases, along with a measure of internal movement within a region.|34283839
+doc.32.sent.10|The best set of predictors for the test positivity rate consisted of 3-days lag of past 7-day average test positivity rate, along with the same measure of internal movement.|34283839
+doc.32.sent.11|Using these predictors, RMSE was 4.812 cases per 100,000 people when predicting new cases and 0.79% when predicting the test positivity rate.|34283839
+doc.32.sent.12|MA in predicting new cases was 0.775, and accuracy of prediction to within one tier was 1.0.|34283839
+doc.32.sent.13|MA in predicting the test positivity rate was 0.820, and accuracy to within one tier was 0.998.|34283839
+doc.32.sent.14|Using anonymized, macro-level data human mobility data along with health data aids predictions of when and where COVID-19 outbreaks are likely to occur.|34283839
+doc.32.sent.15|Our method provides a useful tool for government decision makers, particularly in the post-vaccination era, when focused interventions are needed to contain COVID-19 outbreaks while mitigating the collateral damage from more global restrictions.|34283839
+doc.33.sent.0|We explore the spatial and temporal spread of the novel SARS-CoV-2 virus under containment measures in three European countries based on fits to data of the early outbreak.|34283832
+doc.33.sent.1|Using data from Spain and Italy, we estimate an age dependent infection fatality ratio for SARS-CoV-2, as well as risks of hospitalization and intensive care admission.|34283832
+doc.33.sent.2|We use them in a model that simulates the dynamics of the virus using an age structured, spatially detailed agent based approach, that explicitly incorporates governmental interventions and changes in mobility and contact patterns occurred during the COVID-19 outbreak in each country.|34283832
+doc.33.sent.3|Our simulations reproduce several of the features of its spatio-temporal spread in the three countries studied.|34283832
+doc.33.sent.4|They show that containment measures combined with high density are responsible for the containment of cases within densely populated areas, and that spread to less densely populated areas occurred during the late stages of the first wave.|34283832
+doc.33.sent.5|The capability to reproduce observed features of the spatio-temporal dynamics of SARS-CoV-2 makes this model a potential candidate for forecasting the dynamics of SARS-CoV-2 in other settings, and we recommend its application in low and lower-middle income countries which remain understudied.|34283832
+doc.34.sent.0|COVID-19 is a clinical syndrome due to infection with SARS-CoV-2.|34283506
+doc.34.sent.1|It has been discovered in Wuhan, China, in December 2019 and spread to a pandemic level in 2020.|34283506
+doc.34.sent.2|Globally it has affected more than 168 million people, with a death toll of more than 3.5 million patients.|34283506
+doc.34.sent.3|In the United States, the number of cases is more than 32 million, and the number of people who died from COVID-19 exceeded 586,000 patients (WHO Coronavirus dashboard as of 05/28/2021).|34283506
+doc.34.sent.4| Severe Acute Respiratory Syndrome Coronavirus-2 is one of the coronaviruses, single-stranded RNA viruses with close resemblance to the SARS outbreak of 2003.[1] SARS-CoV-2 differs from MERS(middle east respiratory syndrome) and SARS(Severe Acute Respiratory Syndrome)coronaviruses by easier spread and lower fatality rate.[2] SARS-CoV-2 is transmitted by inhalation of air carrying droplets or from person to person through droplets spread by coughing, sneezing, singing, shouting, or even talking.|34283506
+doc.34.sent.5|In addition, SARS-CoV-2  has been detected on multiple services, and touching mucous membranes with hands contaminated with the SARS-CoV-2 virus may also be another transmission source.|34283506
+doc.34.sent.6|  COVID -19 starts after an incubation period of around 5 days after exposure but could range from 2 to 14 days, and most of the patients can identify recent contact with COVID 19 patients.|34283506
+doc.34.sent.7|The clinical presentation varies from asymptomatic cases to severe symptoms of fatigue, headache, anosmia (loss of smell sensation), ageusia(loss of taste sensation), dyspnea, and dry cough that is persistent and may stimulate gag reflex and induce vomiting.|34283506
+doc.34.sent.8|Hypoxia that may worsen to require assisted ventilation, whether invasive or non-invasive.|34283506
+doc.34.sent.9|The physical signs include fever, tachycardia, and hypoxia, resulting in acute respiratory failure and acute respiratory distress syndrome.|34283506
+doc.34.sent.10|Extrapulmonary manifestations have been described in many COVID patients, in multiple organ systems, including but not limited to:cutaneous: acral lesions, cardiovascular: myocardial injury and myocarditis, neurologic: headache and stroke, gastrointestinal: nausea, vomiting, and diarrhea, and elevated liver enzymes.[3] The national institute of Health classifies the manifestations of SARS-CoV-2 as follows: Asymptomatic or Presymptomatic Infection: positive testing for SARS-CoV-2 but no symptoms consistent with COVID-19.|34283506
+doc.34.sent.11|Mild Illness: Individuals who have any of the various signs and symptoms of COVID-19 but do not have shortness of breath, dyspnea, or abnormal chest imaging.|34283506
+doc.34.sent.12|Moderate Illness: the presence of lower respiratory disease and no hypoxia( oxygen saturation (SpO) ≥94% on room air).|34283506
+doc.35.sent.0|A body mass index of ≥30 (>27 in those of Asian descent) kilograms per square meter constitutes the definition of obesity.[1] Obesity involves a complex interplay of genetic, sociocultural, environmental, and behavioral factors.|34283495
+doc.35.sent.1|In 1997, the World Health Organization (WHO) declared obesity a major global health issue along with undernutrition and climate change-the triad being termed "the Global Syndemic.|34283495
+doc.35.sent.2|"[2] Today in the United States of America (USA), one-third of the adult population is obese, with the Center for Disease Control projecting that by 2050 60% of men and 40% of women in the USA will be obese.[3]  Obesity once again came into focus during the SARS-CoV-2 pandemic, when patients with obesity were found to have an increased need for mechanical ventilation and higher mortality.[4] Once thought to be an exclusive problem of the developed world, numerous studies have shown developing countries now have the highest incidence of obesity.|34283495
+doc.35.sent.3|South-East Asians have a higher percentage of body fat, truncal/central obesity, and insulin resistance than their White race counterparts prompting the WHO to endorse a lower cut-off point for action against obesity at ≥27kg/m^2 in the Asian population.[5] The latest terminology introduced for obesity is ABCD-adiposity based chronic disease, which shifts the focus to the chronic nature of obesity and its comorbidities, which require treatment in addition to the treatment of obesity itself.[6]  It is well known that obesity is associated with a shortened life span and increased incidence of obstructive sleep apnea, osteoarthritis, gout, polycystic ovarian syndrome, metabolic syndrome, prediabetes, hypertension, stroke, non-alcoholic fatty liver disease, heart failure, and cancers of the colon, breast, endometrium, and gallbladder.[7] Thus the treatment of obesity is essential, along with early identification of complications.|34283495
+doc.35.sent.4|Although this article focuses on non-dieting approaches to treating obesity with medications, gastrointestinal devices, and bariatric surgery, it must be emphasized that diet and exercise are essential to good cardiometabolic health in obese patients.|34283495
+doc.36.sent.0|Casirivimab is one of the severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) neutralizing antibodies proposed for use in the clinical management of coronavirus disease 2019 (COVID-19).|34283490
+doc.36.sent.1|When used in combination with imdevimab, it reduces viral load and improves clinical outcomes.|34283490
+doc.36.sent.2|This activity reviews the indications, contraindications, activity, adverse events, and other key elements of casirivimab therapy in the clinical setting and also highlights the essential points needed by members of an interprofessional team managing COVID-19 patients.|34283490
+doc.37.sent.0|Coronavirus disease 2019 (COVID-19) has led to a global pandemic with nearly 158 million cases worldwide and 3.3 million deaths.|34283476
+doc.37.sent.1|Due to its easy transmissibility and high virulence, it has caused an overwhelming number of infections leading to a near-collapse of the healthcare infrastructure in some countries.|34283476
+doc.37.sent.2|In this review, we will focus on cases of Severe COVID-19 requiring mechanical ventilation, as well as advanced rescue therapy in the form of extracorporeal membrane oxygenation (ECMO).|34283476
+doc.38.sent.0|The FDA (Food and Drug Administration) has approved the combination products (etesevimab and bamlanivimab) through EUA (Emergency Use Authorizations).|34283469
+doc.38.sent.1|This activity outlines the indications, contraindications, and precautions for using etesevimab as a valuable agent in the management of mild to moderate SARS-CoV-2 in nonhospitalized outpatients at high risk for progressing to severe disease.|34283469
+doc.38.sent.2|This activity will also highlight the mechanism of action, adverse event profile, dosing, and monitoring while administering the medications pertinent for the healthcare team members to manage patients with mild to moderate SARS-CoV-2.|34283469
+doc.39.sent.0|Imdevimab is one of the severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) neutralizing antibodies proposed for use in the clinical management of coronavirus disease 2019 (COVID-19).|34283431
+doc.39.sent.1|When used in combination with casirivimab, it reduces viral load and improves clinical outcomes.|34283431
+doc.39.sent.2|This activity reviews the indications, contraindications, activity, adverse events, and other key elements of imdevimab therapy in the clinical setting and also highlights the essential points needed by members of an interprofessional team managing COVID-19 patients.|34283431
+doc.40.sent.0|During the COVID-19 pandemic, people have been exposed to a great deal of information: news, public health guidance, fact sheets, infographics, research, opinions, rumors, myths, falsehoods, and more.|34283416
+doc.40.sent.1|The World Health Organization and the United Nations have characterized this unprecedented spread of information as an “infodemic.”|34283416
+doc.40.sent.2|Although health misinformation is not a recent phenomenon, in recent years it has spread at unprecedented speed and scale, especially online.|34283416
+doc.40.sent.3|But, together, we have the power to build a healthier information environment where we make more informed decisions about our health and the health of our loved ones and communities.|34283416
+doc.40.sent.4|Preventing and addressing health misinformation is a major priority for the Surgeon General.|34283416
+doc.40.sent.5|In a new Surgeon General’s Advisory, available below, the Surgeon General is warning the American public about the urgent threat of health misinformation and calling for a whole-of-society approach to address health misinformation during the COVID-19 pandemic and beyond.|34283416

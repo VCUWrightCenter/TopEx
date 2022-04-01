@@ -24,7 +24,10 @@ from textblob import TextBlob
 
 # Cell
 def score_phrase(phrase:list, score:float, include_sentiment:bool):
-    "Gets the numerical polarity of a list of tokens"
+    """
+    Gets the numerical polarity of a list of tokens
+    Returns float
+    """
     weight = 1
 
     # Optionally weight the polarity of the phrase
@@ -35,7 +38,10 @@ def score_phrase(phrase:list, score:float, include_sentiment:bool):
 
 def score_token(token:str, pos:str, doc_id:int, vocab:dict, tfidf:np.ndarray, max_token_scores:np.ndarray,
                 tfidf_corpus:str, include_sentiment:bool):
-    "Calculates the importance of a single token"
+    """
+    Calculates the importance of a single token
+    Returns float
+    """
     score = 0
     weight = 1
 

@@ -1,8 +1,8 @@
 {
   "topex": {
     "Overview": "/",
-    "Core": "/core",
-    "Internal": "/internal",
-    "Preprocessing": "/preprocessing"
+    "Core": "core.html",
+    "Internal": "internal.html",
+    "Preprocessing": "preprocessing.html"
   }
 }

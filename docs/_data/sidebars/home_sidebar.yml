@@ -11,13 +11,13 @@ entries:
       url: /
     - output: web,pdf
       title: Core
-      url: /core
+      url: core.html
     - output: web,pdf
       title: Internal
-      url: /internal
+      url: internal.html
     - output: web,pdf
       title: Preprocessing
-      url: /preprocessing
+      url: preprocessing.html
     output: web
     title: topex
   output: web

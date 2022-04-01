@@ -56,9 +56,8 @@ defaults:
       search: true
       tooltip: true
 
-sidebars: [home_sidebar]
-baseurl: /
-plugins:
-    - jekyll-remote-theme
-    
-remote_theme: fastai/nbdev-jekyll-theme
+sidebars:
+- home_sidebar
+
+theme: jekyll-theme-merlot
+baseurl: /TopEx/

@@ -38,7 +38,9 @@ index = {"import_data": "core.ipynb",
          "write_cluster": "internal.ipynb",
          "clusters_to_disk": "internal.ipynb",
          "nlp": "preprocessing.ipynb",
+         "linker": "preprocessing.ipynb",
          "token_filter": "preprocessing.ipynb",
+         "normalize_entity": "preprocessing.ipynb",
          "preprocess_docs": "preprocessing.ipynb",
          "get_stop_words": "preprocessing.ipynb"}
 

@@ -7,11 +7,13 @@ Documentation is available at https://VCUWrightCenter.github.io/TopEx/.
 
 
 ## Requirements
-TopEx is only compatible with 64-bit python. You can check which version of python you're using in your virtual environment with the following code.
-
-`import platform; platform.architecture()[0];`
+First install TopEx
 
 `pip install topex`
+
+Then install the SciSpacy model used for tokenization and/or NER
+
+`pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.0/en_core_sci_sm-0.5.0.tar.gz`
 
 ## How to use
 
@@ -21,17 +23,19 @@ Each step of the pipeline has configuration options for experimenting with vario
 
 ## Example Pipeline
 ### Import data
-Import and pre-process documents from a text file containing a list of all documents.
+Import and pre-process documents from a text file containing a list of all documents. The `ner` option alows users to run clustering over biomedical entities extracted using SciSpacy's en_core_sci_sm model. If that doesn't mean anything to you, just omit that option and clustering will run over words.
 
 ```python
 import topex.core as topex
-data, doc_df = topex.import_from_files('test_data/corpus_file_list.txt', stop_words_file='stop_words.txt', save_results = False)
+data, doc_df = topex.import_from_files('test_data/corpus_file_list.txt', stop_words_file='stop_words.txt', 
+                                       save_results = False, ner=False)
 ```
 
 You can also consolidate your documents into a single, pipe-delimited csv file with the columns "doc_name" and "text".
 
 ```python
-data, doc_df = topex.import_from_csv('test_data/corpus.txt', stop_words_file='stop_words.txt', save_results = False)
+data, doc_df = topex.import_from_csv('test_data/corpus.txt', stop_words_file='stop_words.txt', save_results = False, 
+                                     ner=False)
 ```
 
 ### Transform data
@@ -48,15 +52,12 @@ data = topex.get_phrases(data, dictionary.token2id, tfidf, tfidf_corpus=tfidf_co
 data = topex.get_vectors("svd", data, dictionary = dictionary, tfidf = tfidf, dimensions=min(200,tfidf.shape[1]-1))
 ```
 
-    Removed 75 sentences without phrases.
-    
-
 ### Cluster data
 Cluster the sentences into groups expressing similar ideas or topics. If you aren't sure how many true clusters exist in the data, try running `assign_clusters` with the optional parameter `show_chart = True` to visual cluster quality with varying numbers of clusters. When using `method='hac'`, you can also use `show_dendrogram = True` see the cluster dendrogram.
 
 ```python
 data, linkage_matrix, max_height, height = topex.assign_clusters(data, method = "hac", show_chart = False)
-viz_df = topex.visualize_clustering(data, method="umap", show_chart=False, return_data=True)
+viz_df = topex.visualize_clustering(data, method="umap", show_chart=True, return_data=True)
 ```
 
 ### Cluster size exploration
@@ -92,6 +93,3 @@ doc_df = topex.assign_clusters(doc_df, method = "kmeans", k=4)
 cluster_df = topex.get_cluster_topics(data, doc_df, save_results = False)
 topex.visualize_clustering(data, method = "umap", show_chart = False)
 ```
-
-    Removed 0 sentences without phrases.
-    

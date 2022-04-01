@@ -2,11 +2,13 @@
 
 title: Preprocessing
 
+
 keywords: fastai
 sidebar: home_sidebar
 
 summary: "Methods for preprocessing raw text data"
 description: "Methods for preprocessing raw text data"
+nb_path: "preprocessing.ipynb"
 ---
 <!--
 
@@ -24,12 +26,24 @@ description: "Methods for preprocessing raw text data"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
+<div class="output_wrapper">
+<div class="output">
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>C:\Users\etfrench\Anaconda3\envs\TopExEnv\lib\site-packages\sklearn\base.py:329: UserWarning: Trying to unpickle estimator TfidfTransformer from version 0.22.2.post1 when using version 1.0.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/modules/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+C:\Users\etfrench\Anaconda3\envs\TopExEnv\lib\site-packages\sklearn\base.py:329: UserWarning: Trying to unpickle estimator TfidfVectorizer from version 0.22.2.post1 when using version 1.0.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/modules/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+</pre>
+</div>
+</div>
+
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -52,9 +66,10 @@ description: "Methods for preprocessing raw text data"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="token_filter" class="doc_header"><code>token_filter</code><a href="VCUWrightCentertopex/preprocessing.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>token_filter</code>(<strong><code>token</code></strong>, <strong><code>stopwords</code></strong>:<code>list</code>, <strong><code>custom_stopwords_only</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="token_filter" class="doc_header"><code>token_filter</code><a href="VCUWrightCentertopex/preprocessing.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>token_filter</code>(<strong><code>token</code></strong>, <strong><code>stopwords</code></strong>:<code>list</code>, <strong><code>custom_stopwords_only</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
-<p>Filters out stopwords and tokens without alpha characters</p>
+<p>Checks if the given token both has alpha characters and is not a stopword
+Returns bool</p>
 
 </div>
 
@@ -77,11 +92,39 @@ description: "Methods for preprocessing raw text data"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="preprocess_docs" class="doc_header"><code>preprocess_docs</code><a href="VCUWrightCentertopex/preprocessing.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>preprocess_docs</code>(<strong><code>doc_df</code></strong>:<code>DataFrame</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>stop_words_list</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>custom_stopwords_only</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="normalize_entity" class="doc_header"><code>normalize_entity</code><a href="VCUWrightCentertopex/preprocessing.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>normalize_entity</code>(<strong><code>entity</code></strong>)</p>
+</blockquote>
+<p>For a given entity extracted via NER, attempts to normalize to a canonical name
+if available, otherwise returns the lemmatized entity.
+Returns string</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="preprocess_docs" class="doc_header"><code>preprocess_docs</code><a href="VCUWrightCentertopex/preprocessing.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>preprocess_docs</code>(<strong><code>doc_df</code></strong>:<code>DataFrame</code>, <strong><code>save_results</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>stop_words_list</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>custom_stopwords_only</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>ner</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Imports and pre-processes the documents from the <code>raw_docs</code> dataframe
 Document pre-processing is handled in <code>tokenize_and_stem</code>.
 <code>path_to_file_list</code> is a path to a text file containing a list of files to be processed separated by line breaks.
+<code>ner</code> runs a biomedical NER pipeline over the input and clusters on extracted entities rather than tokens.
 Returns (DataFrame, DataFrame)</p>
 
 </div>
@@ -98,13 +141,6 @@ Returns (DataFrame, DataFrame)</p>
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -112,9 +148,10 @@ Returns (DataFrame, DataFrame)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_stop_words" class="doc_header"><code>get_stop_words</code><a href="VCUWrightCentertopex/preprocessing.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_stop_words</code>(<strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>stop_words_list</code></strong>:<code>list</code>=<em><code>None</code></em>)</p>
+<h4 id="get_stop_words" class="doc_header"><code>get_stop_words</code><a href="VCUWrightCentertopex/preprocessing.py#L95" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_stop_words</code>(<strong><code>stop_words_file</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>stop_words_list</code></strong>:<code>list</code>=<em><code>None</code></em>)</p>
 </blockquote>
-<p>Gets a list of all custom stop words</p>
+<p>Gets a list of all stop words.
+Returns list(string)</p>
 
 </div>
 
@@ -122,6 +159,13 @@ Returns (DataFrame, DataFrame)</p>
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}

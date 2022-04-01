@@ -67,7 +67,8 @@ description: "Internal TopEx methods"
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="score_phrase" class="doc_header"><code>score_phrase</code><a href="VCUWrightCentertopex/internal.py#L26" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>score_phrase</code>(<strong><code>phrase</code></strong>:<code>list</code>, <strong><code>score</code></strong>:<code>float</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
 </blockquote>
-<p>Gets the numerical polarity of a list of tokens</p>
+<p>Gets the numerical polarity of a list of tokens
+Returns float</p>
 
 </div>
 
@@ -90,9 +91,10 @@ description: "Internal TopEx methods"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="score_token" class="doc_header"><code>score_token</code><a href="VCUWrightCentertopex/internal.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>score_token</code>(<strong><code>token</code></strong>:<code>str</code>, <strong><code>pos</code></strong>:<code>str</code>, <strong><code>doc_id</code></strong>:<code>int</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>max_token_scores</code></strong>:<code>ndarray</code>, <strong><code>tfidf_corpus</code></strong>:<code>str</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
+<h4 id="score_token" class="doc_header"><code>score_token</code><a href="VCUWrightCentertopex/internal.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>score_token</code>(<strong><code>token</code></strong>:<code>str</code>, <strong><code>pos</code></strong>:<code>str</code>, <strong><code>doc_id</code></strong>:<code>int</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>max_token_scores</code></strong>:<code>ndarray</code>, <strong><code>tfidf_corpus</code></strong>:<code>str</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
 </blockquote>
-<p>Calculates the importance of a single token</p>
+<p>Calculates the importance of a single token
+Returns float</p>
 
 </div>
 
@@ -115,7 +117,7 @@ description: "Internal TopEx methods"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_phrase" class="doc_header"><code>get_phrase</code><a href="VCUWrightCentertopex/internal.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_phrase</code>(<strong><code>sent</code></strong>:<code>Series</code>, <strong><code>window_size</code></strong>:<code>int</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf_corpus</code></strong>:<code>str</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>max_token_scores</code></strong>:<code>ndarray</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
+<h4 id="get_phrase" class="doc_header"><code>get_phrase</code><a href="VCUWrightCentertopex/internal.py#L60" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_phrase</code>(<strong><code>sent</code></strong>:<code>Series</code>, <strong><code>window_size</code></strong>:<code>int</code>, <strong><code>vocab</code></strong>:<code>dict</code>, <strong><code>tfidf_corpus</code></strong>:<code>str</code>, <strong><code>tfidf</code></strong>:<code>ndarray</code>, <strong><code>max_token_scores</code></strong>:<code>ndarray</code>, <strong><code>include_sentiment</code></strong>:<code>bool</code>)</p>
 </blockquote>
 <p>Finds the most expressive phrase in a sentence. This function is called in a lambda expression in <code>core.get_phrases</code>.
 Passing <code>include_sentiment=False</code> will weight all tokens equally, ignoring sentiment and part of speech.</p>
@@ -149,7 +151,7 @@ Passing <code>include_sentiment=False</code> will weight all tokens equally, ign
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_vector_tfidf" class="doc_header"><code>get_vector_tfidf</code><a href="VCUWrightCentertopex/internal.py#L80" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_vector_tfidf</code>(<strong><code>sent</code></strong>:<code>Series</code>, <strong><code>dictionary</code></strong>:<code>Dictionary</code>, <strong><code>term_matrix</code></strong>:<code>ndarray</code>)</p>
+<h4 id="get_vector_tfidf" class="doc_header"><code>get_vector_tfidf</code><a href="VCUWrightCentertopex/internal.py#L86" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_vector_tfidf</code>(<strong><code>sent</code></strong>:<code>Series</code>, <strong><code>dictionary</code></strong>:<code>Dictionary</code>, <strong><code>term_matrix</code></strong>:<code>ndarray</code>)</p>
 </blockquote>
 <p>Create a word vector for a given sentence using a term matrix.
 This function is called in a lambda expression in <code>core.get_vectors</code>.</p>
@@ -176,7 +178,7 @@ This function is called in a lambda expression in <code>core.get_vectors</code>.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_vector_w2v" class="doc_header"><code>get_vector_w2v</code><a href="VCUWrightCentertopex/internal.py#L90" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_vector_w2v</code>(<strong><code>sent</code></strong>:<code>Series</code>, <strong><code>model</code></strong>:<code>Word2VecKeyedVectors</code>)</p>
+<h4 id="get_vector_w2v" class="doc_header"><code>get_vector_w2v</code><a href="VCUWrightCentertopex/internal.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_vector_w2v</code>(<strong><code>sent</code></strong>:<code>Series</code>, <strong><code>model</code></strong>:<code>Word2VecKeyedVectors</code>)</p>
 </blockquote>
 <p>Create a word vector for a given sentence using a Word2Vec model.
 This function is called in a lambda expression in <code>core.get_vectors</code>.</p>
@@ -210,7 +212,7 @@ This function is called in a lambda expression in <code>core.get_vectors</code>.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="w2v_pretrained" class="doc_header"><code>w2v_pretrained</code><a href="VCUWrightCentertopex/internal.py#L101" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>w2v_pretrained</code>(<strong><code>bin_file</code></strong>:<code>str</code>)</p>
+<h4 id="w2v_pretrained" class="doc_header"><code>w2v_pretrained</code><a href="VCUWrightCentertopex/internal.py#L107" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>w2v_pretrained</code>(<strong><code>bin_file</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>Load a pre-trained Word2Vec model from a bin file.</p>
 <p>Returns gensim.models.keyedvectors.Word2VecKeyedVectors</p>
@@ -249,7 +251,7 @@ This function is called in a lambda expression in <code>core.get_vectors</code>.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_cluster_assignments_hac" class="doc_header"><code>get_cluster_assignments_hac</code><a href="VCUWrightCentertopex/internal.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_assignments_hac</code>(<strong><code>linkage_matrix</code></strong>:<code>ndarray</code>, <strong><code>height</code></strong>:<code>int</code>)</p>
+<h4 id="get_cluster_assignments_hac" class="doc_header"><code>get_cluster_assignments_hac</code><a href="VCUWrightCentertopex/internal.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_assignments_hac</code>(<strong><code>linkage_matrix</code></strong>:<code>ndarray</code>, <strong><code>height</code></strong>:<code>int</code>)</p>
 </blockquote>
 <p>Assigns clusters by cutting the HAC dendrogram at the specified height.</p>
 <p>Returns list</p>
@@ -275,7 +277,7 @@ This function is called in a lambda expression in <code>core.get_vectors</code>.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_silhouette_score_hac" class="doc_header"><code>get_silhouette_score_hac</code><a href="VCUWrightCentertopex/internal.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_silhouette_score_hac</code>(<strong><code>phrase_vecs</code></strong>:<code>list</code>, <strong><code>linkage_matrix</code></strong>:<code>ndarray</code>, <strong><code>height</code></strong>:<code>int</code>)</p>
+<h4 id="get_silhouette_score_hac" class="doc_header"><code>get_silhouette_score_hac</code><a href="VCUWrightCentertopex/internal.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_silhouette_score_hac</code>(<strong><code>phrase_vecs</code></strong>:<code>list</code>, <strong><code>linkage_matrix</code></strong>:<code>ndarray</code>, <strong><code>height</code></strong>:<code>int</code>)</p>
 </blockquote>
 <p>Assigns clusters to a list of word vectors for a given <code>height</code> and calculates the silhouette score of the clustering.</p>
 <p>Returns float</p>
@@ -301,7 +303,7 @@ This function is called in a lambda expression in <code>core.get_vectors</code>.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_tree_height" class="doc_header"><code>get_tree_height</code><a href="VCUWrightCentertopex/internal.py#L134" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_tree_height</code>(<strong><code>root</code></strong>:<code>ClusterNode</code>)</p>
+<h4 id="get_tree_height" class="doc_header"><code>get_tree_height</code><a href="VCUWrightCentertopex/internal.py#L140" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_tree_height</code>(<strong><code>root</code></strong>:<code>ClusterNode</code>)</p>
 </blockquote>
 <p>Recursively finds the height of a binary tree.</p>
 <p>Returns int</p>
@@ -327,7 +329,7 @@ This function is called in a lambda expression in <code>core.get_vectors</code>.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_optimal_height" class="doc_header"><code>get_optimal_height</code><a href="VCUWrightCentertopex/internal.py#L144" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_optimal_height</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>linkage_matrix</code></strong>:<code>ndarray</code>, <strong><code>max_h</code></strong>:<code>int</code>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>:<code>str</code>=<em><code>'HACSilhouette.png'</code></em>)</p>
+<h4 id="get_optimal_height" class="doc_header"><code>get_optimal_height</code><a href="VCUWrightCentertopex/internal.py#L150" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_optimal_height</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>linkage_matrix</code></strong>:<code>ndarray</code>, <strong><code>max_h</code></strong>:<code>int</code>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>:<code>str</code>=<em><code>'HACSilhouette.png'</code></em>)</p>
 </blockquote>
 <p>Clusters the top phrase vectors and plots the silhoute coefficients for a range of dendrograph heights.
 Returns the optimal height value (highest silhoute coefficient)</p>
@@ -354,7 +356,7 @@ Returns the optimal height value (highest silhoute coefficient)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_clusters_hac" class="doc_header"><code>get_clusters_hac</code><a href="VCUWrightCentertopex/internal.py#L169" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_clusters_hac</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>dist_metric</code></strong>:<code>str</code>, <strong><code>height</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>show_dendrogram</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="get_clusters_hac" class="doc_header"><code>get_clusters_hac</code><a href="VCUWrightCentertopex/internal.py#L175" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_clusters_hac</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>dist_metric</code></strong>:<code>str</code>, <strong><code>height</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>show_dendrogram</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Use Hierarchical Agglomerative Clustering (HAC) to cluster phrase vectors</p>
 <p>Returns (list, np.ndarray, int)</p>
@@ -387,7 +389,7 @@ Returns the optimal height value (highest silhoute coefficient)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_silhouette_score_kmeans" class="doc_header"><code>get_silhouette_score_kmeans</code><a href="VCUWrightCentertopex/internal.py#L200" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_silhouette_score_kmeans</code>(<strong><code>phrase_vecs</code></strong>:<code>list</code>, <strong><code>k</code></strong>:<code>int</code>)</p>
+<h4 id="get_silhouette_score_kmeans" class="doc_header"><code>get_silhouette_score_kmeans</code><a href="VCUWrightCentertopex/internal.py#L206" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_silhouette_score_kmeans</code>(<strong><code>phrase_vecs</code></strong>:<code>list</code>, <strong><code>k</code></strong>:<code>int</code>)</p>
 </blockquote>
 <p>Assigns clusters to a list of word vectors for a given <code>k</code> and calculates the silhouette score of the clustering.</p>
 <p>Returns float</p>
@@ -413,7 +415,7 @@ Returns the optimal height value (highest silhoute coefficient)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_optimal_k" class="doc_header"><code>get_optimal_k</code><a href="VCUWrightCentertopex/internal.py#L209" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_optimal_k</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>:<code>str</code>=<em><code>'KmeansSilhouette.png'</code></em>)</p>
+<h4 id="get_optimal_k" class="doc_header"><code>get_optimal_k</code><a href="VCUWrightCentertopex/internal.py#L215" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_optimal_k</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>save_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>chart_file</code></strong>:<code>str</code>=<em><code>'KmeansSilhouette.png'</code></em>)</p>
 </blockquote>
 <p>Calculates the optimal k-value (highest silhoute coefficient).
 Optionally prints a chart of silhouette score by k-value or saves it to disk.</p>
@@ -440,7 +442,7 @@ Optionally prints a chart of silhouette score by k-value or saves it to disk.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_cluster_assignments_kmeans" class="doc_header"><code>get_cluster_assignments_kmeans</code><a href="VCUWrightCentertopex/internal.py#L234" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_assignments_kmeans</code>(<strong><code>phrase_vecs</code></strong>:<code>list</code>, <strong><code>k</code></strong>:<code>int</code>)</p>
+<h4 id="get_cluster_assignments_kmeans" class="doc_header"><code>get_cluster_assignments_kmeans</code><a href="VCUWrightCentertopex/internal.py#L240" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_cluster_assignments_kmeans</code>(<strong><code>phrase_vecs</code></strong>:<code>list</code>, <strong><code>k</code></strong>:<code>int</code>)</p>
 </blockquote>
 <p>K-means clustering.</p>
 <p>Returns list</p>
@@ -466,7 +468,7 @@ Optionally prints a chart of silhouette score by k-value or saves it to disk.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_clusters_kmeans" class="doc_header"><code>get_clusters_kmeans</code><a href="VCUWrightCentertopex/internal.py#L245" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_clusters_kmeans</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>k</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="get_clusters_kmeans" class="doc_header"><code>get_clusters_kmeans</code><a href="VCUWrightCentertopex/internal.py#L251" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_clusters_kmeans</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>k</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>show_chart</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Use K-means algorithm to cluster phrase vectors</p>
 <p>Returns list</p>
@@ -499,7 +501,7 @@ Optionally prints a chart of silhouette score by k-value or saves it to disk.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_topics_from_docs" class="doc_header"><code>get_topics_from_docs</code><a href="VCUWrightCentertopex/internal.py#L259" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_topics_from_docs</code>(<strong><code>docs</code></strong>:<code>list</code>, <strong><code>topic_count</code></strong>:<code>int</code>)</p>
+<h4 id="get_topics_from_docs" class="doc_header"><code>get_topics_from_docs</code><a href="VCUWrightCentertopex/internal.py#L265" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_topics_from_docs</code>(<strong><code>docs</code></strong>:<code>list</code>, <strong><code>topic_count</code></strong>:<code>int</code>)</p>
 </blockquote>
 <p>Gets a list of <code>topic_count</code> topics for each list of tokens in <code>docs</code>.</p>
 <p>Returns list</p>
@@ -538,7 +540,7 @@ Optionally prints a chart of silhouette score by k-value or saves it to disk.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="df_to_disk" class="doc_header"><code>df_to_disk</code><a href="VCUWrightCentertopex/internal.py#L275" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>df_to_disk</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>file_name</code></strong>:<code>str</code>, <strong><code>mode</code></strong>:<code>str</code>=<em><code>'w'</code></em>, <strong><code>header</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>sep</code></strong>=<em><code>'\t'</code></em>)</p>
+<h4 id="df_to_disk" class="doc_header"><code>df_to_disk</code><a href="VCUWrightCentertopex/internal.py#L281" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>df_to_disk</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>file_name</code></strong>:<code>str</code>, <strong><code>mode</code></strong>:<code>str</code>=<em><code>'w'</code></em>, <strong><code>header</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>sep</code></strong>=<em><code>'\t'</code></em>)</p>
 </blockquote>
 <p>Writes a dataframe to disk as a tab delimited file.</p>
 <p>Returns None</p>
@@ -564,7 +566,7 @@ Optionally prints a chart of silhouette score by k-value or saves it to disk.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="sentences_to_disk" class="doc_header"><code>sentences_to_disk</code><a href="VCUWrightCentertopex/internal.py#L288" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sentences_to_disk</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/DocumentSentenceList.txt'</code></em>)</p>
+<h4 id="sentences_to_disk" class="doc_header"><code>sentences_to_disk</code><a href="VCUWrightCentertopex/internal.py#L294" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sentences_to_disk</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/DocumentSentenceList.txt'</code></em>)</p>
 </blockquote>
 <p>Writes the raw sentences to a file organized by document and sentence number.</p>
 <p>Returns None</p>
@@ -590,7 +592,7 @@ Optionally prints a chart of silhouette score by k-value or saves it to disk.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="write_cluster" class="doc_header"><code>write_cluster</code><a href="VCUWrightCentertopex/internal.py#L298" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_cluster</code>(<strong><code>cluster_rows</code></strong>:<code>DataFrame</code>, <strong><code>file_name</code></strong>:<code>str</code>, <strong><code>mode</code></strong>:<code>str</code>=<em><code>'a'</code></em>, <strong><code>header</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="write_cluster" class="doc_header"><code>write_cluster</code><a href="VCUWrightCentertopex/internal.py#L304" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_cluster</code>(<strong><code>cluster_rows</code></strong>:<code>DataFrame</code>, <strong><code>file_name</code></strong>:<code>str</code>, <strong><code>mode</code></strong>:<code>str</code>=<em><code>'a'</code></em>, <strong><code>header</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Appends the rows for a single cluster to disk.</p>
 <p>Returns None</p>
@@ -616,7 +618,7 @@ Optionally prints a chart of silhouette score by k-value or saves it to disk.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="clusters_to_disk" class="doc_header"><code>clusters_to_disk</code><a href="VCUWrightCentertopex/internal.py#L307" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>clusters_to_disk</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>doc_df</code></strong>:<code>DataFrame</code>, <strong><code>cluster_df</code></strong>:<code>DataFrame</code>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/TopicClusterResults.txt'</code></em>)</p>
+<h4 id="clusters_to_disk" class="doc_header"><code>clusters_to_disk</code><a href="VCUWrightCentertopex/internal.py#L313" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>clusters_to_disk</code>(<strong><code>data</code></strong>:<code>DataFrame</code>, <strong><code>doc_df</code></strong>:<code>DataFrame</code>, <strong><code>cluster_df</code></strong>:<code>DataFrame</code>, <strong><code>file_name</code></strong>:<code>str</code>=<em><code>'output/TopicClusterResults.txt'</code></em>)</p>
 </blockquote>
 <p>Writes the sentences and phrases to a file organized by cluster and document.</p>
 <p>Returns None</p>

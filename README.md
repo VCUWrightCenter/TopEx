@@ -2,6 +2,8 @@
 
 Documentation is available at https://VCUWrightCenter.github.io/TopEx/.
 
+# NOTICE: This code is no longer maintained.
+
 # TopEx
 > Topic exploration in unstructured text documents.
 
